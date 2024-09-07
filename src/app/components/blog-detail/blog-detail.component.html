@@ -1,0 +1,44 @@
+<app-nav-bar class="navxd"></app-nav-bar>
+
+<div class="blog-container" style="margin-top: 2rem;" *ngIf="blog">
+  <div class="blog-main">
+    <h1 class="blog-title">{{ blog.title }}</h1>
+    <p class="blog-author">by {{ blog.author }} on {{ blog.date }}</p>
+    
+    <div class="blog-content">
+      <div *ngFor="let content of blog.content">
+        <ng-container [ngSwitch]="content.type">
+          <p *ngSwitchCase="'paragraph'" class="blog-paragraph">{{ content.text }}</p>
+          <div *ngSwitchCase="'image'" class="blog-image-container">
+            <img [src]="content.src" [alt]="content.alt" class="blog-image" />
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    
+    <div class="blog-tags">
+      <span *ngFor="let tag of blog.tags" class="blog-tag">{{ tag }}</span>
+    </div>
+  </div>
+
+  <div class="blog-sidebar">
+    <div class="contact-info">
+      <h2>Encuéntranos</h2>
+      <p><strong>Dirección</strong></p>
+      <p>Calle 53B #27b-12<br>Bogotá, Colombia</p>
+      <p><strong>Horas</strong></p>
+      <p>Lunes a viernes: de 9:00 a 17:00 h.<br>Sábado y domingo: de 11:00 a 15:00 h.</p>
+    </div>
+
+    <div class="recent-posts">
+      <h2>Entradas recientes</h2>
+      <ul>
+        <li *ngFor="let post of recentPosts">{{ post.title }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<app-floating-buttons></app-floating-buttons>
+<app-footer></app-footer>

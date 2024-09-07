@@ -1,0 +1,105 @@
+.Container{
+  min-width: 350px;
+  max-width: 350px;
+  max-height: 300px;
+}
+p{
+  display: flex ;
+  font-size: medium;
+  justify-content: center;
+}
+:host ::ng-deep .p-scrollpanel {
+  width: 100% !important; /* Asegura que el panel de desplazamiento ocupe todo el ancho del contenedor */
+  height: 190px !important; /* Altura fija para el panel de desplazamiento */
+  background-color: #ffffff;
+  color: #2c2c2c;
+  border: 1px solid #cacaca;
+  font-size: small;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.cart-item-remove {
+
+  background: none;
+  border: none;
+  color: #2c2c2c;
+  cursor: pointer;
+}
+:host ::ng-deep .p-scrollpanel-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #dbdbdb;
+  width: 100%; /* Asegura que cada ítem ocupe todo el ancho disponible */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+.cart-item-image {
+  width: 70px;
+  height: 100%;
+  align-items: center;
+  padding-left: 5%;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+  margin-left: 10px;
+  width: calc(100% - 80px); /* Resta el ancho de la imagen y un poco de margen */
+  overflow: hidden; /* Oculta el contenido que exceda el ancho */
+  text-overflow: ellipsis; /* Muestra ... si el texto es demasiado largo */
+  white-space: nowrap; /* Evita que el texto se envuelva */
+}
+
+
+.cart-summary {
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #bbbbbb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom-left-radius: 10px; /* Establece un radio de borde solo en la esquina inferior izquierda */
+  border-bottom-right-radius: 10px; /* Establece un radio de borde solo en la esquina inferior derecha */
+}
+.textSubtotal{
+  font-size: small;
+  color: #2c2c2c;
+}
+.view-cart-button,
+.checkout-button {
+  font-size: small;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.view-cart-button {
+  background-color: transparent;
+  border-color: #515151;
+  color: #2c2c2c;
+}
+
+.checkout-button {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border-color: #2c2c2c;
+}
+
+.empty-wishlist {
+  text-align: center;
+  padding: 50px 0;
+  color: #666;
+}
+
+.empty-wishlist i {
+  font-size: 48px;
+  color: #999;
+  margin-bottom: 20px;
+}

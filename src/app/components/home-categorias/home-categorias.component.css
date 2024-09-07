@@ -1,0 +1,255 @@
+.categories-section {  
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  
+}
+
+.categories-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+  animation: shine 15s infinite linear;
+}
+
+@keyframes shine {
+  0% { transform: translate(-30%, -30%) rotate(0deg); }
+  100% { transform: translate(-30%, -30%) rotate(360deg); }
+}
+
+.category-title {
+  font-size: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards 0.2s;
+}
+
+.category-icon {
+  margin-right: 1rem;
+  font-size: 3rem;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.category-text {
+  background: linear-gradient(45deg, #333, #000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+.category-text::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(45deg, #333, #000);
+  transform: scaleX(0);
+  transition: transform 0.5s ease-in-out;
+}
+
+.categories-section:hover .category-text::after {
+  transform: scaleX(1);
+}
+
+.category-description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #444;
+  text-align: center;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards 0.4s;
+}
+
+.category-highlight {
+  font-weight: 600;
+  color: #000;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.category-highlight::before,
+.category-highlight::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s ease-in-out;
+}
+
+.category-highlight::before {
+  left: 0;
+  top: -2px;
+}
+
+.category-highlight::after {
+  right: 0;
+  bottom: -2px;
+}
+
+.category-highlight:hover::before,
+.category-highlight:hover::after {
+  width: 100%;
+}
+
+.category-highlight:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+.contenedorCategorias {
+  margin: auto;
+  max-width: 1300px;
+  padding: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards 0.6s;
+}
+
+.grid-item {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 250px;
+  background-size: cover;
+  background-position: center;
+}
+
+.grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.grid-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.grid-item:hover::before {
+  opacity: 0.9;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  opacity: 1;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+
+
+.imgcat4 {
+  background: url('../../../assets/imgshome/vermas.jpg') center/cover no-repeat;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Estilos para tablets */
+@media (max-width: 1024px) {
+  .category-title {
+    font-size: 2.5rem;
+  }
+  .category-description {
+    font-size: 1rem;
+  }
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px; /* Reducimos el gap para que los contenedores sean más anchos */
+  }
+  .grid-item {
+    min-height: 220px; /* Aumentamos la altura mínima */
+  }
+  .overlay {
+    bottom: 20px;
+    padding: 5%;
+    left: 5%;
+    font-size: 1.2rem;
+    opacity: 1;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .contenedorCategorias {
+    padding: 10px; /* Reducimos el padding para aprovechar más el espacio */
+  }
+}
+
+/* Estilos para móviles */
+@media (max-width: 480px) {
+  .category-title {
+    font-size: 2rem;
+  }
+  .category-description {
+    font-size: 0.9rem;
+  }
+  .contenedorCategorias{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 10px; /* Reducimos aún más el gap para móviles */
+    min-width: 350px;
+
+  }
+  .grid-item {
+    min-height: 200px; /* Aumentamos la altura mínima para móviles */
+  }
+  .overlay {
+    font-size: 1rem;
+  }
+  .contenedorCategorias {
+    padding: 5px; /* Reducimos aún más el padding para móviles */
+  }
+}

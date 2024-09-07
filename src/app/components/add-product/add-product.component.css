@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+.addProduct {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+ width: 1100px;
+ max-width: 1100px;
+  transform: translate(-50%, -50%);
+  font-family: 'Poppins', sans-serif;
+  display: flex; /* Asegúrate de que el contenedor use flexbox */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  background-color: transparent; /* Un fondo suave para que el panel resalte */
+}
+
+:host ::ng-deep p-scrollPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.products-add {
+  width: 100%;
+
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 0; /* Elimina el margen vertical */
+}
+
+.title-section {
+  text-align: center;
+}
+
+.title-section h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+}
+
+.title-section p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-column, .right-column {
+  flex: 1;
+  margin: 1rem;
+}
+
+.right-column {
+  max-width: 800px;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.buttonAdd p-button {
+  margin-left: 1rem;
+}
+
+.btnCancel {
+  border-color: #C6BFBF;
+  color: black;
+}
+
+.btnAdd {
+  color: #ffffff;
+  background-color: #474747;
+}
+
+.nameProduct,
+.imagesProduct,
+.category,
+.tagProduct,
+.description {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.nameProduct h3,
+.imagesProduct h3,
+.category h3,
+.tagProduct h3,
+.description h3 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.label input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.dropDownCategory,
+.textareaDescription {
+  margin-top: 1rem;
+}
+
+:host ::ng-deep p-dropdown  {
+  width: 100%;
+  font-size: 1rem;
+
+}
+.textArea{
+  width: 100%;
+}
+
+.divider {
+  margin-top: 1rem;
+}
+
+.card {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.exceeded-progress-bar .p-progressbar-value {
+  background-color: #f00;
+}
+

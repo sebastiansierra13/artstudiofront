@@ -1,0 +1,21 @@
+<div class="categories-section">
+    <h2 class="category-title">
+      <span class="category-icon">🎨</span>
+      <span class="category-text">Explora por Categorías</span>
+    </h2>
+    <p class="category-description">
+      Descubre mundos de arte que hablarán por ti.
+      <span class="category-highlight">Encuentra tu estilo</span> entre nuestras
+      colecciones más populares.
+    </p>
+  <div class="contenedorCategorias">
+    <div class="grid-container">
+      <div *ngFor="let categoria of categorias; let i = index" class="grid-item" (click)="selectCategory(categoria)" [ngStyle]="{'background-image': 'url(' + categoria.imagenCategoria + ')'}" data-aos="fade-right" data-aos-duration="1000">
+        <div class="overlay">{{ categoria.nombreCategoria }}</div>
+      </div>
+      <div class="grid-item imgcat4" data-aos="fade-left" data-aos-duration="1000" routerLink="/lista-categorias">
+        <a class="overlay" >Ver Más</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<!--Div del menu-->
+<div class="menu">
+    <p-button [style]="{'margin-bottom':'1rem', 'color':'#000000'}"  [text]="true" [outlined]="true" severity="secondary"  [disabled]="disableMisProductos" routerLink="/products">
+        <i class="pi pi-shop px-2"></i>
+        <span class="px-3">Mis Productos</span>
+    </p-button>
+    <br>
+    <p-button  [style]="{'margin-bottom':'1rem', 'color':'#000000'}"  [outlined]="true" severity="secondary" [text]="true" [disabled]="disableDestacados" routerLink="/highlights">
+        <i class="pi pi-crown px-2"></i>
+        <span class="px-3">Destacados</span>
+    </p-button>
+    <br>
+    <p-button  [style]="{'color':'#000000'}" [outlined]="true" severity="secondary" [text]="true" [disabled]="disableConfiguracion" routerLink="/admin">
+        <i class="pi pi-cog px-2"></i>
+        <span class="px-3">Configuración</span>
+    </p-button>
+</div>

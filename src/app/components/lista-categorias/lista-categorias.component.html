@@ -1,0 +1,40 @@
+<div class="categories-page">
+    <app-nav-bar class="navxd"></app-nav-bar>
+    <div class="banner">
+        <div class="banner-content">
+          <h1>
+            <span class="line">Explora Nuestras</span>
+            <span class="line">Categorías</span>
+          </h1>
+          <p>
+            <span class="word">Descubre &nbsp;</span>
+            <span class="word">mundos &nbsp;</span>
+            <span class="word">de &nbsp;</span>
+            <span class="word">arte &nbsp;</span>
+            <span class="word">que &nbsp;</span>
+            <span class="word">hablarán &nbsp;</span>
+            <span class="word">por &nbsp;</span>
+            <span class="word">ti &nbsp;</span>
+          </p>
+        </div>
+      </div>
+  
+    <div class="categories-content">
+      <div *ngIf="loading" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+  
+      <div *ngIf="!loading" class="categories-grid">
+        <div *ngFor="let categoria of categorias" class="category-card" (click)="selectCategory(categoria)">
+          <div class="category-image" [style.backgroundImage]="'url(' + categoria.imagenCategoria + ')'">
+            <div class="category-overlay">
+              <h2>{{categoria.nombreCategoria}}</h2>
+              <p *ngIf="categoria.productos">{{categoria.productos.length}} productos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-floating-buttons></app-floating-buttons>
+    <app-footer></app-footer>
+  </div>

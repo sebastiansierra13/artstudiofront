@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+.contnavBar {
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    height: 75px;
+    display: flex;
+    align-items: center; /* Centrar verticalmente los elementos */
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    padding: 10px 20px;
+    background-color: #ffffff; /* Fondo blanco para un look limpio */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+  }
+  
+  
+  :host ::ng-deep .p-badge{
+    background-color: #515151;
+    color: #ffffff;
+    font-size: 8px; /* Tamaño de fuente más pequeño */
+  }
+  
+  .logo {
+    background-color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  
+  .optionNav {
+    display: flex;
+    gap: 8px; /* Añade espacio entre los botones */
+    font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+    color: #413F3F;
+    padding-right: 1%;
+  }
+  
+  .buttonNav{
+    font-size: medium;
+    color: #413F3F;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px; /* Padding para mejor interacción */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para hover */
+  }
+  
+  .buttonNav:hover {
+    background-color: #f0f0f0; /* Color de fondo en hover */
+  }
+  
+  
+  .hamburger-menu {
+    display: none; /* Ocultamos el menú en pantallas grandes */
+    cursor: pointer;
+  }
+  
+  
+  
+  /* Para dispositivos móviles */
+  @media (max-width: 768px) {
+    .divIcons,
+    .optionNav {
+        display: none; /* Ocultamos estos elementos en pantallas pequeñas */
+    }
+  
+    .hamburger-menu {
+        display: block; /* Mostramos el icono del menú en pantallas pequeñas */
+    }
+  
+    
+  }
+  
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .close-btn {
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+
+  .containerTitle{
+    width: 94%;
+    margin-left: 3%;
+  }
+
+  b{
+    font-family: 'Poppins', sans-serif;
+    font-weight: lighter;
+    font-size: 2.5em;
+  }
+
+  

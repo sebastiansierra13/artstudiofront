@@ -1,0 +1,24 @@
+<div class="blog-section">
+  <h1 class="blog-title">
+    <span class="blog-title-text">ArtStudio</span>
+    <span class="blog-title-highlight">Blog</span>
+  </h1>
+  <p class="blog-subtitle">Descubre historias que inspiran, técnicas que transforman y visiones que desafían</p>
+  
+  <p-carousel [value]="blogs" [numVisible]="4"  [circular]="true" [responsiveOptions]="responsiveOptions">
+    <ng-template let-blog pTemplate="item">
+      <div class="blog-card" [routerLink]="['/blog', blog.id]">
+        <div class="blog-card-image" [style.background-image]="'url(' + blog.image + ')'"></div>
+        <div class="blog-card-content">
+          <h3 class="blog-card-title">{{ blog.title }}</h3>
+          <p class="blog-card-meta">
+            <span class="blog-card-author">{{ blog.author }}</span>
+            <span class="blog-card-date">{{ blog.date }}</span>
+          </p>
+          <p class="blog-card-summary">{{ blog.summary }}</p>
+          <a [routerLink]="['/blog', blog.id]" class="blog-card-read-more">Leer más</a>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>

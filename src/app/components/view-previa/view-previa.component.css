@@ -1,0 +1,529 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;600;0,700;1,600&display=swap");
+
+app-nav-bar{
+  top: 0;
+  z-index: 1000;
+  background-color: #ffffff; /* Ajusta el color de fondo según sea necesario */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.contenedor-principal {
+  font-family: "Poppins";
+  display: flex;
+  width: 100%;
+}
+
+.container-viewService {
+  flex: 70%;
+  position: relative;
+  display: flex;
+}
+
+.columna {
+  float: left;
+  width: 50%;
+}
+
+.columnaLeft {
+  float: left;
+  position: relative;
+  overflow: auto;
+  max-height: 600px;
+  margin: 20px auto; 
+  
+}
+.imgService {
+  max-width: 100px;
+  max-height: 100px;
+  cursor: pointer;
+  flex: 1;
+  margin: 5px 15px;
+}
+
+  .columnaRight {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-self: center;
+  }
+
+/* contenido de la izquierda */
+
+.conLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselImg {
+  display: flex;
+}
+
+.imgServiceGrande {
+  width: 100%;
+}
+
+/* contenido de la derecha */
+.conRight {
+  width: 50%;
+}
+
+.conLeft {
+  position: relative;
+  display: flex;
+}
+
+.ptittle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 55px;
+  line-height: 96px;
+  margin-bottom: 2px;
+}
+
+.pPrice {
+  font-family: "Poppins";
+  font-style: normal;
+  font-size: 14px;
+  line-height: 40px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.pText {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 30px;
+  margin-bottom: 2px;  
+  margin-top: 2px;
+}
+
+p{
+  margin-right: 20%;
+}
+
+.buttonContratar {
+  background: #1684ac;
+  border-radius: 30px;
+  font-size: 21px;
+  border: none;
+  width: 60%;
+  height: 45px;
+  color: #fff;
+}
+
+::ng-deep .p-button1 {
+  background-color: #474747;
+  /* Color gris */
+  padding: 10px 20px;
+  margin-left: 1rem;
+}
+
+::ng-deep .p-dropdown {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.compact-input-number-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin: 10px 0;
+}
+
+.button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  font-size: 1.2em;
+  outline: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  background-color: #f0f0f0;
+}
+
+
+.compact-input {
+  text-align: center;
+  border: none;
+  padding: 0;
+  font-size: 0.8em;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  outline: none;
+}
+
+/* Ocultar las flechas en campos de entrada numérica */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ocultar las flechas en campos de entrada numérica  para navegadores como Firefox*/
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Otros navegadores */
+}
+
+
+
+/* contenedor categorias */
+.contenedorCategorias {
+  display: flex;
+  flex-direction: column;
+  flex: 30%;
+  margin-top: 2%;
+  font-family: 'Lexend', sans-serif;
+  align-items: center;
+}
+
+.textNewDesign {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(1);
+  gap: 20px;
+  justify-items: center;
+}
+
+.grid-item {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  height: 110px;
+  max-height: 100px;
+}
+
+.overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.overlay:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Estilo para las imágenes de las categorías */
+.imgcat {
+  background: center/cover no-repeat;
+}
+
+/* Scrollbar styles for p-scrollPanel */
+.p-scrollpanel .p-scrollpanel-wrapper ::-webkit-scrollbar {
+  width: 12px; /* Ancho del scrollbar */
+}
+
+.p-scrollpanel .p-scrollpanel-wrapper ::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color del fondo del track del scrollbar */
+}
+
+.p-scrollpanel .p-scrollpanel-wrapper ::-webkit-scrollbar-thumb {
+  background: #888; /* Color del pulgar del scrollbar */
+  border-radius: 10px; /* Bordes redondeados para el pulgar */
+}
+
+.p-scrollpanel .p-scrollpanel-wrapper ::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color del pulgar del scrollbar al pasar el cursor */
+}
+
+/* Estilo para el scrollbar en Firefox */
+.p-scrollpanel .p-scrollpanel-wrapper {
+  scrollbar-width: thin; /* Ancho del scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Color del pulgar y del track */
+}
+
+.p-scrollpanel .p-scrollpanel-wrapper:hover {
+  scrollbar-color: #555 #f1f1f1; /* Color del pulgar al pasar el cursor */
+}
+
+
+.carousel-container {
+  width: 100%;
+  font-family: "Poppins";
+  align-items: center;
+  padding: 10px; /* Añade espacio alrededor del contenido */
+  box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+}
+.title-section{
+  margin-left: 5%;
+}
+.divider {
+  margin: 20px 0;
+  width: 50%;
+  border:4px solid;
+}
+.ngTemplatexd {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.pruebaxd {
+  padding: 10px;
+  border-radius: 0%;
+  border: 2px;
+  margin: 10px;
+  height: 80%;
+  background-color: #ffffff;
+
+}
+
+
+.divImge {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-img-size {
+  max-width: 100%; /* Establece el ancho máximo de la imagen al ancho del contenedor */
+  height: 100%; /* Permite que la altura se ajuste automáticamente según la proporción original de la imagen */
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.zoom-shadow:hover .custom-img-size {
+  transform: scale(1.05); /* Zoom in */
+  filter: brightness(0.7); /* Sombra oscureciendo la imagen */
+}
+
+.zoom-shadow:hover .add-to-cart-button {
+  opacity: 1;
+}
+
+.add-to-cart-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #f3f1f1;
+  color: #515151;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoProductosCarousel {
+  padding: auto;
+  justify-content: center;
+  width: 100%; /* O ajusta este valor según tus necesidades */
+  justify-content: space-between; /* O ajusta según tus necesidades */
+}
+
+.infoProductosCarousel h4,
+.infoProductosCarousel h6 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+p {
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+h1, h3 {
+  font-weight: 600;
+}
+h4 {
+  text-align: center;
+  font-size: 18px;
+}
+
+h6 {
+  text-align: center;
+}
+.divButton {
+  display: flex;
+}
+
+.buttonAgregaraCarrito {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+  height: 50px;
+  font-size: 5px;
+}
+
+.textbotton {
+  margin: 0;
+  font-size: 12px;
+}
+
+
+
+
+
+/* Animated main title */
+.animated-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to right, #333, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Section titles */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #666;
+  transition: width 0.3s ease;
+}
+
+.section-title:hover::after {
+  width: 100%;
+}
+
+/* Highlight text (for price) */
+.highlight-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #555;
+  background: linear-gradient(45deg, #f3f3f3, #e6e6e6);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.highlight-text:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Category title */
+.category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #444;
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.category-title::before,
+.category-title::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 2px;
+  background-color: #666;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.category-title::before {
+  left: -60px;
+}
+
+.category-title::after {
+  right: -60px;
+}
+
+/* Related products title */
+.related-products-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.related-products-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #666;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.related-products-title:hover::before {
+  transform: translateX(0);
+}
+
+/* Subtitle */
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 0.5rem;
+  font-style: italic;
+  padding-left: 80px;
+}

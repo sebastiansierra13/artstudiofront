@@ -1,0 +1,131 @@
+<!-- about-us.component.html -->
+<app-nav-bar></app-nav-bar>
+
+<section class="hero">
+    <div class="container">
+        <h1 class="hero__title">¿Qué es <span>ArtStudio?</span></h1>
+        <p class="hero__description">
+            Art Studio es una plataforma en línea dedicada a ofrecer una amplia variedad de 
+            posters artísticos únicos y originales. Nuestra misión es proporcionar a nuestros 
+            clientes una experiencia de compra excepcional, ofreciendo productos de alta 
+            calidad, un servicio al cliente excepcional y una amplia selección de obras de arte 
+            cuidadosamente seleccionadas. En Art Studio, creemos en el poder del arte para 
+            transformar los espacios y enriquecer nuestras vidas.
+        </p>
+        <div class="hero__buttons">
+            <button class="btn btn--primary">Ver Productos</button>
+        </div>
+    </div>
+</section>
+
+<section id="productos" class="about" >
+    <div class="container">
+        <div class="about__content">
+            <div class="about__image">
+                <img src="/assets/imgAboutUs/diseno10.jpg" alt="Sobre nosotros" class="responsive-image">
+            </div>
+            <div class="about__text">
+                <h2 class="section-title">
+                    <img src="/assets/imgAboutUs/Icon_sobrenosotros.png" alt="icono sobre nosotros" class="section-title__icon">
+                    Sobre Nosotros
+                </h2>
+                <div [innerHTML]="aboutUsText" class="about__description"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="policy">
+    <div class="container">
+        <h3 class="policy__subtitle">
+            <img src="/assets/imgAboutUs/icon_terminos.png" alt="icono Termino y condiciones">
+            Políticas de Empresa
+        </h3>
+        <h2 class="policy__title">Nuestros Términos Y<br> Condiciones</h2>
+        <button class="btn btn--secondary">Visita la Página Principal</button>
+    </div>
+</section>
+
+<section id="terminos" class="terms" >
+    <div class="container">
+        <div class="terms__content">
+            <div class="terms__image">
+                <img src="/assets/imgAboutUs/image-terms.png" alt="Términos y Condiciones" class="responsive-image">
+            </div>
+            <div class="terms__text">
+                <h2 class="section-title">
+                    <img src="/assets/imgAboutUs/Icon-policy.png" alt="icono sobre nosotros" class="section-title__icon">
+                    Políticas De La Empresa
+                </h2>
+                <h3 class="terms__subtitle">Términos y Condiciones</h3>
+                <div class="terms__description">
+                    <div class="vertical-line"></div>
+                    <div [innerHTML]="termsText"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="envios" class="shipping" >
+    <div class="container">
+        <h3 class="shipping__subtitle">
+            <img src="/assets/imgAboutUs/icon_terminos.png" alt="icono Termino y condiciones">
+            Políticas de Empresa
+        </h3>
+        <h2 class="shipping__title">Políticas de Envío</h2>
+    </div>
+</section>
+
+<section class="shipping-content">
+    <div class="container">
+        <div class="shipping-content__wrapper">
+            <div class="shipping-content__text">
+                <h2 class="section-title">
+                    <img src="/assets/imgAboutUs/Icon-policy.png" alt="icono sobre nosotros" class="section-title__icon">
+                    Políticas De La Empresa
+                </h2>
+                <div class="shipping-content__description">
+                    <div class="vertical-line"></div>
+                    <div [innerHTML]="shippingPoliciesText"></div>
+                </div>
+            </div>
+            <div class="shipping-content__image">
+                <img src="/assets/imgAboutUs/image-shipping.png" alt="Políticas de Envío" class="responsive-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="devoluciones" class="returns" >
+    <div class="container">
+        <h3 class="returns__subtitle">
+            <img src="/assets/imgAboutUs/icon_terminos.png" alt="icono Termino y condiciones">
+            Políticas de Empresa
+        </h3>
+        <h2 class="returns__title">Políticas de Devolución</h2>
+    </div>
+</section>
+
+<section class="returns-content">
+    <div class="container">
+        <div class="returns-content__wrapper">
+            <div class="returns-content__image">
+                <img src="/assets/imgAboutUs/finalpart.png" alt="Políticas de Devolución" class="responsive-image">
+            </div>
+            <div class="returns-content__text">
+                <h2 class="section-title">
+                    <img src="/assets/imgAboutUs/Icon-policy.png" alt="icono sobre nosotros" class="section-title__icon">
+                    Políticas De La Empresa
+                </h2>
+                <div class="returns-content__description">
+                    <div class="vertical-line"></div>
+                    <div [innerHTML]="returnPoliciesText"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-floating-buttons></app-floating-buttons>
+<app-footer></app-footer>

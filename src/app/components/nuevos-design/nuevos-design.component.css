@@ -1,0 +1,499 @@
+
+.contenedorPrincipal{
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    height: 800px; /* Altura del contenedor */
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 1200px;
+    
+}
+/* aqui el css de las imagenes del  la izquierda */
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    max-width: max-content;
+}
+.container2{
+  display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    max-width: max-content;
+}
+.column {
+  display: flex;
+  min-width: 290px; /* Ancho mínimo que puede tener el div, ajusta esto según tus necesidades */
+  max-height: 650px;
+  width: 100%; /* Asegura que el div ocupe todo el ancho disponible */
+  height: 100%;
+  overflow: hidden; /* Oculta cualquier contenido que exceda el ancho máximo */
+  flex-direction: column;  
+  border-radius: 14px;
+  position: relative; /* Necesario para posicionar las imágenes superpuestas */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  cursor: pointer;
+
+}
+
+.image-large2 {
+  height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+  width: auto; /* Mantiene la proporción de la imagen */
+  object-fit: contain; /* Ajusta la imagen para que ocupe todo el alto del contenedor y lo que haga cover sea solo el ancho */
+  position: absolute; /* Para superponer las imágenes */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta la posición para centrar realmente */
+  transition: opacity 0.5s ease-in-out; /* Añade una transición suave */
+}
+
+.primary-image {
+  z-index: 1; /* Asegura que la imagen primaria esté encima por defecto */
+}
+
+.secondary-image {
+  z-index: 2; /* La imagen secundaria estará detrás de la primaria por defecto */
+  opacity: 0; /* La imagen secundaria está oculta por defecto */
+}
+
+.image-small2:hover .secondary-image, .image-small3:hover .secondary-image ,.image-large21:hover .secondary-image, .column:hover .secondary-image {
+  opacity: 1; /* Muestra la imagen secundaria al pasar el mouse */
+   
+}
+.image-medium:hover .secondary-image{
+  opacity: 1;
+}
+
+.image-medium:hover .primary-image{
+  opacity: 0;
+}
+
+.image-small2:hover .primary-image,.image-small3:hover .primary-image,.image-large21:hover .primary-image, .column:hover .primary-image {
+  opacity: 0; /* Oculta la imagen primaria al pasar el mouse */
+}
+
+
+
+
+.columna {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;    
+  width: 100%; /* Asegura que el div ocupe todo el ancho disponible */
+  min-width: 280px;
+  max-width: 280px; /* Ancho máximo que puede tener el div, ajusta esto según tus necesidades */
+  min-height: 700px;
+  max-height: 701px;
+  box-sizing: border-box; /* Incluye el padding y borde en el ancho total del div */
+  cursor: pointer;
+}
+
+.image-medium {
+  margin: 5px auto; 
+  flex: 1; /* Permite que cada div de imagen ocupe el mismo espacio dentro del contenedor */
+  width: 100%; /* Asegura que el div ocupe todo el ancho disponible */
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Asegura que el contenido no se desborde del contenedor */
+  border-radius: 14px;
+}
+
+.image-medium1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease-in-out;
+}
+  
+.column3 {
+  display: flex;
+  max-width: 180px; /* Ancho máximo que puede tener el div, ajusta esto según tus necesidades */
+  min-width: 180px;
+  max-height: 600px;
+  height: 100%;
+  overflow: hidden; /* Oculta cualquier contenido que exceda el ancho máximo */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.image-small3 {    
+  margin: 5px auto; 
+  flex: 1; /* Permite que cada div de imagen ocupe el mismo espacio dentro del contenedor */
+  width: 100%; /* Asegura que el div ocupe todo el ancho disponible */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Asegura que el contenido no se desborde del contenedor */
+  border-radius: 14px;
+  position: relative; /* Asegura que las imágenes posicionadas absolutamente estén dentro de este contenedor */
+}
+
+.image-smaller {
+  height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+  width: auto; /* Mantiene la proporción de la imagen */
+  object-fit: contain; /* Ajusta la imagen para que ocupe todo el contenedor sin deformarse */  
+  border-radius: 14px; 
+  position: absolute; /* Posiciona absolutamente las imágenes dentro del contenedor */
+  top: 0; /* Asegura que las imágenes estén en la parte superior del contenedor */
+  left: 50%; /* Centra horizontalmente las imágenes en el contenedor */
+  transform: translateX(-50%); /* Ajusta la posición horizontal para que las imágenes estén realmente centradas */
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+/* estilos div derecho */
+
+.div-imgRight{
+    padding: 0;
+    position: relative;
+    width: 40%;
+    max-width:600px ;
+    height: 100%;
+}
+
+  
+  @keyframes shine {
+    0% { transform: translate(-30%, -30%) rotate(0deg); }
+    100% { transform: translate(-30%, -30%) rotate(360deg); }
+  }
+  
+  .text-container {
+    text-align: center;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .title-part {
+    display: block;
+    color: #333;
+    transition: all 0.3s ease;
+  }
+  
+  .title-part:last-child {
+    color: #000;
+    font-weight: 700;
+  }
+  
+  .title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(45deg, #333, #000);
+    transform: scaleX(0);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .text-container:hover .title-part:first-child {
+    transform: translateY(-5px);
+  }
+  
+  .text-container:hover .title-part:last-child {
+    transform: translateY(5px);
+  }
+  
+  .text-container:hover .title::after {
+    transform: scaleX(1);
+  }
+  
+  .description {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards 0.5s;
+  }
+  
+  .highlight {
+    font-weight: 600;
+    color: #000;
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  
+  .highlight::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+  }
+  
+  .highlight:hover {
+    transform: translateY(-2px);
+  }
+  
+  .highlight:hover::before {
+    transform: scaleX(1);
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  
+.ImgParteInferior{
+    display: flex;
+    margin-bottom: 0px;
+    min-height: 500px;
+
+}
+.column2 {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;    
+  width: 250px; /* Ancho máximo que puede tener el div, ajusta esto según tus necesidades */  
+  height: 500px;
+  cursor: pointer;
+}
+
+.image-small2 {
+  margin: 5px auto; 
+  flex: 1; /* Permite que cada div de imagen ocupe el mismo espacio dentro del contenedor */
+  width: 100%; /* Asegura que el div ocupe todo el ancho disponible */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Asegura que el contenido no se desborde del contenedor */
+  border-radius: 14px;
+}
+
+.image-smallered {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.column21 {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 180px; /* Cambiado de min-width a width */
+  height: 250px; /* Cambiado de min-height y max-height a height */
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.image-large21 {
+  width: 100%; /* Añadido */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
+}
+
+.image-large211 {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 14px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+:host ::ng-deep .custom-button.p-button {
+  background-color: white !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+:host ::ng-deep .custom-button.p-button:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+}
+
+:host ::ng-deep .custom-button.p-button .p-button-icon {
+  color: #333 !important;
+  font-size: 1.2rem !important;
+}
+
+:host ::ng-deep .custom-button.p-button:focus {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #333, 0 1px 2px 0 black !important;
+}
+
+.button-overlay {
+  position: absolute;
+  top: 10px;
+  left: 12%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 3;
+}
+
+.show-overlay {
+  opacity: 1;
+}
+
+.action-button {
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.action-button:hover {
+  transform: scale(1.1);
+}
+
+
+:host ::ng-deep .p-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background-color: #ef5151 !important; /* Color gris */
+  color: white !important;
+}
+
+.componentResponsive{
+  display: none;
+}
+
+/* Media query para tablets */
+@media (max-width: 1024px) {
+  .text-container{
+    display: none;
+  }
+  .componentResponsive{
+    display: flex;
+    text-align: center;
+    opacity: 1;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+  }
+  .column2, .column21 {
+      display: none; /* Oculta los últimos 3 productos */
+  }
+
+  .button-overlay {
+    opacity: 1;
+  }
+
+}
+
+/* Media query para móviles */
+@media (max-width: 799px) {  
+  .container {
+    flex-direction: row;
+  }
+  .container2{
+    flex-direction: column;
+    margin-right: 10px;
+  }
+  .column{
+      min-width: 230px;
+      max-height: 175px;
+      margin: 10px 0;
+      border-radius: 15px;
+      min-height: 175px;
+  }
+  .image-large2 {
+    height: auto; /* Asegura que la imagen ocupe todo el alto del contenedor */
+    width: 100%; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Ajusta la imagen para que ocupe todo el alto del contenedor y lo que haga cover sea solo el ancho */
+  }
+  .columna {
+    min-width: 230px;
+    max-height: 525px;
+    margin: 10px 0;
+    min-height: 525px;
+}
+  .column3 {
+      min-height: 800px;
+      max-width: 230px;
+  }
+
+}
+
+
+/* Media query para móviles */
+@media (max-width: 480px) {  
+  .column{
+      min-width: 200px;
+  }
+  .columna {
+      min-width: 200px;
+  }
+  .column3 {
+      min-height: 750px ;
+      max-width: 200px;
+      min-width: 200px;
+  }
+}
+
+/* Media query para móviles */
+@media (max-width: 415px) {  
+
+  .contenedorPrincipal{
+    height: 1000px;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .column{
+      min-width: 350px;
+  }
+  .columna {
+      min-width: 350px;
+  }
+  .column3 {
+      flex-direction: row;
+      min-height: 250px ;
+      max-width: 350px;
+      min-width: 350px;
+  }
+}

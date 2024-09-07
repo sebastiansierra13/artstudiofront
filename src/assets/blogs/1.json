@@ -1,0 +1,40 @@
+{
+  "id": "1",
+  "title": "El arte de la decoración con posters",
+  "author": "Jane Doe",
+  "date": "2023-06-19",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "La decoración con posters puede transformar cualquier espacio. En este blog, exploraremos diferentes estilos y técnicas para decorar con posters."
+    },
+    {
+      "type": "image",
+      "src": "assets/imagesBlogs/poster-decor-1.jpg",
+      "alt": "Decoración con posters"
+    },
+    {
+      "type": "paragraph",
+      "text": "Existen muchos tipos de posters que puedes usar para decorar, desde arte abstracto hasta reproducciones de tus películas favoritas. La clave está en cómo los dispones en el espacio."
+    },
+    {
+      "type": "image",
+      "src": "assets/imagesBlogs/poster-decor-2.jpg",
+      "alt": "Poster en la sala de estar"
+    },
+    {
+      "type": "paragraph",
+      "text": "Además, puedes combinar posters con otros elementos decorativos como marcos, luces y plantas para crear una atmósfera única y personalizada."
+    },
+    {
+      "type": "paragraph",
+      "text": "Consejo: usa marcos de diferentes tamaños y colores para añadir profundidad y contraste a tu decoración."
+    },
+    {
+      "type": "image",
+      "src": "assets/imagesBlogs/poster-decor-3.jpg",
+      "alt": "Poster en la sala de estar"
+    }
+  ],
+  "tags": ["decoración", "posters", "arte", "diseño de interiores"]
+}

@@ -1,0 +1,51 @@
+<div class="contenedor-imagen"></div>
+<div class="contenedor">
+  <div class="divtitle">
+    <a class="navtitle font-Inter" routerLink="/welcome">ArtStudio Administrador</a>
+  </div>
+  <mat-card class="cardFormulario">
+    <div class="form">
+      <form class="login-form" (ngSubmit)="login()">
+        <p class="text-parrafo">
+          Introduzca a continuación sus datos de acceso exclusivos de administrador
+        </p>
+        <br>
+        <div class="form-group">
+          <div>
+            <mat-label class="mat-label-inter">Correo</mat-label>
+          </div>
+          <div>
+            <input
+                type="text"
+                placeholder="correo electrónico"
+                class="form-control"
+                id="email"
+                [(ngModel)]="user"
+                name="user"
+                required
+              />
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <div>
+            <mat-label class="mat-label-inter">Contraseña</mat-label>
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="contraseña"
+              class="form-control"
+              id="password"
+              [(ngModel)]="password" 
+              name="password"
+              required
+            />
+          </div>
+        </div>
+        <br>
+        <button class="buttonAceptar" type="submit">Iniciar sesión</button>
+      </form>
+    </div>
+  </mat-card>
+</div>

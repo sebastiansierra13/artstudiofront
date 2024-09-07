@@ -1,0 +1,127 @@
+<div class="contnavBar">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+
+    <div class="mobile-menu-button" (click)="toggleSidebar()">
+      <i class="pi pi-bars"></i>
+    </div>
+
+    <div class="divLogo">
+        <button class="logo">
+            <img src="../../../assets/logoArtStudioO.png" width="150" height="40" alt="Imagen del botón" routerLink="/home"/>
+        </button>
+    </div>
+  
+    <div class="search desktop-only">
+      <form class="search-form" (submit)="onSearchSubmit($event)">
+        <input #searchInput 
+               class="search-input" 
+               type="search" 
+               placeholder="Buscar productos o categorías" 
+               aria-label="Search"
+               [(ngModel)]="searchQuery"
+               (input)="onSearchInput()"
+               (focus)="showResults = searchResults.length > 0 && searchQuery.length > 0"
+               [ngModelOptions]="{standalone: true}">
+        <button type="submit" class="search-button" aria-label="Buscar">
+          <i class="pi pi-search"></i>
+        </button>
+        <button *ngIf="searchQuery" 
+                type="button" 
+                class="clear-search" 
+                (click)="clearSearch()" 
+                aria-label="Limpiar búsqueda">
+          <i class="pi pi-times"></i>
+        </button>
+      </form>
+      
+      <div class="search-results" *ngIf="showResults">
+        <div *ngFor="let result of searchResults" 
+             (click)="selectSearchResult(result)" 
+             class="search-result-item">
+          <i class="pi" [ngClass]="{'pi-tag': isProducto(result), 'pi-list': !isProducto(result)}"></i>
+          <span *ngIf="isProducto(result)">{{ result.nombreProducto }}</span>
+          <span *ngIf="!isProducto(result)">{{ result.nombreCategoria }}</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="optionNav desktop-only">
+      <div class="categories-dropdown" 
+      (mouseover)="showCategoriesPanel()" 
+      (mouseleave)="hideCategoriesPanel()">
+   <button class="buttonNav">Categorias</button>
+   <div class="categories-panel" 
+        *ngIf="showCategories" 
+        (mouseover)="keepCategoriesPanelOpen()" 
+        (mouseleave)="hideCategoriesPanel()">
+     <div class="categories-grid">
+       <div class="category-item" *ngFor="let category of categories" (click)="selectCategory(category)">
+         <div class="category-image" [ngStyle]="{'background-image': 'url(' + category.imagenCategoria + ')'}"></div>
+         <span class="category-title">{{ category.nombreCategoria }}</span>
+       </div>
+     </div>
+   </div>
+ </div>
+        <button class="buttonNav" routerLink="/about">Acerca de Nosotros</button>
+      </div>
+      
+      
+  
+      <div class="divIcons">
+        <div class="icon-container" [routerLink]="isMobile ? '/wishlist' : null" (mouseover)="!isMobile && showPanel('wishlist')" (mouseleave)="!isMobile && hidePanel('wishlist')">
+          <button class="buttonNav1">
+            <img src="\assets\corazon.png" alt="wishlist-icon" class="icon">
+            <p-badge [value]="wishlistItemsCount.toString()" severity="info"></p-badge>
+          </button>
+          <app-wishlist-panel *ngIf="showWishlist && !isMobile" (mouseover)="keepPanelOpen('wishlist')" (mouseleave)="hidePanel('wishlist')"></app-wishlist-panel>
+        </div>
+        <div class="icon-container" [routerLink]="isMobile ? '/detailed-cart' : null" (mouseover)="!isMobile && showPanel('cart')" (mouseleave)="!isMobile && hidePanel('cart')">
+          <button class="buttonNav1">
+            <img src="\assets\carrito.png" alt="cart-icon" class="icon">
+            <p-badge [value]="cartItemsCount.toString()" severity="info"></p-badge>
+          </button>
+          <app-cart-small *ngIf="showCart && !isMobile" (mouseover)="keepPanelOpen('cart')" (mouseleave)="hidePanel('cart')"></app-cart-small>
+        </div>  
+      </div>
+</div>
+  
+
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000" styleClass="mobile-sidebar">
+  <div class="sidebar-content">
+    <div class="search-mobile">
+      <form class="search-form" (submit)="onSearchMobileSubmit($event)">
+        <input #mobileSearchInput 
+               class="search-input" 
+               type="search" 
+               placeholder="Buscar productos o categorías" 
+               aria-label="Search"
+               [(ngModel)]="mobileSearchQuery"
+               (input)="onMobileSearchInput()"
+               (focus)="showMobileResults = mobileSearchResults.length > 0 && mobileSearchQuery.length > 0"
+               [ngModelOptions]="{standalone: true}">
+        <button type="submit" class="search-button" aria-label="Buscar">
+          <i class="pi pi-search"></i>
+        </button>
+        <button *ngIf="mobileSearchQuery" 
+                type="button" 
+                class="clear-search" 
+                (click)="clearMobileSearch()" 
+                aria-label="Limpiar búsqueda">
+          <i class="pi pi-times"></i>
+        </button>
+      </form>
+      <div class="search-results mobile" *ngIf="showMobileResults">
+        <div *ngFor="let result of mobileSearchResults" 
+             (click)="selectSearchResult(result)" 
+             class="search-result-item">
+          <i class="pi" [ngClass]="{'pi-tag': isProducto(result), 'pi-list': !isProducto(result)}"></i>
+          <span *ngIf="isProducto(result)">{{ result.nombreProducto }}</span>
+          <span *ngIf="!isProducto(result)">{{ result.nombreCategoria }}</span>
+        </div>
+      </div>
+    </div>
+    <button class="buttonNav" routerLink="/v">Categorias</button>
+    <button class="buttonNav" routerLink="/about" (click)="visibleSidebar=false">Acerca de Nosotros</button>
+  </div>
+</p-sidebar>

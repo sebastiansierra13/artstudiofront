@@ -1,0 +1,40 @@
+
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
+    <button class="close-btn" (click)="visibleSidebar=false">X</button>
+    <div class="sidebar-content">
+        <button class="buttonNav" routerLink="/home" (click)="visibleSidebar=false">Categorias</button>
+        <button class="buttonNav" routerLink="/about" (click)="visibleSidebar=false">Acerca de Nosotros</button>
+    </div>
+</p-sidebar>
+
+
+<!--Div del nav bar del admin-->
+<div class="contnavBar">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+    <div class="divLogo">
+        <button class="logo">
+            <img src="../../../assets/logoArtStudioO.png" width="150" height="40" alt="Imagen del botón" routerLink="/home"/>
+        </button>
+    </div>
+  
+    <div class="optionNav">
+        <button class="buttonNav" routerLink="/home">Categorias</button>
+        <button class="buttonNav" routerLink="/about">Acerca de Nosotros</button>
+        <!-- Botón de logout -->
+        <button class="buttonNav" (click)="logout()">Cerrar sesión</button>
+    </div>
+  
+    <div class="hamburger-menu" (click)="toggleSidebar()">
+        <i class="pi pi-bars"></i>
+    </div>
+</div>
+
+<!--Div del titulo del menu-->
+<div class="containerTitle">
+    <p-divider align="left" type="solid">
+        <b >{{ setTitle }}</b>
+        </p-divider>
+</div>
+
+
+

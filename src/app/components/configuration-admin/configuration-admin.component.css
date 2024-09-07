@@ -1,0 +1,104 @@
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+.configAdmin {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #ffffff;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.content{
+    
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+h1, h3 {
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+p {
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.textarea-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.textarea-container p-editor {
+    flex-grow: 1;
+}
+
+.divider {
+    margin: 20px 0;
+    width: 50%;
+    border-bottom: 2px solid #ddd;
+}
+
+.custom-table {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-table td {
+    border: 0.5px solid #c75151;
+    padding: 20px;
+    text-align: left;
+}
+
+.header-row {
+    background-color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+}
+
+.subheader-row {
+    background-color: #fafafa;
+
+}
+
+.subheader-row h4, .subheader-row p {
+    margin: 0;
+    padding: 10px 0;
+}
+
+
+
+.divBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mat-divider {
+    height: 2px;
+    background-color: #ddd;
+}
+
+
+app-button-admin-menu {
+    width: 17%;
+    margin-left: 1.5rem;
+  }

@@ -1,0 +1,119 @@
+.contenedor-imagen {
+    position: absolute;
+    left: 70%;
+    width: 30vw; /* Ancho deseado de tu imagen */
+    height: 60vh; /* Altura deseada de tu imagen */
+    background-image: url('../../../assets/imgLogin/BG.png'); /* Ruta de tu imagen */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+  }
+  
+
+.contenedor {
+    width: 100%;
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    height: 100vh;
+    display: flex;
+    background-color: #252525;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.cardFormulario {
+    position: relative;
+    margin: auto;
+    margin-top: 5%;
+}
+
+
+
+.divtitle {
+    margin-top: 5%;
+    background-color: transparent;
+}
+
+.text-parrafo{
+    width: 80%;
+    margin: auto;
+    color: #666666;
+    text-align: center;
+    font-size: 17px;
+}
+.navtitle {
+    font-size: 30px;
+    font-weight: 30;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+
+ .login-form {
+    position: flex;
+    padding: 45px;
+    width: 90%;
+    flex-direction: column;
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border-radius: 4px;
+    height: 35px;
+    border: none;
+    width: 100%;    margin: 5px 5px;
+    padding: 15px;
+
+    box-sizing: border-box;
+    font-size: 14px;
+} 
+.mat-label-inter {
+    font-size: 18px; /* Establece el tamaño de fuente a 24px */
+    font-weight: 400; /* Establece el peso de la fuente a regular */
+    color: #666666;
+  }
+
+.buttonAceptar {
+    width: 100%;
+}
+
+
+.buttonAceptar {
+    font-family: "Roboto", sans-serif;
+    background: #252525;
+    padding: 12px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-color: #f4eb49;
+    border-radius: 4px;
+    border-width: 1px;
+}
+
+.message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    text-align: right;
+    font-size: 17px;
+}
+
+.message a {
+    color: #999999;
+    text-decoration: none;
+}
+
+
+
+
+
+

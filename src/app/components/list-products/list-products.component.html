@@ -1,0 +1,107 @@
+<div class="contenedorPrincipal">
+<p-toast position="top-right"></p-toast>
+<app-nav-bar class="navxd"></app-nav-bar>
+<!-- Banner condicional -->
+<div *ngIf="!showAllProducts && !isSearchResult" class="banner">
+  <div class="banner-image">
+    <img [src]="categoria?.imagenCategoria" [alt]="categoria?.nombreCategoria" class="category-image">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <div class="banner-text">
+      <h1>{{ categoria?.nombreCategoria }}</h1>
+      <p>Descubre nuestra colección exclusiva</p>
+    </div>
+  </div>
+</div>
+
+<!-- Banner para resultados de búsqueda -->
+<div *ngIf="isSearchResult" class="banner">
+  <div class="banner-image">
+    <img [src]="defaultBannerImage" alt="Resultados de Búsqueda" class="category-image">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <div class="banner-text">
+      <h1>Resultados de Búsqueda</h1>
+      <p>Mostrando resultados para "{{ searchQuery }}"</p>
+    </div>
+  </div>
+</div>
+<!-- Banner para todos los productos -->
+<div *ngIf="showAllProducts" class="banner">
+  <div class="banner-image">
+    <img [src]="defaultBannerImage" alt="Todos los productos" class="category-image">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <div class="banner-text">
+      <h1>Todos los productos</h1>
+      <p>Explora nuestra colección completa</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="products">
+    <div class="top-bar">
+      <div class="results-label">
+        Mostrando {{ displayedProductos.length }} de {{ productos.length }} resultados
+      </div>
+      <div class="column-buttons">
+        <button class="custom-button" [class.active]="columnas === 2" (click)="onColumnChange(2)">
+          <div class="circle-container">
+            <span class="circle"></span>
+            <span class="circle"></span>
+          </div>
+        </button>
+        <button class="custom-button" [class.active]="columnas === 3" (click)="onColumnChange(3)">
+          <div class="circle-container">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+          </div>
+        </button>
+        <button class="custom-button" [class.active]="columnas === 4" (click)="onColumnChange(4)">
+          <div class="circle-container">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle"></span>
+          </div>
+        </button>
+      </div>
+      <p-dropdown [options]="sortOptions" placeholder="Ordenar por" (onChange)="onSortChange($event)"></p-dropdown>
+
+</div>
+
+    <div [ngClass]="{
+      'grid-columns-2': columnas === 2,
+      'grid-columns-3': columnas === 3,
+      'grid-columns-4': columnas === 4
+    }">
+      <div *ngFor="let producto of displayedProductos" class="product-card" [routerLink]="['/preview', producto.nombreProducto, producto.idProducto]">
+        <div class="product-content">
+          <div class="image-container zoom-shadow">
+            <img *ngIf="producto.Imagenes && producto.Imagenes.length > 0" [src]="producto.Imagenes[0]" [alt]="producto.nombreProducto" class="product-image" />
+            <div class="button-overlay" >
+              <button pButton icon="pi pi-heart" class="action-button" (click)="addToWishlist($event,producto)"></button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h4>{{ producto.nombreProducto }}</h4>
+            <h6>{{ producto.ListPrecios }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="load-more">
+      <button pButton label="Cargar más" icon="pi pi-chevron-down" (click)="loadMore()"></button>
+    </div>
+  </div>
+</div>
+<app-floating-buttons></app-floating-buttons>
+<app-footer></app-footer>
+</div>

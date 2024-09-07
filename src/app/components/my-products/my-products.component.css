@@ -1,0 +1,135 @@
+
+.my-product {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.my-product .title-section {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    
+}
+
+.products-view{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.content{
+    width: 100%;
+    background: #fff;
+    padding-right: 2rem;
+    border-radius: 12px;
+    padding-top: 0rem;
+}
+
+
+.accordion-categories {
+    background-color: #ffffff;
+}
+
+:host ::ng-deep .p-dialog .product-image {
+    width: 150px;
+    margin: 0 auto 2rem auto;
+    display: block;
+}
+
+.card{
+    display: flex;
+    width: 100%;
+    justify-content: right;
+}
+
+:host ::ng-deep .btnAddCat{
+    background-color: #4B4B4B ;
+    border-color: #4B4B4B;
+}
+.overlay{
+    position: absolute !important;
+    z-index: 99;
+    width: 95%;
+    top: 75px;
+}
+
+.container.blurred {
+    filter: blur(2px);
+}
+
+
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ffffff;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    color: #515151;
+    border: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  :host ::ng-deep .accordiontab{
+    color: #ffffff;
+    background-color: #4B4B4B;
+  }
+  
+  app-button-admin-menu{
+    width: 20%;
+    margin-left: 1.5rem;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .field {
+    margin-top: 1rem;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+
+
+
+  /* Estilo para los botones */
+.category-button {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+  }
+  
+  .category-button:hover {
+    background-color: #ddd;
+  }
+  
+  .category-button.active {
+    background-color: #ccc;
+  }
+  
+  /* Estilo para la tabla */
+  .products-table {
+    margin-top: 20px;
+  }
+  
+
+ 

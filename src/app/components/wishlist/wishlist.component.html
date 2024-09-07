@@ -1,0 +1,38 @@
+<!-- wishlist.component.html -->
+<app-nav-bar class="navxd"  ></app-nav-bar>
+<div class="wishlist-container">
+    <div class="wishlist-header">
+      <div class="title-container">
+        <i class="fas fa-heart wishlist-icon"></i>
+        <h2 class="wishlist-title">Mi Lista de Deseos</h2>
+        <div class="title-underline"></div>
+      </div>
+      <p class="wishlist-subtitle">Descubre tus artículos favoritos</p>
+    </div>
+  <div class="wishlist-items">
+    <div *ngFor="let item of wishlistItems" class="wishlist-item">
+      <div class="wishlist-item-image-container">
+        <img [src]="item.Imagenes[0]" [alt]="item.nombreProducto" class="wishlist-item-image">
+        <div class="wishlist-item-overlay">
+          <button (click)="goToProductDetails(item)" class="btn-view">Seleccionar Medidas</button>
+        </div>
+      </div>
+      <div class="wishlist-item-details">
+        <h3>{{ item.nombreProducto }}</h3>
+        <p class="item-description">{{ item.DescripcionProducto | slice:0:50 }}...</p>
+        <div class="item-actions">
+          <button (click)="removeFromWishlist(item.idProducto)" class="btn-remove">
+            <i class="fas fa-trash-alt"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="wishlistItems.length === 0" class="empty-wishlist">
+    <i class="fas fa-heart-broken"></i>
+    <p>Tu lista de deseos está vacía.</p>
+    <button routerLink="/home" class="btn-explore">Explorar Productos</button>
+  </div>
+  <app-floating-buttons></app-floating-buttons>
+</div>
+<app-footer></app-footer>

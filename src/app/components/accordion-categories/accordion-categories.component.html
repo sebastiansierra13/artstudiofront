@@ -1,0 +1,87 @@
+<div class="accordion-categories">
+  <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+    <ng-container *cdkVirtualFor="let category of categories">
+      <div class="accordion-category">
+        <div class="accordion-header"  (click)="toggleAccordion(category.nombreCategoria)">
+          <span class="flex align-items-center gap-2 w-full">
+            <span class="font-bold white-space-nowrap">{{ category.nombreCategoria }}</span>
+            <span class="ml-auto">{{ expandedCategories[category.nombreCategoria] ? '-' : '+' }}</span>
+          </span>
+        </div>
+        <div class="accordion-content" *ngIf="expandedCategories[category.nombreCategoria]">
+          <p-toolbar styleClass="mb-4 gap-2">
+            <ng-template pTemplate="left">
+              <p-button pRipple severity="success" label="Nuevo" icon="pi pi-plus" class="mr-2" (click)="onCategoryClick(category)" (click)="openNew(category)"></p-button>
+              <p-button pRipple severity="danger" label="Borrar" icon="pi pi-trash" (click)="deleteSelected()" [disabled]="!selectedProducts || !selectedProducts.length"></p-button>
+            </ng-template>
+          </p-toolbar>
+          <p-table
+                #dt
+                [value]="category.productos ?? []"
+                [rows]="5"
+                [paginator]="true"
+                [globalFilterFields]="['nombreProducto', 'categoria', 'precio', 'status']"
+                [tableStyle]="{ 'min-width': '55rem' }"
+                [(selection)]="selectedProducts"
+                [rowHover]="true"
+                dataKey="idProducto"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} productos"
+                [showCurrentPageReport]="true">
+
+                <ng-template pTemplate="caption">
+                  <div class="flex align-items-center justify-content-between">
+                    <h5 class="m-0">Gestiona tus productos</h5>
+                    <span class="p-input-icon-left">
+                      <i class="pi pi-search"></i>
+                      <input type="text" pInputText placeholder="Search..." #globalFilter />
+                    </span>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pResizableColumn pReorderableColumn style="width: 3rem">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th pResizableColumn pReorderableColumn field="rating">Imagen</th>
+                    <th pResizableColumn pReorderableColumn field="name">Nombre</th>
+                    <th pResizableColumn pReorderableColumn field="category">Categoría</th>
+                    <th pResizableColumn pReorderableColumn field="price">Precio</th>
+                    <th pResizableColumn pReorderableColumn style="width: 10rem">Acciones</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                  <tr [pSelectableRow]="product">
+                    <td>
+                      <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                    </td>
+                    <td>
+                      <img *ngIf="product.Imagenes && product.Imagenes.length > 0" [src]="product.Imagenes[0]" [alt]="product.nombreProducto" width="50" class="shadow-4"/>
+                      <span *ngIf="!product.Imagenes || product.Imagenes.length === 0">No image</span>
+                    </td>
+                    <td>{{ product.nombreProducto }}</td>
+                    <td>{{ product.idCategoria }}</td>
+                    <td>{{ product.listPrecios }}</td>
+                    <td>
+                      <div class="flex gap-2">
+                        <p-button pRipple size="small" icon="pi pi-pencil" (click)="edit(product)"></p-button>
+                        <p-button pRipple size="small" icon="pi pi-trash"  (click)="delete(category, product)" severity="danger"  ></p-button>
+                        <p-button pRipple size="small" [icon]="isFavorite(product) ? 'pi pi-star-fill' : 'pi pi-star'" (click)="toggleFavoriteProduct(product)">
+            
+                        </p-button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="6">No se encontraron productos</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+
+
+        </div>
+      </div>
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</div>

@@ -1,0 +1,142 @@
+<div class="componentResponsive">
+  <div class="text-containers" data-aos="zoom-in" data-aos-delay="300">
+    <h2 class="title">
+      <span class="title-part">¡Nuevos</span>
+      <span class="title-part">Diseños!</span>
+    </h2>
+    <p class="description">Descubre lo último en arte: nuestras nuevas llegadas te esperan para
+      <span class="highlight">inspirarte</span> y <span class="highlight">renovar</span> tus espacios con estilo y originalidad.
+    </p>
+  </div>
+</div>
+
+
+
+<div class="contenedorPrincipal">
+  <div class="container">
+    <div class="container2">
+    <div class="column" *ngIf="ultimosProductos[0]" [routerLink]="['/preview', ultimosProductos[0].nombreProducto, ultimosProductos[0].idProducto]" data-aos="fade-right" data-aos-offset="500" data-aos-duration="500" (mouseenter)="onMouseEnter(ultimosProductos[0])" (mouseleave)="onMouseLeave(ultimosProductos[0])">
+      <p-tag value="Nuevo" severity="success"></p-tag>
+      <img *ngIf="ultimosProductos[0]" [src]="ultimosProductos[0].Imagenes[0]" [alt]="ultimosProductos[0].nombreProducto" class="image-large2 primary-image">
+      <img *ngIf="ultimosProductos[0]" [src]="ultimosProductos[0].Imagenes[1]" [alt]="ultimosProductos[0].nombreProducto" class="image-large2 secondary-image">
+      <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[0])">
+          <p-button icon="pi pi-heart" 
+                  styleClass="action-button custom-button" 
+                  (onClick)="addToWishlist($event,ultimosProductos[0])">
+          </p-button>
+      </div>
+    </div>
+  
+    
+    <div class="columna" >
+      <div class="image-medium" [routerLink]="['/preview', ultimosProductos[1].nombreProducto, ultimosProductos[1].idProducto]" *ngIf="ultimosProductos[1]" (mouseenter)="onMouseEnter(ultimosProductos[1])" (mouseleave)="onMouseLeave(ultimosProductos[1])" data-aos="zoom-in-up" data-aos-duration="1000">
+        <p-tag value="Nuevo" severity="success"></p-tag>
+        <img *ngIf="ultimosProductos[1]" [src]="ultimosProductos[1].Imagenes[0]" [alt]="ultimosProductos[1].nombreProducto" class="image-medium1 primary-image">
+        <img *ngIf="ultimosProductos[1]" [src]="ultimosProductos[1].Imagenes[1]" [alt]="ultimosProductos[1].nombreProducto" class="image-medium1 secondary-image">
+        <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[1])">
+          <p-button icon="pi pi-heart" 
+                  styleClass="action-button custom-button" 
+                  (onClick)="addToWishlist($event,ultimosProductos[1])">
+          </p-button>
+      </div>
+      </div>
+      <div class="image-medium" [routerLink]="['/preview', ultimosProductos[2].nombreProducto, ultimosProductos[2].idProducto]" *ngIf="ultimosProductos[2]" (mouseenter)="onMouseEnter(ultimosProductos[2])" (mouseleave)="onMouseLeave(ultimosProductos[2])" data-aos="zoom-in" data-aos-duration="1000">
+        <p-tag value="Nuevo" severity="success"></p-tag>
+        <img *ngIf="ultimosProductos[2]" [src]="ultimosProductos[2].Imagenes[0]" [alt]="ultimosProductos[2].nombreProducto" class="image-medium1 primary-image">
+        <img *ngIf="ultimosProductos[2]" [src]="ultimosProductos[2].Imagenes[1]" [alt]="ultimosProductos[2].nombreProducto" class="image-medium1 secondary-image">
+        <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[2])">
+          <p-button icon="pi pi-heart" 
+                  styleClass="action-button custom-button" 
+                  (onClick)="addToWishlist($event,ultimosProductos[2])">
+          </p-button>
+      </div>
+      </div>
+      <div class="image-medium"[routerLink]="['/preview', ultimosProductos[3].nombreProducto, ultimosProductos[3].idProducto]" *ngIf="ultimosProductos[3]" (mouseenter)="onMouseEnter(ultimosProductos[3])" (mouseleave)="onMouseLeave(ultimosProductos[3])" data-aos="zoom-in-down" data-aos-duration="1000">
+        <p-tag value="Nuevo" severity="success"></p-tag>
+        <img *ngIf="ultimosProductos[3]" [src]="ultimosProductos[3].Imagenes[0]" [alt]="ultimosProductos[3].nombreProducto" class="image-medium1 primary-image">
+        <img *ngIf="ultimosProductos[3]" [src]="ultimosProductos[3].Imagenes[1]" [alt]="ultimosProductos[3].nombreProducto" class="image-medium1 secondary-image">
+        <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[3])">
+          <p-button icon="pi pi-heart" 
+                  styleClass="action-button custom-button" 
+                  (onClick)="addToWishlist($event,ultimosProductos[3])">
+          </p-button>
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="column3">
+      <div class="image-small3" [routerLink]="['/preview', ultimosProductos[4].nombreProducto, ultimosProductos[4].idProducto]" *ngIf="ultimosProductos[4]" (mouseenter)="onMouseEnter(ultimosProductos[4])" (mouseleave)="onMouseLeave(ultimosProductos[4])" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
+        <p-tag value="Nuevo" severity="success"></p-tag>
+        <img *ngIf="ultimosProductos[4]" [src]="ultimosProductos[4].Imagenes[0]" [alt]="ultimosProductos[4].nombreProducto" class="image-smaller primary-image">
+        <img *ngIf="ultimosProductos[4]" [src]="ultimosProductos[4].Imagenes[1]" [alt]="ultimosProductos[4].nombreProducto" class="image-smaller secondary-image">
+            <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[4])">
+              <p-button icon="pi pi-heart" 
+                      styleClass="action-button custom-button" 
+                      (onClick)="addToWishlist($event,ultimosProductos[4])">
+              </p-button>
+           </div>
+      </div>
+      <div class="image-small3"  [routerLink]="['/preview', ultimosProductos[5].nombreProducto, ultimosProductos[5].idProducto]" *ngIf="ultimosProductos[5]" (mouseenter)="onMouseEnter(ultimosProductos[5])" (mouseleave)="onMouseLeave(ultimosProductos[5])" data-aos="fade-up" data-aos-duration="1000">
+        <p-tag value="Nuevo" severity="success"></p-tag>
+        <img *ngIf="ultimosProductos[5]" [src]="ultimosProductos[5].Imagenes[0]" [alt]="ultimosProductos[5].nombreProducto" class="image-smaller primary-image">
+        <img *ngIf="ultimosProductos[5]" [src]="ultimosProductos[5].Imagenes[1]" [alt]="ultimosProductos[5].nombreProducto" class="image-smaller secondary-image">
+        <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[5])">
+          <p-button icon="pi pi-heart" 
+                  styleClass="action-button custom-button" 
+                  (onClick)="addToWishlist($event,ultimosProductos[5])">
+          </p-button>
+        </div>
+      </div>
+    </div>
+    <div class="div-imgRight">
+      <div class="text-container" data-aos="zoom-in" data-aos-delay="300">
+        <h2 class="title">
+          <span class="title-part">¡Nuevos</span>
+          <span class="title-part">Diseños!</span>
+        </h2>
+        <p class="description">Descubre lo último en arte: nuestras nuevas llegadas te esperan para
+          <span class="highlight">inspirarte</span> y <span class="highlight">renovar</span> tus espacios con estilo y originalidad.
+        </p>
+      </div>
+    <div class="ImgParteInferior">
+      <div class="column2" >
+        <div class="image-small2" [routerLink]="['/preview', ultimosProductos[6].nombreProducto, ultimosProductos[6].idProducto]" *ngIf="ultimosProductos[6]" (mouseenter)="onMouseEnter(ultimosProductos[6])" (mouseleave)="onMouseLeave(ultimosProductos[6])" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+          <p-tag value="Nuevo" severity="success"></p-tag>
+          <img *ngIf="ultimosProductos[6]" [src]="ultimosProductos[6].Imagenes[0]" [alt]="ultimosProductos[6].nombreProducto" class="image-smallered primary-image">
+          <img *ngIf="ultimosProductos[6]" [src]="ultimosProductos[6].Imagenes[1]" [alt]="ultimosProductos[6].nombreProducto" class="image-smallered secondary-image">
+          <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[6])">
+            <p-button icon="pi pi-heart" 
+                    styleClass="action-button custom-button" 
+                    (onClick)="addToWishlist($event,ultimosProductos[6])">
+            </p-button>
+        </div>
+        </div>
+        <div class="image-small2" [routerLink]="['/preview', ultimosProductos[7].nombreProducto, ultimosProductos[7].idProducto]" *ngIf="ultimosProductos[7]" (mouseenter)="onMouseEnter(ultimosProductos[7])" (mouseleave)="onMouseLeave(ultimosProductos[7])" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+          <p-tag value="Nuevo" severity="success"></p-tag>
+          <img *ngIf="ultimosProductos[7]" [src]="ultimosProductos[7].Imagenes[0]" [alt]="ultimosProductos[7].nombreProducto" class="image-smallered primary-image">
+          <img *ngIf="ultimosProductos[7]" [src]="ultimosProductos[7].Imagenes[1]" [alt]="ultimosProductos[7].nombreProducto" class="image-smallered secondary-image">
+          <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[7])">
+            <p-button icon="pi pi-heart" 
+                    styleClass="action-button custom-button" 
+                    (onClick)="addToWishlist($event,ultimosProductos[7])">
+            </p-button>
+        </div>
+        </div>
+      </div>
+      <div class="column21" >
+        <div class="image-large21" [routerLink]="['/preview', ultimosProductos[8].nombreProducto, ultimosProductos[8].idProducto]" *ngIf="ultimosProductos[8]" (mouseenter)="onMouseEnter(ultimosProductos[8])" (mouseleave)="onMouseLeave(ultimosProductos[8])" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500">
+          <p-tag value="Nuevo" severity="success"></p-tag>
+          <img *ngIf="ultimosProductos[8]" [src]="ultimosProductos[8].Imagenes[0]" [alt]="ultimosProductos[8].nombreProducto" class="image-large211 primary-image">
+          <img *ngIf="ultimosProductos[8]" [src]="ultimosProductos[8].Imagenes[1]" [alt]="ultimosProductos[8].nombreProducto" class="image-large211 secondary-image">
+          <div class="button-overlay" [class.show-overlay]="isOverlayVisible(ultimosProductos[8])">
+            <p-button icon="pi pi-heart" 
+                    styleClass="action-button custom-button" 
+                    (onClick)="addToWishlist($event,ultimosProductos[8])">
+            </p-button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

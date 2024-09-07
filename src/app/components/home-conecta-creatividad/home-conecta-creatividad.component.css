@@ -1,0 +1,254 @@
+.instagram-showcase {
+  font-family: 'Poppins', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+.showcase-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.showcase-title {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.title-highlight {
+  color: #ff6b6b;
+  font-weight: 800;
+}
+
+.title-underline {
+  position: relative;
+  color: #2c3e50;
+  display: inline-block;
+}
+
+.title-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.instagram-showcase:hover .title-underline::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.title-gradient {
+  background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+.showcase-subtitle {
+  font-size: 1.2rem;
+  color: #34495e;
+  margin-bottom: 1.5rem;
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.grid-main {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+}
+
+.main-image {
+  overflow: hidden;
+  border-radius: 15px;
+  aspect-ratio: 1 / 1;
+}
+
+.sub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-secondary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-item {
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  aspect-ratio: 1 / 1;
+}
+
+.grid-item:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.grid-item:hover img {
+  transform: scale(1.1);
+}
+
+.showcase-cta {
+  text-align: center;
+}
+
+.instagram-btn {
+  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.instagram-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.loading-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.loading, .error {
+  font-size: 1.2rem;
+  color: #34495e;
+}
+
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.grid-main {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.grid-main:hover {
+  transform: scale(1.02);
+}
+
+.main-image {
+  overflow: hidden;
+  border-radius: 15px;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.sub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-secondary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-item {
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.grid-item:hover {
+  transform: scale(1.05);
+}
+
+.instagram-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.grid-item:hover .instagram-indicator,
+.main-image:hover .instagram-indicator {
+  opacity: 1;
+}
+
+.instagram-indicator i {
+  color: #E1306C;
+  font-size: 18px;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.grid-item:hover img,
+.main-image:hover img {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .instagram-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-secondary {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  
+  .showcase-title {
+    font-size: 2.5rem;
+  }
+  
+  .showcase-subtitle {
+    font-size: 1rem;
+  }
+}

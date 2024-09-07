@@ -1,0 +1,25 @@
+<p-dialog header="Actualizar Precios" [(visible)]="visible" [modal]="true" [closable]="false" [style]="{ width: '30vw' }" (onHide)="close()">
+  <div class="content">
+    <h2>Advertencia</h2>
+    <p>Modificar los precios de los posters es una acción delicada. Asegúrate de revisar cuidadosamente los cambios antes de continuar.</p>
+    <p><strong>NOTA:</strong> Los cambios afectarán todos los productos de ArtStudio con la medida seleccionada.</p>
+
+    <p-dropdown [options]="precios" [(ngModel)]="selectedPrecio" (onChange)="onPrecioSelect($event)" 
+                optionLabel="TamanhoPoster" placeholder="Seleccione una medida"></p-dropdown>
+
+    <div class="field" *ngIf="selectedPrecio">
+      <label for="PosterPrice">Precio actual del poster</label>
+      <p-inputNumber id="PosterPrice" [(ngModel)]="selectedPrecio.PrecioPoster" mode="currency" currency="COP"></p-inputNumber>
+    </div>
+    
+    <div class="field" *ngIf="selectedPrecio">
+      <label for="FramePrice">Precio actual del marco</label>
+      <p-inputNumber id="FramePrice" [(ngModel)]="selectedPrecio.PrecioMarco" mode="currency" currency="COP"></p-inputNumber>
+    </div>
+
+    <div class="buttons">
+      <p-button label="Guardar" icon="pi pi-check" (click)="saveChanges()" [disabled]="!selectedPrecio"></p-button>
+      <p-button label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancel()"></p-button>
+    </div>
+  </div>
+</p-dialog>

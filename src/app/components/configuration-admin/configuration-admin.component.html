@@ -1,0 +1,92 @@
+<div configuration-admin class="configAdmin">
+    <app-menu-admin [setTitle]="'Configuración ArtStudio'"></app-menu-admin>
+    <div class="container">
+        <app-button-admin-menu [disableMisProductos]="false" [disableDestacados]="false" [disableConfiguracion]="true"></app-button-admin-menu>
+            <div class="content">
+        
+                <div class="title-section">
+                    <h1>INFORMACIÓN IMPORTANTE</h1>
+                    <p>Actualiza información importante de ArtStudio.</p>
+                </div>
+
+                <div class="aboutus-section">
+                    <mat-divider class="divider"></mat-divider>
+                    <h3>Sobre Nosotros</h3>
+                    <div class="textarea-container">
+                        <p-editor [(ngModel)]="aboutUsText" [style]="{ height: '320px' }"></p-editor>
+                        <p-toast></p-toast>
+                        <p-button icon="pi pi-save" (click)="saveText('aboutUs')"></p-button>
+                    </div>
+                </div>
+
+                <div class="Terms-section">
+                    <mat-divider class="divider"></mat-divider>
+                    <h3>Términos y Condiciones</h3>
+                    <div class="textarea-container">
+                        <p-editor [(ngModel)]="termsText" [style]="{ height: '320px' }"></p-editor>
+                        <p-button pRipple icon="pi pi-save" (click)="saveText('terms')"></p-button>
+                    </div>
+                </div>
+
+                <div class="shipping-policies-section">
+                    <mat-divider class="divider"></mat-divider>
+                    <h3>Políticas de Envío</h3>
+                    <div class="textarea-container">
+                        <p-editor [(ngModel)]="shippingPoliciesText" [style]="{ height: '320px' }"></p-editor>
+                        <p-button pRipple icon="pi pi-save" (click)="saveText('shippingPolicies')"></p-button>
+                    </div>
+                </div>
+
+                <div class="return-policies-section">
+                    <mat-divider class="divider"></mat-divider>
+                    <h3>Políticas de Devolución</h3>
+                    <div class="textarea-container">
+                        <p-editor [(ngModel)]="returnPoliciesText" [style]="{ height: '320px' }"></p-editor>
+                        <p-button pRipple icon="pi pi-save" (click)="saveText('returnPolicies')"></p-button>
+                    </div>
+                </div>
+
+                <table class="custom-table">
+                    <tbody>
+                        <!-- ... (filas anteriores permanecen iguales) ... -->
+                        <tr>
+                            <td colspan="2" class="subheader-row">
+                                <h4 class="pruebah4">Actualizar precios</h4>
+                                <p class="pruebap"><em>En este apartado podrás modificar los precios de los posters dependiendo de su medida,<br> además, podrás actualizar el valor adicional de los marcos.</em></p>
+                                <p-confirmDialog>
+                                    <ng-template pTemplate="message" let-message>
+                                        <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+                                            <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+                                            <p>{{ message.message }}</p>
+                                        </div>
+                                    </ng-template>
+                                </p-confirmDialog>
+                                <p-button (click)="confirmAction('price')" label="Actualizar" class="btn" severity="danger"></p-button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="subheader-row">
+                                <h4 class="pruebah4">Actualizar medidas</h4>
+                                <p class="pruebap"><em>En este apartado podrás modificar las medidas de los posters.</em></p>
+                                <p-button (click)="confirmAction('size')" label="Actualizar" class="btn" severity="danger"></p-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <app-size-update-modal 
+                [visible]="showSizeUpdateModal"
+                [precios]="precios"
+                (onCancel)="onModalCancel('size')">
+                </app-size-update-modal>
+
+                <app-price-update-modal 
+                [visible]="showPriceUpdateModal"
+                [precios]="precios"
+                (updatePrices)="onPriceUpdate($event)"
+                (onCancel)="onModalCancel('price')">
+                </app-price-update-modal>
+                
+            </div>
+    </div>
+</div>

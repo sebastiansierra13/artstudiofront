@@ -1,0 +1,260 @@
+.blog-section {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+  animation: shine 15s infinite linear;
+}
+
+@keyframes shine {
+  0% { transform: translate(-30%, -30%) rotate(0deg); }
+  100% { transform: translate(-30%, -30%) rotate(360deg); }
+}
+
+.blog-title {
+  text-align: center;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.blog-title-text {
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.blog-title-highlight {
+  color: #000;
+  position: relative;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.blog-title-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.blog-title:hover .blog-title-text {
+  color: #000;
+}
+
+.blog-title:hover .blog-title-highlight::after {
+  transform: scaleX(1);
+}
+
+.blog-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards 0.5s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards 0.6s;
+}
+
+.blog-card {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.blog-card-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.blog-card-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.blog-card:hover .blog-card-image {
+  transform: scale(1.05);
+}
+
+.blog-card:hover .blog-card-image::before {
+  opacity: 0.7;
+}
+
+.blog-card-content {
+  padding: 1.5rem;
+}
+
+.blog-card-title {
+  font-size: 1.2rem;
+  color: #333333;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.blog-card:hover .blog-card-title {
+  color: #000;
+}
+
+.blog-card-meta {
+  font-size: 0.9rem;
+  color: #888888;
+  margin-bottom: 0.5rem;
+}
+
+.blog-card-author {
+  margin-right: 1rem;
+}
+
+.blog-card-summary {
+  font-size: 1rem;
+  color: #444444;
+  margin-bottom: 1rem;
+}
+
+.blog-card-read-more {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.blog-card-read-more::after {
+  content: '→';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.blog-card-read-more:hover {
+  color: #000;
+  padding-right: 25px;
+}
+
+.blog-card-read-more:hover::after {
+  opacity: 1;
+  right: 0;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+:host ::ng-deep .p-carousel {
+  width: 100%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+:host ::ng-deep .p-carousel .p-carousel-content .p-carousel-item {
+  display: flex;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-carousel .p-carousel-indicators {
+  margin-top: 1rem;
+  display: none;
+}
+
+/* Ajusta el tamaño de las tarjetas dentro del carrusel */
+:host ::ng-deep .p-carousel .blog-card {
+  width: 300px;
+  margin: 0 auto;
+}
+
+
+:host ::ng-deep .p-carousel-prev,
+  :host ::ng-deep .p-carousel-next {
+    display: none;
+  }
+
+@media (max-width: 1024px) {
+  /* Adjust carousel indicators */
+:host ::ng-deep .p-carousel .p-carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+:host ::ng-deep .p-carousel .p-carousel-indicator button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin: 0 5px;
+}
+
+:host ::ng-deep .p-carousel .p-carousel-indicator.p-highlight button {
+  background-color: #555;
+}
+  
+}
+
+@media (max-width: 768px) {
+  .blog-title {
+    font-size: 2.5rem;
+  }
+  
+  .blog-subtitle {
+    font-size: 1rem;
+  }
+
+}
+
+/* Mantén todos los estilos anteriores y agrega lo siguiente al final */
+

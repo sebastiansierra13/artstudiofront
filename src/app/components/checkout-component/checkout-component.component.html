@@ -1,0 +1,128 @@
+<app-nav-bar></app-nav-bar>
+<div class="banner">
+  <h2>Finaliza tu Compra</h2>
+  <p>Estás a un paso de completar tu pedido</p>
+</div>
+<div class="checkout-container">
+
+  <div class="steps">
+    <p-steps [(activeIndex)]="activeIndex" [model]="steps"></p-steps>
+  </div>
+  
+  <div *ngIf="activeIndex === 0" class="step-content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-section">
+          <h3>Detalles de Facturación</h3>
+          <div class="form-group">
+            <label for="firstName">Nombre</label>
+            <input id="firstName" type="text" [(ngModel)]="firstName" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu nombre">
+            <small class="error-message" *ngIf="formErrors['firstName']">{{formErrors['firstName']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Apellido</label>
+            <input id="lastName" type="text" [(ngModel)]="lastName" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu apellido">
+            <small class="error-message" *ngIf="formErrors['lastName']">{{formErrors['lastName']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="Department">Departamento</label>
+            <p-dropdown [options]="departments" 
+              [(ngModel)]="selectedDepartmentId" 
+              (onChange)="onDepartmentChange()" 
+              placeholder="Selecciona un departamento" 
+              optionLabel="label" 
+              optionValue="value">
+            </p-dropdown>
+            <small class="error-message" *ngIf="formErrors['department']">{{formErrors['department']}}</small>
+          </div>
+          <div class="form-group" >
+            <div class="field" >
+              <label for="municipality">Municipio</label>
+            <p-dropdown [options]="municipalities" 
+              [(ngModel)]="selectedMunicipalityId" 
+              (onChange)="onMunicipalityChange()" 
+              placeholder="Selecciona un municipio" 
+              optionLabel="label" 
+              optionValue="value"
+              [disabled]="!selectedDepartmentId">
+            </p-dropdown>
+            </div>
+            <small class="error-message" *ngIf="formErrors['municipality']">{{formErrors['municipality']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="streetName">Dirección</label>
+            <input id="streetName" type="text" [(ngModel)]="streetName" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu dirección">
+            <small class="error-message" *ngIf="formErrors['streetName']">{{formErrors['streetName']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="neighborhood">Barrio</label>
+            <input id="neighborhood" type="text" [(ngModel)]="neighborhood" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu barrio">
+            <small class="error-message" *ngIf="formErrors['neighborhood']">{{formErrors['neighborhood']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="apartment">Otros detalles</label>
+            <input id="apartment" type="text" [(ngModel)]="apartment" (ngModelChange)="saveCheckoutData()"  placeholder="Ingresa más detalles (ejemplo: apto 302, casa roja, etapa, etc)">
+            <small class="error-message" *ngIf="formErrors['apartment']">{{formErrors['apartment']}}</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="postcode">Código Postal</label>
+            <input id="postcode" type="text" [(ngModel)]="postcode" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu código postal">
+            <small class="error-message" *ngIf="formErrors['postcode']">{{formErrors['postcode']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input id="phone" type="text" [(ngModel)]="phone" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu número de teléfono">
+            <small class="error-message" *ngIf="formErrors['phone']">{{formErrors['phone']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input id="email" type="email" [(ngModel)]="email" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu correo electrónico">
+            <small class="error-message" *ngIf="formErrors['email']">{{formErrors['email']}}</small>
+          </div>
+          <div class="form-group">
+            <label for="orderNotes">Notas del Pedido</label>
+            <textarea id="orderNotes" [(ngModel)]="orderNotes" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa cualquier nota sobre tu pedido"></textarea>
+          </div>
+        </div>
+      </div>
+     
+      <div class="col-md-6">
+        <div class="summary-section">
+          <h3>Resumen del Pedido</h3>
+          <div class="summary-item" *ngFor="let item of orderItems">
+            <div>{{item.name}} (x{{item.quantity || 1}})</div>
+            <div>{{((item.price || 0) * (item.quantity || 1)) | currency:'COP':'symbol-narrow':'1.0-0'}}</div>
+          </div>
+          <div class="summary-item">
+            <div>Subtotal</div>
+            <div>{{calculateTotal() | currency:'COP':'symbol-narrow':'1.0-0'}}</div>
+          </div>
+          <div class="summary-item">
+            <div>Costo de Envío</div>
+            <div>Gratis</div>
+          </div>
+          <div class="summary-item">
+            <strong>Total</strong>
+            <strong>{{total | currency:'COP':'symbol-narrow':'1.0-0'}}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-group">
+      <button pButton type="button" label="Pagar con PayU" icon="pi pi-credit-card" (click)="createPayment()"></button>
+    </div>
+    
+    <!-- Formulario oculto para PayU -->
+    <form #payuForm id="payuForm" method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" style="display:none;">
+      <!-- Los campos del formulario se llenarán dinámicamente -->
+    </form>
+  </div>
+  
+  <div *ngIf="activeIndex === 1" class="step-content">
+    <h3>Pedido Completo</h3>
+    <p>Tu pedido ha sido realizado exitosamente. ¡Gracias por tu compra!</p>
+  </div>
+</div>
+<app-floating-buttons></app-floating-buttons>
+<app-footer></app-footer>

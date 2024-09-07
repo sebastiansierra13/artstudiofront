@@ -1,0 +1,88 @@
+<div configuration-admin class="highlights">
+    <app-menu-admin [setTitle]="'Destacados'"></app-menu-admin>
+    <div class="container">        
+        <app-button-admin-menu [disableMisProductos]="false" [disableDestacados]="true" [disableConfiguracion]="false"></app-button-admin-menu>
+        <div class="products-add">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+            <div class="title-section">
+                <h1>Lista de Destacados</h1>
+                <p>Ordena y administra los productos destacados</p>
+            </div>
+
+            <div class="Buttons">
+                <p-toast></p-toast>
+                <p-confirmDialog></p-confirmDialog>
+                <div class="buttonAdd">
+                    <p-button styleClass="btnAdd" (click)="confirm1($event)" label="Guardar Cambios" [outlined]="true"></p-button>
+                </div>
+            </div>
+
+            <!-- Sección 2 Componente lista -->
+            <div class="orderList">
+              <p-orderList class="p-orderList"
+                [value]="highlightedProducts" 
+                [listStyle]="{ 'max-height': '35rem' }" 
+                header="Ordena Tus Destacados" 
+                [dragdrop]="true"
+                (onReorder)="onReorder($event)">
+                <ng-template let-product pTemplate="item">
+                  <div class="elements">
+                    <img [src]="product.Imagenes && product.Imagenes.length > 0 ? product.Imagenes[0] : 'ruta/a/imagen/por/defecto.jpg'" alt="{{product.nombreProducto}} " class="circle-img">
+                    <div class="productName">
+                      <span class="font-bold">{{ product.nombreProducto }}</span>
+                    </div>
+                    <div class="btnDelete">
+                      <p-button styleClass="btnDel" icon="pi pi-times" (click)="removeHighlightedProduct(product)" [rounded]="true" severity="secondary" [outlined]="true"></p-button>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-orderList>
+            </div>
+              
+            <div class="title-section">
+                <h1>Banners</h1>
+                <p>Ordena y administra los Banners de la página principal</p>
+            </div>
+                <br>
+            <!-- Sección 3 Componente lista de banners -->
+            <div class="banner-container">
+                <div #scrollPanel cdkDropList cdkDropListOrientation="horizontal" class="banner-list" (cdkDropListDropped)="drop($event)">
+                  <div class="banner-item" *ngFor="let banner of banners; let i = index" cdkDrag>
+                    <img [src]="banner.Url" alt="Descripción de la imagen"> <!-- banner.url para mostrar la URL -->
+                    <button class="remove-btn" (click)="removeBanner(banner)">✖</button>
+                  </div>                  
+                </div>
+                <button class="upload-btn" (click)="fileInput.click()">Subir Banner</button>
+                <input type="file" #fileInput (change)="uploadBanners($event)" hidden multiple>
+
+              </div>      
+              
+              <!-- Mini panel para título y subtítulo -->
+              <div *ngIf="showBannerDetailsPanel" class="banner-details-panel">
+                <h3>Detalles del Banner</h3>
+                <div class="banner-preview">
+                  <img [src]="selectedBannerUrl" alt="Imagen seleccionada">
+                </div>
+                <form class="banner-form">
+                  <div class="form-group">
+                    <label for="bannerTitle">Título:</label>
+                    <input type="text" id="bannerTitle" [(ngModel)]="selectedBannerTitle" name="bannerTitle" placeholder="Ingresa el título">
+                  </div>
+                  <div class="form-group">
+                    <label for="bannerSubtitle">Subtítulo:</label>
+                    <input type="text" id="bannerSubtitle" [(ngModel)]="selectedBannerSubtitle" name="bannerSubtitle" placeholder="Ingresa el subtítulo">
+                  </div>
+                  <div class="form-buttons">
+                    <button pButton label="Guardar" (click)="saveBannerDetails()"></button>
+                    <button pButton label="Cancelar" (click)="cancelBannerDetails()" class="p-button-secondary"></button>
+                  </div>
+                </form>                
+              </div>
+
+</div>
+
+
+
+  

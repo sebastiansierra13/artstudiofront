@@ -1,0 +1,26 @@
+<p-dialog header="Actualizar Medidas de Posters" [(visible)]="visible" [modal]="true" [closable]="false" (onHide)="close()">
+   <div class="content">
+    <div>
+        <ul>
+            <li class="ule" *ngFor="let precio of precios; let i = index">
+                {{ precio.TamanhoPoster }}
+                <p-button icon="pi pi-times" class="p-button-danger p-button-sm" (click)="removeSize(i)"></p-button>
+              </li>
+        </ul>
+        <div class="card flex">
+            <input type="text" pInputText [(ngModel)]="newTamanhoPoster" placeholder="Nuevo tamaño" />
+            <br>
+            <p>Precio Poster</p>
+            <p-inputNumber [(ngModel)]="newPrecioPoster" placeholder="Precio poster" mode="currency" currency="COP"></p-inputNumber>
+            <br>
+            <p>Precio Marco</p>
+            <p-inputNumber [(ngModel)]="newPrecioMarco" placeholder="Precio marco" mode="currency" currency="COP"></p-inputNumber>
+            <p-button label="Agregar" icon="pi pi-plus" (click)="addSize()"></p-button>
+        </div>
+    </div>
+    <p-footer class="buttons">
+        <p-button label="Guardar" icon="pi pi-check" (click)="saveChanges()"></p-button>
+        <p-button label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancel()"></p-button>
+    </p-footer>
+</div>
+</p-dialog>

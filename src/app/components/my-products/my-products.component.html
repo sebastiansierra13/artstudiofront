@@ -1,0 +1,103 @@
+<div *ngIf="displayAddProductPanel" class="overlay">
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+  <app-add-product [selectedCategory]="selectedCategory" (closePanel2)="closeAddProductPanel()" (closePanel2)="showMessage2()" (closePanel)="closeAddProductPanel()" (closePanel)="showMessage()"></app-add-product>
+</div>
+
+<div class="my-product">
+  <p-toast></p-toast>
+  <p-confirmDialog></p-confirmDialog>
+  <div class="container" [class.blurred]="displayAddProductPanel">
+      <app-menu-admin [setTitle]="'Mis Productos'"></app-menu-admin>
+      <div class="products-view">
+          <app-button-admin-menu [disableMisProductos]="true" [disableDestacados]="false" [disableConfiguracion]="false"></app-button-admin-menu>
+
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+          <div class="content">
+              <div class="title-section">
+                  <h1>Categorías</h1>
+              </div>
+
+              <div class="card">
+                  <p-button [style]="{'margin-bottom':'2rem'}" styleClass="btnAddCat"
+                      type="button" 
+                      label="Añadir Categoría" 
+                      (click)="showDialog()">
+                  </p-button>
+              </div>
+                
+              <div *ngIf="displayAddCategoryDialog" class="overlay">
+                  <p-toast></p-toast>
+                  <p-dialog header="Añadir Categoría" [(visible)]="displayAddCategoryDialog" [modal]="true" [closable]="true" [style]="{ width: '30vw' }" (onHide)="onDialogHide()">
+                    <div class="content">
+                      <div class="field">
+                        <label for="categoryName">Nombre de la Categoría</label>
+                        <input id="categoryName" type="text" pInputText [(ngModel)]="newCategoryName" />
+                      </div>
+                      
+                      <div class="field">
+                          <label for="categoryImage">Imagen de la Categoría</label>
+                          <p-fileUpload mode="basic" name="categoryImage" accept="image/*" maxFileSize="1000000" (onSelect)="onFileSelect($event)"></p-fileUpload>
+                      </div>
+                        
+                      <div class="buttons">
+                          <p-toast></p-toast>
+                          <p-button label="Guardar" icon="pi pi-check" (click)="saveCategory()"></p-button>
+                          <p-button label="Cancelar" icon="pi pi-times" class="p-button-secondary" (click)="cancel()"></p-button>
+                      </div>
+                    </div>
+                  </p-dialog>
+              </div>
+              
+              <div class="my-products">    
+                <app-accordion-categories 
+                  [categories]="categories"
+                  (openNewProduct)="openNew($event)"
+                  (deleteSelectedProducts)="deleteSelectedProducts($event)"
+                  (editProduct)="editProduct($event)"
+                  (deleteProduct)="deleteProduct($event.category, $event.product)"
+                  (toggleFavorite)="toggleFavorite($event)"
+                  (categorySelected)="onCategorySelected($event)">
+                </app-accordion-categories>              
+
+              
+                <p-dialog [(visible)]="productDialog" [modal]="true" [style]="{ width: '450px' }" [header]="product.idProducto ? 'Edit Product' : 'Editar producto'" [closable]="false" [draggable]="false" [resizable]="false" appendTo="body">
+                  <ng-template pTemplate="content">
+                    <div class="field">
+                      <label for="rating">Imagen</label>
+                      <br>
+                      <p-fileUpload name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="true" accept="image/*" maxFileSize="1000000" (onUpload)="onTemplatedUpload()" (onSelect)="onSelectedFiles($event)" mode="advanced"
+                      chooseLabel="Elegir" 
+                      showUploadButton="false"
+                      cancelLabel="Borrar"/>                    
+                    </div>
+                    <div class="field">
+                      <label for="name">Nombre</label>
+                      <br>
+                      <input id="name" type="text" pInputText [(ngModel)]="product.nombreProducto" required autofocus />
+                    </div>
+                    <div class="field">
+                      <label for="price">Precio</label>
+                      <br>
+                      <input id="price" type="text" pInputText [(ngModel)]="product.listPrecios" required />
+                    </div>
+                    <div class="field">
+                      <label for="category">Categoría</label>
+                      <br>
+                      <p-dropdown [options]="categories" [(ngModel)]="product.idCategoria" optionLabel="nombreCategoria" placeholder="Seleccionar Categoría"></p-dropdown>
+                    </div> 
+                  </ng-template>
+                  <ng-template pTemplate="footer">
+                    <p-button label="Cancelar" icon="pi pi-times" (click)="productDialog = false"></p-button>
+                    <p-button label="Guardar" icon="pi pi-check" (click)="saveProduct()"></p-button>
+                  </ng-template>
+                </p-dialog>
+              </div>
+              
+            
+          </div>
+      </div>
+  </div>
+</div>

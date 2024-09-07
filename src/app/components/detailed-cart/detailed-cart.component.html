@@ -1,0 +1,100 @@
+<app-nav-bar class="navxd"></app-nav-bar>
+<div class="banner">
+  <div class="banner-content">
+    <i class="pi pi-shopping-cart"></i>
+    <h1>Tu Carrito</h1>
+  </div>
+</div>
+<div class="cart-container">  
+  <p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>
+  <div class="cart-content">
+    <div class="cart-items">
+      <p-table [value]="cartItems" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th></th>
+            <th>Image</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>
+              <button pButton type="button" icon="pi pi-times" class="p-button-rounded p-button-secondary p-button-text" (click)="removeItem(item.id)"></button>
+            </td>
+            <td><img [src]="item.image" class="cart-item-image" alt="{{item.name}}"></td>
+            <td>
+              {{item.name}}
+              <div class="product-options">
+                <p>Tamaño: {{item.options?.size || 'No especificado'}}</p>
+                <p>Marco: {{item.options?.frame === 'Sí' ? 'Con marco' : 'Sin marco'}}</p>
+              </div>
+            </td>
+            <td>{{item.price | currency:'COP':'symbol-narrow':'1.0-0'}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price * item.quantity | currency:'COP':'symbol-narrow':'1.0-0'}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <br>
+      <div class="cart-actions">
+        <button pButton type="button" label="Vaciar Carrito" 
+                class="p-button-outlined p-button-danger" 
+                (click)="confirmEmptyCart()">
+        </button>
+      </div>
+    </div>
+    <div class="cart-summary">
+      <div class="cart-totals">
+        <h2>Cart totals</h2>
+        <p-divider />
+        <div class="total-item">
+          <span>Subtotal:</span>
+          <span>{{getSubtotal() | currency:'USD'}}</span>
+        </div>
+        <p-divider />
+        <div class="total-item tem">
+          <span>Envío: </span>
+          <span >Introduzca su dirección para ver las opciones de envío.</span>
+        </div>
+        <p-divider />
+        <div class="total-item">
+          <p-accordion>
+            <p-accordionTab header="Calcular Envío">
+              <div class="field">
+                <label for="Department">Departamento</label>
+                <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment"
+                placeholder="Selecciona un departamento"
+                (onChange)="onDepartmentChange()" ></p-dropdown>
+              </div>
+              <div class="field" *ngIf="selectedDepartment !== null">
+                <label for="municipality">Municipio</label>
+                <p-dropdown [options]="municipalities" [(ngModel)]="selectedMunicipality"></p-dropdown>
+              </div>
+              <div *ngIf="selectedMunicipality !==null">
+                <h4>Costo de Envío: Gratis!!</h4>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <p-divider />
+        <div class="total-item total">
+          <span class="total-label">Total</span>
+          <span class="total-amount">{{ totalCost | currency:'COP':'symbol-narrow':'1.0-0' }}</span>
+        </div>
+        <p-divider />
+        <button pButton type="button" 
+        label="Proceder con la compra" 
+        class="checkout-button"
+        (click)="proceedToCheckout()">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-floating-buttons></app-floating-buttons>
+<app-footer></app-footer>

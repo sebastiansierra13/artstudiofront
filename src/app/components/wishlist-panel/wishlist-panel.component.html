@@ -1,0 +1,17 @@
+<div class="wishlist-panel">
+    <h3>Lista de Deseos</h3>
+    <p-scrollPanel [style]="{width: '100%', height: '170px'}">
+      <div *ngIf="wishlistItems.length === 0; else wishlistItemsTemplate" class="empty-wishlist">
+        <i class="fas fa-heart-broken"></i>
+        <p>Su Lista de deseos actualmente está vacía.</p>
+      </div>
+      <ng-template #wishlistItemsTemplate>
+      <li *ngFor="let item of wishlistItems">
+        <img [src]="item.Imagenes[0]" alt="{{ item.nombreProducto }}" class="product-image">
+        <span class="product-name">{{ item.nombreProducto }}</span>
+        <button pButton (click)="removeFromWishlist(item.idProducto)" class="remove-btn"  type="button" icon="pi pi-times"></button>
+      </li>
+    </ng-template>
+    </p-scrollPanel>
+    <button class="view-all" routerLink="/wishlist">Ver toda la lista de deseos</button>
+  </div>

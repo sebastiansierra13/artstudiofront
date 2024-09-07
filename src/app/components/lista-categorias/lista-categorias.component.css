@@ -1,0 +1,205 @@
+:root {
+    --primary-color: #333;
+    --secondary-color: #666;
+    --background-color: #f5f5f5;
+    --card-background: #fff;
+    --accent-color: #e0e0e0;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .categories-page {
+    background-color: var(--background-color);
+  }
+  
+  .banner {
+    height: 300px;
+    background: linear-gradient(45deg, #2c3e50, #3498db);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.5s;
+    animation: shine 3s infinite;
+  }
+  
+  @keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+  }
+  
+  .banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+  }
+  
+  .banner-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .banner-content h1 .line {
+    display: block;
+    overflow: hidden;
+  }
+  
+  .banner-content h1 .line span {
+    display: inline-block;
+    transform: translateY(100%);
+    animation: revealText 1s forwards;
+  }
+  
+  .banner-content h1 .line:nth-child(2) span {
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes revealText {
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .banner-content p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+  }
+  
+  .banner-content p .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+  }
+  
+  .banner-content p .word:nth-child(1) { animation-delay: 1.1s; }
+  .banner-content p .word:nth-child(2) { animation-delay: 1.2s; }
+  .banner-content p .word:nth-child(3) { animation-delay: 1.3s; }
+  .banner-content p .word:nth-child(4) { animation-delay: 1.4s; }
+  .banner-content p .word:nth-child(5) { animation-delay: 1.5s; }
+  .banner-content p .word:nth-child(6) { animation-delay: 1.6s; }
+  .banner-content p .word:nth-child(7) { animation-delay: 1.7s; }
+  .banner-content p .word:nth-child(8) { animation-delay: 1.8s; }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .categories-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .spinner {
+    border: 4px solid var(--accent-color);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+  
+  .category-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .category-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    padding: 1rem;
+    transition: background 0.3s ease;
+  }
+  
+  .category-card:hover .category-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5));
+  }
+  
+  .category-overlay h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .category-overlay p {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }

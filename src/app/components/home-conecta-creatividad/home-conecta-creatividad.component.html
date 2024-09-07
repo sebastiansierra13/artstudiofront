@@ -1,0 +1,53 @@
+<div class="instagram-showcase">
+  <div class="showcase-header">
+    <h1 class="showcase-title">
+      <span class="title-highlight">Explora &nbsp;</span>
+      <span class="title-underline">tu Mundo</span>
+      <span class="title-gradient">&nbsp;Artístico</span>
+    </h1>
+    <p class="showcase-subtitle">
+      Descubre obras únicas que darán vida a tus espacios 🎨🖼️
+    </p>
+  </div>
+  
+  <div class="instagram-grid" *ngIf="!isLoading && !error && instagramPosts.length > 0">
+    <div class="grid-main">
+      <a [href]="instagramPosts[0].PostUrl" target="_blank" class="main-image">
+        <img [src]="instagramPosts[0].ImageUrl" [alt]="instagramPosts[0].Caption" />
+        <div class="instagram-indicator">
+          <i class="fab fa-instagram"></i>
+        </div>
+      </a>
+      <div class="sub-grid">
+        <ng-container *ngFor="let post of instagramPosts.slice(1, 4)">
+          <a [href]="post.PostUrl" target="_blank" class="grid-item">
+            <img [src]="post.ImageUrl" [alt]="post.Caption" />
+            <div class="instagram-indicator">
+              <i class="fab fa-instagram"></i>
+            </div>
+          </a>
+        </ng-container>
+      </div>
+    </div>
+    <div class="grid-secondary">
+      <ng-container *ngFor="let post of instagramPosts.slice(4, 10)">
+        <a [href]="post.PostUrl" target="_blank" class="grid-item">
+          <img [src]="post.ImageUrl" [alt]="post.Caption" />
+          <div class="instagram-indicator">
+            <i class="fab fa-instagram"></i>
+          </div>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+ 
+  <div class="showcase-cta">
+    <a href="#" class="instagram-btn" [href]="'https://www.instagram.com/artstudio.decoracion'" [target]="'blank'">
+      <i class="fab fa-instagram"></i> Inspírate en Instagram
+    </a>
+  </div>
+</div>
+<div class="loading-container">
+  <div *ngIf="isLoading" class="loading">Cargando publicaciones...</div>
+  <div *ngIf="error" class="error">{{error}}</div>
+</div>
