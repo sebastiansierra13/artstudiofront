@@ -111,48 +111,17 @@ a:hover {
   opacity: 0.7;
 }
 
-@media (min-width: 576px) {
-  .footer-section-1 {
-    flex-basis: auto;
-    text-align: left;
+@media (max-width: 768px) {
+  .logo {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
   }
-
-  .slogan {
-    margin: 0;
-  }
-
-  .footer-columns {
-    justify-content: flex-start;
-  }
-
-  .footer-section {
-    flex-basis: calc(50% - 1rem);
-    margin-right: 1rem;
-  }
-}
-
-@media (min-width: 768px) {
   .footer-content {
-    flex-wrap: nowrap;
-  }
-
-  .footer-section-1 {
-    flex-basis: 30%;
-    margin-right: 2rem;
-  }
-
-  .footer-columns {
-    flex-basis: 70%;
-    justify-content: space-between;
+    flex-direction: column;
   }
 
   .footer-section {
-    flex-basis: auto;
-    margin-right: 0;
-  }
-
-  .social-media {
-    text-align: left;
-    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
 }

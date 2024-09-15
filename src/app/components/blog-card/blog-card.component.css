@@ -256,5 +256,44 @@
 
 }
 
-/* Mantén todos los estilos anteriores y agrega lo siguiente al final */
+/* Nuevo media query para pantallas muy angostas */
+@media (max-width: 480px) {
+  .blog-section {
+    padding: 1.5rem;
+  }
+
+  .blog-title {
+    font-size: 2rem;
+  }
+
+  .blog-subtitle {
+    font-size: 0.9rem;
+  }
+
+  :host ::ng-deep .p-carousel .blog-card {
+    width: 85%;
+    max-width: 250px;
+  }
+
+  .blog-card-image {
+    height: 150px;
+  }
+
+  .blog-card-content {
+    padding: 1rem;
+  }
+
+  .blog-card-title {
+    font-size: 1rem;
+  }
+
+  .blog-card-meta {
+    font-size: 0.8rem;
+  }
+
+  .blog-card-summary {
+    font-size: 0.9rem;
+  }
+}
+
 
