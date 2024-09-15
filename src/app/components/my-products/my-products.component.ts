@@ -252,11 +252,7 @@ export class MyProductsComponent implements OnInit {
     });
   }
   
-
-  editProduct(product: Producto) {
-    this.product = { ...product };
-    this.productDialog = true;
-  }
+  
 
 
   createEmptyProduct(): Producto {

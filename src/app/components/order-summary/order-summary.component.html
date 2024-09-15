@@ -1,0 +1,42 @@
+<div class="order-summary-container">
+    <div class="status-icon">
+      <img *ngIf="paymentSuccess" src="assets/icons/success.svg" alt="Éxito" class="status-icon-success">
+      <img *ngIf="!paymentSuccess" src="assets/icons/failure.svg" alt="Error" class="status-icon-failure">
+    </div>
+    <h2 *ngIf="paymentSuccess">¡Pedido Exitoso!</h2>
+    <h2 *ngIf="!paymentSuccess">Hubo un Problema con tu Pedido</h2>
+  
+    <div *ngIf="paymentSuccess" class="summary-details">
+      <h3>Detalles del Pedido</h3>
+      <div class="summary-row">
+        <div>Nombre:</div>
+        <div>{{ buyerFullName }}</div>
+      </div>
+      <div class="summary-row">
+        <div>Correo Electrónico:</div>
+        <div>{{ buyerEmail }}</div>
+      </div>
+      <div class="summary-row">
+        <div>Dirección de Envío:</div>
+        <div>{{ shippingAddress }}, {{ shippingCity }}, {{ shippingCountry }}</div>
+      </div>
+      <div class="summary-row">
+        <div>Total:</div>
+        <div>{{ total | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
+      </div>
+  
+      <div class="download-invoice">
+        <button pButton label="Descargar Factura" icon="pi pi-file-pdf" (click)="downloadInvoice()"></button>
+      </div>
+    </div>
+  
+    <div *ngIf="!paymentSuccess" class="error-message">
+      <p>Lo sentimos, pero tu pago no fue procesado correctamente. Por favor, inténtalo de nuevo o contacta con el soporte técnico.</p>
+    </div>
+  
+    <div class="action-buttons">
+      <button *ngIf="!paymentSuccess" pButton label="Reintentar Pago" icon="pi pi-refresh" (click)="retryPayment()"></button>
+      <button pButton label="Volver al Inicio" icon="pi pi-home" (click)="goToHome()"></button>
+    </div>
+  </div>
+  

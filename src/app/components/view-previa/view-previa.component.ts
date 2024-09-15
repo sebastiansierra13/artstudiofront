@@ -25,6 +25,8 @@ import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../interfaces/interfaces-app';
 import { TooltipModule } from 'primeng/tooltip';
 import { HomeDestacadosComponent } from "../home-destacados/home-destacados.component";
+import { OrderService } from '../../services/order.service';
+
 @Component({
     selector: 'app-view-previa',
     standalone: true,
@@ -44,6 +46,7 @@ export class ViewPreviaComponent implements OnInit {
   imagenSeleccionada: string = '';
   formGroup!: FormGroup;
   categorias: Categoria[] = [];
+  producto: ProductoConImagenes | null = null;
 
   product: ProductoConImagenes | undefined;
   productosRelacionados: ProductoConImagenes[] = [];
@@ -58,7 +61,7 @@ export class ViewPreviaComponent implements OnInit {
 
   
 
-  constructor(private cartService: CartService, private fb: FormBuilder , private router: Router,private route: ActivatedRoute,private categoriaService: CategoriaService ,  private serviceProduct:ServiceProductService , private servicePrecio:PrecioService) {
+  constructor(private cartService: CartService, private fb: FormBuilder , private router: Router,private route: ActivatedRoute,private categoriaService: CategoriaService ,  private serviceProduct:ServiceProductService , private servicePrecio:PrecioService, private orderService:OrderService) {
     this.imagenSeleccionada = this.imgaServices[0];
     this.formGroup = this.fb.group({
       checked: [false]
@@ -75,7 +78,6 @@ export class ViewPreviaComponent implements OnInit {
     this.serviceProduct.getProductByID(id).subscribe((producto) => {
       this.product = producto;
       this.loadProductosRelacionados(producto);
-      console.log('Productos relacionadosSSSSS:', this.productosRelacionados);
     });
 
 
@@ -137,14 +139,10 @@ export class ViewPreviaComponent implements OnInit {
       let suma = this.selectedNodes.PrecioMarco * this.quantity;
 
       if (this.marcoAgregado) {
-        console.log('Sumando el precio del marco:', suma);
         this.precioSeleccionado += suma;
       } else {
-        console.log('Restando el precio del marco:', suma);
         this.precioSeleccionado -= suma;
       }
-
-      console.log('El precio total es:', this.precioSeleccionado);
     } else {
       console.log('selectedNodes o precioMarco no está definido');
     }
@@ -256,20 +254,29 @@ export class ViewPreviaComponent implements OnInit {
   addToCart() {
     if (this.product && this.selectedNodes) {
       const cartItem: CartItem = {
-        id: this.product.idProducto,
+        id: this.generateUniqueId(),
         name: this.product.nombreProducto,
         price: this.precioSeleccionado,
         quantity: this.quantity,
-        image: this.product.Imagenes[0], // Asumiendo que Imagenes es un array de URLs
+        image: this.product.Imagenes[0],
         options: {
           size: this.selectedNodes.TamanhoPoster,
           frame: this.formGroup.get('checked')?.value ? 'Sí' : 'No'
         }
       };
+      
       this.cartService.addToCart(cartItem);
+      this.resetQuantity();
     }
   }
-  
+
+  private generateUniqueId(): number {
+    return Date.now() + Math.floor(Math.random() * 1000);
+  }
+ 
+  private resetQuantity() {
+    this.quantity = 1;
+  }
   
   loadProductosRelacionados(producto: ProductoConImagenes) {
     const productoId = producto.idProducto; // Asegúrate de que este campo tiene un valor válido
@@ -290,7 +297,9 @@ export class ViewPreviaComponent implements OnInit {
     }
 }
 
-
-  
-
 }
+
+
+
+
+

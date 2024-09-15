@@ -169,28 +169,6 @@ export class HighlightsComponent implements OnInit{
     );
   }
 
-
-  confirm1(event: Event) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: 'Are you sure that you want to proceed?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      acceptIcon: "none",
-      rejectIcon: "none",
-      rejectButtonStyleClass: "p-button-text",
-      accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-        this.uploadImageToFirebase;
-      },
-      reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-      }
-    });
-  }
-
-
-
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.banners, event.previousIndex, event.currentIndex);
     this.updateBannerPositions();

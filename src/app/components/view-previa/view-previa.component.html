@@ -3,7 +3,7 @@
   <div class="container-viewService">
     <div class="conLeft columna">
       <div class="columnaRight">
-        <img [src]="imagenSeleccionada" alt="Imagen del botón" class="imgServiceGrande" />
+        <img [src]="imagenSeleccionada" alt="Imagen del botón" class="imgServiceGrande" style="max-width: 100%; height: auto;">
         <div class="columnaLeft">
           <img *ngFor="let img of product?.Imagenes" [src]="img" alt="Imagen del producto" class="imgService"
             (click)="seleccionarImagen(img)" />
@@ -14,7 +14,7 @@
       <h1 class="ptittle animated-title">{{ product?.nombreProducto }}</h1>
       <h2 class="pText section-title">Descripción</h2>
       <br>
-      <p>{{ product?.DescripcionProducto }}</p>
+      <p style="width: 285px;">{{ product?.DescripcionProducto }}</p>
       <br>
       <h2 class="pText section-title">Precio</h2>
       <br>
@@ -23,8 +23,9 @@
       <h2 class="pText section-title">Medidas</h2>
       <br>
       <p-dropdown [options]="nodes" [(ngModel)]="selectedNodes" optionLabel="TamanhoPoster" [showClear]="true"
-        placeholder="Selecciona una Medida" (onChange)="onNodeSelect()">
-      </p-dropdown> <br>
+          placeholder="Selecciona una Medida" (onChange)="onNodeSelect()" [style]="{'width': '285px'}">
+      </p-dropdown>
+      <br>
       <br>
       <h2 class="pText section-title">Agregar Marco</h2>
       <br>
@@ -49,11 +50,10 @@
         ></p-button>
       </div>
       <br>
-      <p-button *ngIf="precioSeleccionado !== 0" [label]="'Comprar Ahora $' + precioSeleccionado" [rounded]="true"
-        styleClass="p-button1">
-      </p-button>
-      <p-button *ngIf="precioSeleccionado === 0" label="Comprar Ahora" [rounded]="true" styleClass="p-button1">
-      </p-button>
+      <div class="subtotal-label">
+        <span>Subtotal: {{ precioSeleccionado | currency: 'COP ':'symbol':'1.0-0' }}</span>
+      </div>
+      
     </div>
   </div>
   <div class="contenedorCategorias">
@@ -69,6 +69,10 @@
       </div>
     </p-scrollPanel>
   </div>
+
+
+
+
 </div>
 <div class="carousel-container">
   <div class="title-section">

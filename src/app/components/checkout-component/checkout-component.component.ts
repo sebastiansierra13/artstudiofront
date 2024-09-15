@@ -10,12 +10,14 @@ import { StepperModule } from 'primeng/stepper';
 import { StepsModule } from 'primeng/steps';
 import { FloatingButtonsComponent } from "../floating-buttons/floating-buttons.component";
 import { FooterComponent } from "../footer/footer.component";
+import { OrderSummaryComponent } from '../order-summary/order-summary.component';
 import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { LocationService } from '../../services/location.service';
 import { CartItem, Departamento, Municipio, Region } from '../../interfaces/interfaces-app';
 import { Subscription } from 'rxjs';
 import { OrderService } from '../../services/order.service';
 import { PayUService } from '../../services/pay-u.service';
+import { Router,RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-checkout',
@@ -34,7 +36,9 @@ import { PayUService } from '../../services/pay-u.service';
         StepsModule,
         FloatingButtonsComponent,
         FooterComponent,
-        NavBarComponent
+        NavBarComponent,
+        RouterModule,
+        OrderSummaryComponent
     ]
 })
 export class CheckoutComponent implements OnInit {
@@ -58,6 +62,11 @@ export class CheckoutComponent implements OnInit {
   municipalities: Municipio[] = [];
   selectedDepartmentId: number | null = null;
   selectedMunicipalityId: number | null = null;
+  buyerFullName = this.firstName + this.lastName;
+  paymentSuccess: boolean = false; // Indica si el pago fue exitoso
+
+  // Validaciones del formulario
+  formValid: boolean = false;
 
   shipToDifferentAddress: boolean = false;
   addressConfirmed: boolean = false;
@@ -78,32 +87,38 @@ export class CheckoutComponent implements OnInit {
   private shippingSubscription: Subscription | undefined;
 
   formErrors: { [key: string]: string } = {};
-  formValid: boolean = false;
 
-  constructor(private payUService: PayUService, private locationService: LocationService,private orderService: OrderService) {
+  constructor(private payUService: PayUService, private router: Router, private locationService: LocationService,private orderService: OrderService) {
     this.calculateTotal();
   }
 
   ngOnInit() {
+    this.loadOrderItems(); // Cargar los productos desde localStorage
     this.loadRegions();
     this.loadDepartments();
     
+   
+    // Suscripción a los productos del carrito
     this.orderService.orderItems$.subscribe(items => {
-      this.orderItems = items;
-      this.updateTotalCost();
-    });
-  
-    this.orderService.shippingInfo$.subscribe(info => {
-      console.log('Shipping info recibida:', info);
-      this.selectedDepartmentId = info.departmentId;
-      this.selectedMunicipalityId = info.municipalityId;
-      this.shippingCost = info.shippingCost;
-      
-      if (this.selectedDepartmentId) {
-        this.loadMunicipalities();
+      if (items.length === 0 && this.orderItems.length > 0) {
+        // Emitir los productos cargados desde localStorage si el carrito está vacío
+        this.orderService.setOrderItems(this.orderItems);
+      } else {
+        console.log('Productos recibidos desde el carrito:', items);
+        this.updateOrderItems(items);
       }
-      
-      this.updateTotalCost();
+    });
+    
+    this.orderService.shippingInfo$.subscribe(info => {
+      if (this.selectedDepartmentId !== info.departmentId || this.selectedMunicipalityId !== info.municipalityId || this.shippingCost !== info.shippingCost) {
+        this.selectedDepartmentId = info.departmentId;
+        this.selectedMunicipalityId = info.municipalityId;
+        this.shippingCost = info.shippingCost;
+        if (this.selectedDepartmentId) {
+          this.loadMunicipalities();
+        }
+        this.updateTotalCost();
+      }
     });
   
     this.orderService.totalCost$.subscribe(cost => {
@@ -112,55 +127,124 @@ export class CheckoutComponent implements OnInit {
   
     this.loadCheckoutData();
   }
+  
 
-  createPayment() {
-    if (!this.formValid) {
-      this.validateForm();
-      return;
+  // Guardar los productos en localStorage cada vez que cambien
+  saveOrderItems() {
+    if (this.orderItems.length > 0) {
+      localStorage.setItem('orderItems', JSON.stringify(this.orderItems));
+      console.log('Productos guardados en localStorage:', this.orderItems);
+    } else {
+      console.log('No hay productos para guardar en localStorage.');
     }
-  
-    const orderData = {
-      merchantId: '1011854', // Asegúrate de obtener esto de la configuración
-      referenceCode: `Order-${Date.now()}`, // Genera un código único
-      accountId: '1020700', // Asegúrate de obtener esto de la configuración
-      description: `Pedido de ${this.firstName} ${this.lastName}`,
-      currency: 'COP',
-      amount: this.total,
-      tax: 0, // Calcula el impuesto si es necesario
-      taxReturnBase: 0, // Calcula la base de retorno de impuestos si es necesario
-      buyerEmail: this.email,
-      telephone: this.phone,
-      buyerFullName: `${this.firstName} ${this.lastName}`,
-      payerEmail: this.email,
-      payerPhone: this.phone,
-      payerFullName: `${this.firstName} ${this.lastName}`,
-      payerDocument: '1312321', // Añade un campo para el documento del pagador si es necesario
-      payerDocumentType: 'cc', // Añade un campo para el tipo de documento del pagador si es necesario
-      shippingAddress: this.getShippingAddress(),
-      shippingCity: this.selectedCity?.Nombre || '',
-      shippingCountry: 'CO'
-    };
-  
-    this.payUService.createPaymentForm(orderData).subscribe(
-      response => {
-        if (response && response.formHtml) {
-          // Si PayU devuelve el HTML del formulario, insértalo en el DOM y envíalo
-          this.payuForm.nativeElement.innerHTML = response.formHtml;
-          this.payuForm.nativeElement.submit();
-        } else if (response && response.paymentUrl) {
-          // Si PayU devuelve una URL de pago, redirige a ella
-          window.location.href = response.paymentUrl;
-        } else {
-          console.error('Respuesta inesperada del servidor:', response);
-          // Muestra un mensaje de error al usuario
-        }
-      },
-      error => {
-        console.error('Error al crear el formulario de pago:', error);
-        // Muestra un mensaje de error al usuario
-      }
-    );
   }
+
+  // Cargar los productos desde localStorage al iniciar el componente
+  loadOrderItems() {
+    const storedItems = localStorage.getItem('orderItems');
+    console.log('Cargando productos desde localStorage:', storedItems);
+
+    if (storedItems) {
+      this.orderItems = JSON.parse(storedItems);
+      console.log('Productos cargados desde localStorage:', this.orderItems);
+      this.updateTotalCost(); // Actualizar el costo total al cargar los ítems
+    } else {
+      console.log('No se encontraron productos en localStorage.');
+    }
+  }
+
+  // Actualizar los productos y guardar en localStorage
+  updateOrderItems(items: CartItem[]) {
+    this.orderItems = items;
+    console.log('Actualizando productos del carrito:', this.orderItems);
+    this.updateTotalCost(); // Actualizar el costo total
+    this.saveOrderItems();  // Guardar los ítems en localStorage
+  }
+
+  placeOrder() {
+    // Validar el formulario antes de proceder
+    this.validateForm();
+    
+    // Si el formulario es válido, proceder con el pedido
+    if (this.formValid) {
+      console.log('Pedido realizado exitosamente');
+      console.log('Detalles del pedido:', {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        streetName: this.streetName,
+        apartment: this.apartment,
+        city: this.selectedCity?.Nombre,
+        postcode: this.postcode,
+        phone: this.phone,
+        email: this.email,
+        orderNotes: this.orderNotes,
+        neighborhood: this.neighborhood,
+        selectedDepartment: this.selectedDepartment?.Nombre,
+        selectedCity: this.selectedCity?.Nombre,
+        couponCode: this.couponCode,
+        emailUpdates: this.emailUpdates,
+        shipToDifferentAddress: this.shipToDifferentAddress,
+        shippingCost: this.shippingCost,
+        total: this.total
+      });
+
+      // Avanzar al paso de "Pedido Completo"
+      this.activeIndex = 1;
+
+      // Eliminar los productos del carrito y datos de checkout del localStorage
+      localStorage.removeItem('orderItems');
+      localStorage.removeItem('checkoutData');
+    } else {
+      // Mostrar mensaje de error si el formulario no está completo
+      console.log('Por favor, completa todos los campos requeridos');
+    }
+}
+
+validateForm() {
+  this.formValid = this.firstName && this.lastName && this.streetName && this.city && this.phone && this.email ? true : false;
+}
+
+// Método para procesar el pedido y crear el formulario de pago
+createPayment() {
+  this.validateForm();
+
+  if (!this.formValid) {
+    console.error('Formulario no válido. Verifica los campos.');
+    return;
+  }
+
+  // Datos del pedido que se enviarán al backend
+  const orderData = {
+    firstName: this.firstName,
+    lastName: this.lastName,
+    streetName: this.streetName,
+    neighborhood: this.neighborhood,
+    city: this.city,
+    phone: this.phone,
+    email: this.email,
+    total: this.total
+  };
+
+  // Llamada al backend para generar el formulario PayU
+  this.payUService.createPaymentForm(orderData).subscribe(
+    response => {
+      if (response && response.formHtml) {
+        // Si PayU devuelve el HTML del formulario, insértalo en el DOM
+        this.payuForm.nativeElement.innerHTML = response.formHtml;
+        this.payuForm.nativeElement.submit(); // Enviar el formulario
+      } else if (response && response.paymentSuccess !== undefined) {
+        // Si PayU devuelve el estado del pago
+        this.paymentSuccess = response.paymentSuccess;
+        this.activeIndex = 1; // Cambia a la pantalla de "Pedido Completo"
+      } else {
+        console.error('Error al generar el formulario de PayU:', response);
+      }
+    },
+    error => {
+      console.error('Error al crear el formulario de pago:', error);
+    }
+  );
+}
 
   private populateAndSubmitForm(formData: any) {
     const form = this.payuForm.nativeElement;
@@ -293,11 +377,6 @@ calculateShipping() {
   this.saveCheckoutData();
 }
 
-  updateOrderItems(items: CartItem[]) {
-    this.orderItems = items;
-    this.updateTotalCost(); // Esto ya llama a saveCheckoutData()
-  }
-
   calculateTotal(): number {
     return this.orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   }
@@ -320,86 +399,6 @@ calculateShipping() {
     this.nextStep();
   }
 
-  placeOrder() {
-    this.validateForm();
-    
-    if (this.formValid) {
-      console.log('Pedido realizado exitosamente');
-      console.log('Detalles del pedido:', {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        streetName: this.streetName,
-        apartment: this.apartment,
-        city: this.selectedCity?.Nombre,
-        postcode: this.postcode,
-        phone: this.phone,
-        email: this.email,
-        orderNotes: this.orderNotes,
-        neighborhood: this.neighborhood,
-        selectedDepartment: this.selectedDepartment?.Nombre,
-        selectedCity: this.selectedCity?.Nombre,
-        couponCode: this.couponCode,
-        emailUpdates: this.emailUpdates,
-        shipToDifferentAddress: this.shipToDifferentAddress,
-        shippingCost: this.shippingCost,
-        total: this.total
-      });
-      this.activeIndex = 1; // Navegar al paso de pedido completo
-      localStorage.removeItem('checkoutData');
-    } else {
-      console.log('Por favor, completa todos los campos requeridos');
-    }
-  }
-
-
-  validateForm() {
-    this.formErrors = {};
-    this.formValid = true;
-  
-    if (!this.firstName.trim()) {
-      this.formErrors['firstName'] = 'El nombre es requerido';
-      this.formValid = false;
-    }
-    if (!this.lastName.trim()) {
-      this.formErrors['lastName'] = 'El apellido es requerido';
-      this.formValid = false;
-    }
-    if (!this.streetName.trim()) {
-      this.formErrors['streetName'] = 'La dirección es requerida';
-      this.formValid = false;
-    }
-    if (!this.postcode.trim()) {
-      this.formErrors['postcode'] = 'El código postal es requerido';
-      this.formValid = false;
-    }
-    if (!this.apartment.trim()) {
-      this.formErrors['apartment'] = 'Ingresa al menos un detalle antes de continuar';
-      this.formValid = false;
-    }
-    if (!this.postcode.trim()) {
-      this.formErrors['postcode'] = 'El código postal es requerido';
-      this.formValid = false;
-    }
-    if (!this.apartment.trim()) {
-      this.formErrors['apartment'] = 'Ingresa al menos un detalle antes de continuar';
-      this.formValid = false;
-    }
-    if (!this.neighborhood.trim()) {
-      this.formErrors['neighborhood'] = 'El barrio es requerido';
-      this.formValid = false;
-    }
-    if (!this.phone.trim()) {
-      this.formErrors['phone'] = 'El teléfono es requerido';
-      this.formValid = false;
-    }
-    if (!this.email.trim()) {
-      this.formErrors['email'] = 'El correo electrónico es requerido';
-      this.formValid = false;
-    } else if (!this.isValidEmail(this.email)) {
-      this.formErrors['email'] = 'El correo electrónico no es válido';
-      this.formValid = false;
-    }
-  }
   
   isValidEmail(email: string): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

@@ -19,7 +19,6 @@ export class AccordionCategoriesComponent {
   @Input() categories: Categoria[] = [];
   @Output() openNewProduct = new EventEmitter<Categoria>();
   @Output() deleteSelectedProducts = new EventEmitter<Producto[]>();
-  @Output() editProduct = new EventEmitter<Producto>();
   @Output() deleteProduct = new EventEmitter<{ category: Categoria, product: Producto }>();
   @Output() toggleFavorite = new EventEmitter<Producto>();
   @Output() categorySelected = new EventEmitter<Categoria>();
@@ -40,10 +39,6 @@ export class AccordionCategoriesComponent {
       this.deleteSelectedProducts.emit(this.selectedProducts);    
   }
 
-
-  edit(product: Producto) {
-    this.editProduct.emit(product);
-  }
 
   delete(category: Categoria, product: Producto) {
     this.deleteProduct.emit({ category, product });

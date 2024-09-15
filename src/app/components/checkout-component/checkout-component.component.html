@@ -3,14 +3,17 @@
   <h2>Finaliza tu Compra</h2>
   <p>Estás a un paso de completar tu pedido</p>
 </div>
+
 <div class="checkout-container">
 
   <div class="steps">
     <p-steps [(activeIndex)]="activeIndex" [model]="steps"></p-steps>
   </div>
-  
+
   <div *ngIf="activeIndex === 0" class="step-content">
     <div class="row">
+      
+      <!-- Formulario de detalles de facturación -->
       <div class="col-md-6">
         <div class="form-section">
           <h3>Detalles de Facturación</h3>
@@ -27,25 +30,25 @@
           <div class="form-group">
             <label for="Department">Departamento</label>
             <p-dropdown [options]="departments" 
-              [(ngModel)]="selectedDepartmentId" 
-              (onChange)="onDepartmentChange()" 
-              placeholder="Selecciona un departamento" 
-              optionLabel="label" 
-              optionValue="value">
+                        [(ngModel)]="selectedDepartmentId" 
+                        (onChange)="onDepartmentChange()" 
+                        placeholder="Selecciona un departamento" 
+                        optionLabel="label" 
+                        optionValue="value">
             </p-dropdown>
             <small class="error-message" *ngIf="formErrors['department']">{{formErrors['department']}}</small>
           </div>
-          <div class="form-group" >
-            <div class="field" >
+          <div class="form-group">
+            <div class="field">
               <label for="municipality">Municipio</label>
-            <p-dropdown [options]="municipalities" 
-              [(ngModel)]="selectedMunicipalityId" 
-              (onChange)="onMunicipalityChange()" 
-              placeholder="Selecciona un municipio" 
-              optionLabel="label" 
-              optionValue="value"
-              [disabled]="!selectedDepartmentId">
-            </p-dropdown>
+              <p-dropdown [options]="municipalities" 
+                          [(ngModel)]="selectedMunicipalityId" 
+                          (onChange)="onMunicipalityChange()" 
+                          placeholder="Selecciona un municipio" 
+                          optionLabel="label" 
+                          optionValue="value"
+                          [disabled]="!selectedDepartmentId">
+              </p-dropdown>
             </div>
             <small class="error-message" *ngIf="formErrors['municipality']">{{formErrors['municipality']}}</small>
           </div>
@@ -61,10 +64,9 @@
           </div>
           <div class="form-group">
             <label for="apartment">Otros detalles</label>
-            <input id="apartment" type="text" [(ngModel)]="apartment" (ngModelChange)="saveCheckoutData()"  placeholder="Ingresa más detalles (ejemplo: apto 302, casa roja, etapa, etc)">
+            <input id="apartment" type="text" [(ngModel)]="apartment" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa más detalles (ejemplo: apto 302, casa roja, etapa, etc)">
             <small class="error-message" *ngIf="formErrors['apartment']">{{formErrors['apartment']}}</small>
           </div>
-          
           <div class="form-group">
             <label for="postcode">Código Postal</label>
             <input id="postcode" type="text" [(ngModel)]="postcode" (ngModelChange)="saveCheckoutData()" placeholder="Ingresa tu código postal">
@@ -86,43 +88,77 @@
           </div>
         </div>
       </div>
-     
+      
+      <!-- Resumen del Pedido -->
       <div class="col-md-6">
         <div class="summary-section">
           <h3>Resumen del Pedido</h3>
-          <div class="summary-item" *ngFor="let item of orderItems">
-            <div>{{item.name}} (x{{item.quantity || 1}})</div>
-            <div>{{((item.price || 0) * (item.quantity || 1)) | currency:'COP':'symbol-narrow':'1.0-0'}}</div>
-          </div>
+          <!-- Verificar si hay productos -->
+          <div *ngIf="orderItems.length === 0">No hay productos en el pedido.</div>
+
+          <!-- Iterar sobre los productos -->
+          <!-- Verificar si hay productos -->
+            <div *ngIf="orderItems.length > 0">
+              <!-- Iterar sobre los productos -->
+              <div class="summary-item" *ngFor="let item of orderItems">
+                <div class="summary-product">
+                  <!-- Imagen del producto -->
+                  <img [src]="item.image" alt="{{item.name}}" class="product-thumbnail">
+                  
+                  <!-- Nombre y cantidad del producto -->
+                  <div>{{ item.name }} (x{{ item.quantity || 1 }})</div>
+                </div>
+                <!-- Precio del producto -->
+                <div>{{ ((item.price || 0) * (item.quantity || 1)) | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
+              </div>
+            </div>
+
+          
+          <!-- Subtotal -->
           <div class="summary-item">
             <div>Subtotal</div>
-            <div>{{calculateTotal() | currency:'COP':'symbol-narrow':'1.0-0'}}</div>
+            <div>{{ calculateTotal() | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
           </div>
+
+          <!-- Costo de Envío -->
           <div class="summary-item">
             <div>Costo de Envío</div>
             <div>Gratis</div>
           </div>
+
+          <!-- Total -->
           <div class="summary-item">
             <strong>Total</strong>
-            <strong>{{total | currency:'COP':'symbol-narrow':'1.0-0'}}</strong>
+            <strong>{{ total | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
           </div>
         </div>
       </div>
+      
     </div>
+
+    <!-- Botón para proceder con PayU -->
     <div class="button-group">
       <button pButton type="button" label="Pagar con PayU" icon="pi pi-credit-card" (click)="createPayment()"></button>
     </div>
-    
+
     <!-- Formulario oculto para PayU -->
     <form #payuForm id="payuForm" method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" style="display:none;">
       <!-- Los campos del formulario se llenarán dinámicamente -->
     </form>
   </div>
-  
-  <div *ngIf="activeIndex === 1" class="step-content">
-    <h3>Pedido Completo</h3>
-    <p>Tu pedido ha sido realizado exitosamente. ¡Gracias por tu compra!</p>
-  </div>
+ <!-- Pantalla de Pedido Completo -->
+<div *ngIf="activeIndex === 1" class="step-content">
+  <app-order-summary
+    [paymentSuccess]="paymentSuccess"
+    [buyerFullName]="buyerFullName"
+    [buyerEmail]="email"
+    [shippingAddress]="streetName"
+    [shippingCity]="selectedCity?.Nombre"
+    [shippingCountry]="'CO'"
+    [total]="total">
+  </app-order-summary>
 </div>
+
+<!-- Componentes adicionales -->
 <app-floating-buttons></app-floating-buttons>
 <app-footer></app-footer>

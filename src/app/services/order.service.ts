@@ -10,8 +10,11 @@ export class OrderService {
   private orderItemsSubject = new BehaviorSubject<CartItem[]>([]);
   orderItems$ = this.orderItemsSubject.asObservable();
 
+
   private totalCostSubject = new BehaviorSubject<number>(0);
   totalCost$ = this.totalCostSubject.asObservable();
+
+
 
   private shippingInfoSubject = new BehaviorSubject<{
     departmentId: number | null,

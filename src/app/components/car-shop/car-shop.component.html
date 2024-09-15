@@ -20,6 +20,6 @@
 <div class="cart-summary">
   <span class="textSubtotal"> Subtotal: {{getSubtotal() | currency:'USD'}}</span>
   <button pButton type="button" label="Ver Carrito" class="view-cart-button" routerLink="/detailed-cart"></button>
-  <button pButton type="button" label="Finalizar Compra" class="checkout-button"></button>
+  <button pButton type="button" label="Finalizar Compra" class="checkout-button" (click)="checkout()"></button>
 </div>
 </div>

@@ -2,10 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../interfaces/interfaces-app';
 import { Subject, takeUntil } from 'rxjs';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-cart-small',
@@ -19,7 +20,7 @@ export class CarShopComponent implements OnInit,  OnDestroy {
   countCart = 0;
   private unsubscribe$ = new Subject<void>();
   
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private router: Router, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.cartService.getCartItems()
@@ -44,5 +45,18 @@ export class CarShopComponent implements OnInit,  OnDestroy {
 
   removeItem(id: number) {
     this.cartService.removeFromCart(id);
+  }
+
+  // Nuevo método checkout para navegar al CheckoutComponent
+  checkout() {
+    if (this.cartItems.length > 0) {
+      // Guardar los datos del carrito en el servicio
+      this.orderService.setOrderItems(this.cartItems);
+      
+      // Navegar al componente Checkout
+      this.router.navigate(['/checkout']);
+    } else {
+      console.log("El carrito está vacío.");
+    }
   }
 }

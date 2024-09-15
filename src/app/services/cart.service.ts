@@ -15,6 +15,8 @@ export class CartService {
     this.loadCartFromLocalStorage();
   }
 
+  
+  
   private loadCartFromLocalStorage() {
     if (this.isLocalStorageAvailable) {
       const storedCart = localStorage.getItem(this.STORAGE_KEY);
@@ -56,12 +58,17 @@ export class CartService {
 
   addToCart(item: CartItem) {
     const currentItems = this.cartItems.value;
-    const existingItem = currentItems.find(i => i.id === item.id);
-    if (existingItem) {
-      existingItem.quantity += 1;
+    const existingItemIndex = currentItems.findIndex(i => 
+      i.id === item.id && 
+      JSON.stringify(i.options) === JSON.stringify(item.options)
+    );
+
+    if (existingItemIndex > -1) {
+      currentItems[existingItemIndex].quantity += item.quantity;
     } else {
-      currentItems.push({...item, quantity: 1});
+      currentItems.push(item);
     }
+
     this.cartItems.next(currentItems);
     this.saveCartToLocalStorage();
   }

@@ -20,6 +20,18 @@
   position: relative;
   overflow: hidden;
 }
+.summary-product {
+  display: flex;
+  align-items: center;
+}
+
+.product-thumbnail {
+  width: 50px;   /* Ajusta el tamaño de la imagen */
+  height: auto;
+  margin-right: 10px;  /* Espacio entre la imagen y el nombre */
+  border-radius: 4px;
+}
+
 
 .banner h2 {
   font-size: 2.5rem;
