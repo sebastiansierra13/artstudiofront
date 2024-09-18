@@ -201,8 +201,29 @@ export class CheckoutComponent implements OnInit {
 }
 
 validateForm() {
-  this.formValid = this.firstName && this.lastName && this.streetName && this.city && this.phone && this.email ? true : false;
+  // Asegúrate de que todos los campos estén completos
+  if (!this.firstName || !this.lastName || !this.email || !this.streetName || !this.city) {
+    this.formValid = false;
+    console.error('Algunos campos requeridos están vacíos.');
+    return;
+  }
+
+  // Agregar validación de formato de correo
+  if (!this.isValidEmail(this.email)) {
+    this.formValid = false;
+    console.error('El correo electrónico no es válido.');
+    return;
+  }
+
+  this.formValid = true;
 }
+
+// Validación básica de correo electrónico
+isValidEmail(email: string): boolean {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailPattern.test(email);
+}
+
 
 // Método para procesar el pedido y crear el formulario de pago
 createPayment() {
@@ -397,12 +418,6 @@ calculateShipping() {
   confirmAddress() {
     this.addressConfirmed = true;
     this.nextStep();
-  }
-
-  
-  isValidEmail(email: string): boolean {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
   }
 
 
