@@ -19,102 +19,100 @@
               <h3>Detalles de Facturación</h3>
 
               <!-- Campo Nombre -->
-              <div class="form-group">
-                <label for="firstName">Nombre</label>
-                <input id="firstName" type="text" [(ngModel)]="firstName" name="firstName" required minlength="2" #firstNameRef="ngModel" placeholder="Ingresa tu nombre">
-                <small class="error-message" *ngIf="firstNameRef.invalid && firstNameRef.touched">
-                  Nombre es requerido y debe tener al menos 2 caracteres.
-                </small>
-              </div>
+<div class="form-group">
+  <label for="firstName">Nombre <span style="color: red;">*</span></label>
+  <input id="firstName" type="text" [(ngModel)]="firstName" name="firstName" required minlength="2" #firstNameRef="ngModel" placeholder="Ingresa tu nombre" (keypress)="validateName($event)">
+  <small class="error-message" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+    Nombre es requerido y debe tener al menos 2 caracteres.
+  </small>
+</div>
 
-              <!-- Campo Apellido -->
-              <div class="form-group">
-                <label for="lastName">Apellido</label>
-                <input id="lastName" type="text" [(ngModel)]="lastName" name="lastName" required minlength="2" #lastNameRef="ngModel" placeholder="Ingresa tu apellido">
-                <small class="error-message" *ngIf="lastNameRef.invalid && lastNameRef.touched">
-                  Apellido es requerido y debe tener al menos 2 caracteres.
-                </small>
-              </div>
+<!-- Campo Apellido -->
+<div class="form-group">
+  <label for="lastName">Apellido <span style="color: red;">*</span></label>
+  <input id="lastName" type="text" [(ngModel)]="lastName" name="lastName" required minlength="2" #lastNameRef="ngModel" placeholder="Ingresa tu apellido" (keypress)="validateName($event)">
+  <small class="error-message" *ngIf="lastNameRef.invalid && lastNameRef.touched">
+    Apellido es requerido y debe tener al menos 2 caracteres.
+  </small>
+</div>
 
-              <!-- Campo Departamento -->
-              <div class="form-group">
-                <label for="Department">Departamento</label>
-                <p-dropdown [options]="departments" [(ngModel)]="selectedDepartmentId" name="department" required #departmentRef="ngModel"
-                  (onChange)="onDepartmentChange()" placeholder="Selecciona un departamento" optionLabel="label" optionValue="value">
-                </p-dropdown>
-                <small class="error-message" *ngIf="departmentRef.invalid && departmentRef.touched">
-                  Seleccionar un departamento es obligatorio.
-                </small>
-              </div>
+<!-- Campo Departamento -->
+<div class="form-group">
+  <label for="Department">Departamento <span style="color: red;">*</span></label>
+  <p-dropdown [options]="departments" [(ngModel)]="selectedDepartmentId" name="department" required #departmentRef="ngModel"
+    (onChange)="onDepartmentChange()" placeholder="Selecciona un departamento" optionLabel="label" optionValue="value">
+  </p-dropdown>
+  <small class="error-message" *ngIf="departmentRef.invalid && departmentRef.touched">
+    Seleccionar un departamento es obligatorio.
+  </small>
+</div>
 
-              <!-- Campo Municipio -->
-              <div class="form-group">
-                <label for="municipality">Municipio</label>
-                <p-dropdown [options]="municipalities" [(ngModel)]="selectedMunicipalityId" name="municipality" required #municipalityRef="ngModel"
-                  (onChange)="onMunicipalityChange()" placeholder="Selecciona un municipio" optionLabel="label" optionValue="value"
-                  [disabled]="!selectedDepartmentId">
-                </p-dropdown>
-                <small class="error-message" *ngIf="municipalityRef.invalid && municipalityRef.touched">
-                  Seleccionar un municipio es obligatorio.
-                </small>
-              </div>
+<!-- Campo Municipio -->
+<div class="form-group">
+  <label for="municipality">Municipio <span style="color: red;">*</span></label>
+  <p-dropdown [options]="municipalities" [(ngModel)]="selectedMunicipalityId" name="municipality" required #municipalityRef="ngModel"
+    (onChange)="onMunicipalityChange()" placeholder="Selecciona un municipio" optionLabel="label" optionValue="value"
+    [disabled]="!selectedDepartmentId">
+  </p-dropdown>
+  <small class="error-message" *ngIf="municipalityRef.invalid && municipalityRef.touched">
+    Seleccionar un municipio es obligatorio.
+  </small>
+</div>
 
-              <!-- Campo Dirección -->
-              <div class="form-group">
-                <label for="streetName">Dirección</label>
-                <input id="streetName" type="text" [(ngModel)]="streetName" name="streetName" required #streetNameRef="ngModel" placeholder="Ingresa tu dirección">
-                <small class="error-message" *ngIf="streetNameRef.invalid && streetNameRef.touched">
-                  Dirección es requerida.
-                </small>
-              </div>
+<!-- Campo Dirección -->
+<div class="form-group">
+  <label for="streetName">Dirección <span style="color: red;">*</span></label>
+  <input id="streetName" type="text" [(ngModel)]="streetName" name="streetName" required #streetNameRef="ngModel" placeholder="Ingresa tu dirección">
+  <small class="error-message" *ngIf="streetNameRef.invalid && streetNameRef.touched">
+    Dirección es requerida.
+  </small>
+</div>
 
-              <!-- Campo Barrio -->
-              <div class="form-group">
-                <label for="neighborhood">Barrio</label>
-                <input id="neighborhood" type="text" [(ngModel)]="neighborhood" name="neighborhood" required #neighborhoodRef="ngModel" placeholder="Ingresa tu barrio">
-                <small class="error-message" *ngIf="neighborhoodRef.invalid && neighborhoodRef.touched">
-                  Barrio es requerido.
-                </small>
-              </div>
+<!-- Campo Barrio -->
+<div class="form-group">
+  <label for="neighborhood">Barrio <span style="color: red;">*</span></label>
+  <input id="neighborhood" type="text" [(ngModel)]="neighborhood" name="neighborhood" required #neighborhoodRef="ngModel" placeholder="Ingresa tu barrio">
+  <small class="error-message" *ngIf="neighborhoodRef.invalid && neighborhoodRef.touched">
+    Barrio es requerido.
+  </small>
+</div>
 
-              <!-- Campo Otros Detalles -->
-              <div class="form-group">
-                <label for="apartment">Otros detalles</label>
-                <input id="apartment" type="text" [(ngModel)]="apartment" name="apartment" #apartmentRef="ngModel" placeholder="Ingresa más detalles (ejemplo: apto 302)">
-              </div>
+<!-- Campo Otros Detalles -->
+<div class="form-group">
+  <label for="apartment">Otros detalles</label>
+  <input id="apartment" type="text" [(ngModel)]="apartment" name="apartment" #apartmentRef="ngModel" placeholder="Ingresa más detalles (ejemplo: apto 302)">
+</div>
 
-              <!-- Campo Código Postal -->
-              <div class="form-group">
-                <label for="postcode">Código Postal</label>
-                <input id="postcode" type="text" [(ngModel)]="postcode" name="postcode" required #postcodeRef="ngModel" placeholder="Ingresa tu código postal">
-                <small class="error-message" *ngIf="postcodeRef.invalid && postcodeRef.touched">
-                  Código postal es requerido.
-                </small>
-              </div>
+<!-- Campo Código Postal -->
+<div class="form-group">
+  <label for="postcode">Código Postal</label>
+  <input id="postcode" type="text" [(ngModel)]="postcode" name="postcode" required #postcodeRef="ngModel" placeholder="Ingresa tu código postal" (keypress)="validatePostcode($event)">
+</div>
 
-              <!-- Campo Teléfono -->
-              <div class="form-group">
-                <label for="phone">Teléfono</label>
-                <input id="phone" type="text" [(ngModel)]="phone" name="phone" required minlength="10" #phoneRef="ngModel" placeholder="Ingresa tu número de teléfono">
-                <small class="error-message" *ngIf="phoneRef.invalid && phoneRef.touched">
-                  Teléfono es requerido y debe tener al menos 10 dígitos.
-                </small>
-              </div>
+<!-- Campo Teléfono -->
+<div class="form-group">
+  <label for="phone">Teléfono <span style="color: red;">*</span></label>
+  <input id="phone" type="text" [(ngModel)]="phone" name="phone" required minlength="10" #phoneRef="ngModel" placeholder="Ingresa tu número de teléfono" (keypress)="validatePhone($event)">
+  <small class="error-message" *ngIf="phoneRef.invalid && phoneRef.touched">
+    Teléfono es requerido y debe tener al menos 10 dígitos.
+  </small>
+</div>
 
-              <!-- Campo Correo Electrónico -->
-              <div class="form-group">
-                <label for="email">Correo Electrónico</label>
-                <input id="email" type="email" [(ngModel)]="email" name="email" required email #emailRef="ngModel" placeholder="Ingresa tu correo electrónico">
-                <small class="error-message" *ngIf="emailRef.invalid && emailRef.touched">
-                  Correo electrónico es requerido y debe ser válido.
-                </small>
-              </div>
+<!-- Campo Correo Electrónico -->
+<div class="form-group">
+  <label for="email">Correo Electrónico <span style="color: red;">*</span></label>
+  <input id="email" type="email" [(ngModel)]="email" name="email" required email #emailRef="ngModel" placeholder="Ingresa tu correo electrónico">
+  <small class="error-message" *ngIf="emailRef.invalid && emailRef.touched">
+    Correo electrónico es requerido y debe ser válido.
+  </small>
+</div>
 
-              <!-- Campo Notas del Pedido -->
-              <div class="form-group">
-                <label for="orderNotes">Notas del Pedido</label>
-                <textarea id="orderNotes" [(ngModel)]="orderNotes" name="orderNotes" placeholder="Ingresa cualquier nota sobre tu pedido"></textarea>
-              </div>
+<!-- Campo Notas del Pedido -->
+<div class="form-group">
+  <label for="orderNotes">Notas del Pedido</label>
+  <textarea id="orderNotes" [(ngModel)]="orderNotes" name="orderNotes" placeholder="Ingresa cualquier nota sobre tu pedido"></textarea>
+</div>
+
             </div>
           </div>
       
@@ -127,20 +125,19 @@
 
           <!-- Iterar sobre los productos -->
           <!-- Verificar si hay productos -->
-            <div *ngIf="orderItems.length > 0">
-              <!-- Iterar sobre los productos -->
-              <div class="summary-item" *ngFor="let item of orderItems">
-                <div class="summary-product">
-                  <!-- Imagen del producto -->
-                  <img [src]="item.image" alt="{{item.name}}" class="product-thumbnail">
-                  
-                  <!-- Nombre y cantidad del producto -->
-                  <div>{{ item.name }} (x{{ item.quantity || 1 }})</div>
-                </div>
-                <!-- Precio del producto -->
-                <div>{{ ((item.price || 0) * (item.quantity || 1)) | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
+          <div *ngIf="orderItems.length > 0">
+            <!-- Iterar sobre los productos -->
+            <div class="summary-item" *ngFor="let item of orderItems">
+              <div class="summary-product">
+                <img [src]="item.image" alt="{{item.name}}" class="product-thumbnail">
+                <div>{{ item.name }} (x{{ item.quantity || 1 }})</div>
+                <div>{{ item.size }}</div> <!-- Mostrar la medida seleccionada -->
               </div>
+              <!-- Mostrar el precio total (poster + marco) -->
+              <div>{{ ((item.posterPrice + item.framePrice) * (item.quantity || 1)) | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
             </div>
+          </div>
+          
 
           
           <!-- Subtotal -->
@@ -165,29 +162,23 @@
       
     </div>
 
+    <!-- Formulario vacío donde se inyectará el formulario de PayU -->
+    <form #payuForm method="POST"></form>
+
+
     <!-- Botón para proceder con PayU -->
-    <div class="button-group">
-      <button pButton type="button" label="Pagar con PayU" icon="pi pi-credit-card" [disabled]="firstNameRef.invalid || lastNameRef.invalid || departmentRef.invalid || municipalityRef.invalid || streetNameRef.invalid || neighborhoodRef.invalid || postcodeRef.invalid || phoneRef.invalid || emailRef.invalid" (click)="createPayment()"></button>
-    </div>
+    <button pButton type="button" label="Pagar con PayU" icon="pi pi-credit-card" 
+      [disabled]="firstNameRef.invalid || lastNameRef.invalid || departmentRef.invalid || municipalityRef.invalid || streetNameRef.invalid || neighborhoodRef.invalid || phoneRef.invalid || emailRef.invalid"
+      (click)="createPayment()">
+    </button>
 
-    <!-- Formulario oculto para PayU -->
-    <form #payuForm id="payuForm" method="post" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" style="display:none;">
-      <!-- Los campos del formulario se llenarán dinámicamente -->
-    </form>
+
   </div>
- <!-- Pantalla de Pedido Completo -->
-<div *ngIf="activeIndex === 1" class="step-content">
-  <app-order-summary
-    [paymentSuccess]="paymentSuccess"
-    [buyerFullName]="buyerFullName"
-    [buyerEmail]="email"
-    [shippingAddress]="streetName"
-    [shippingCity]="selectedCity?.Nombre"
-    [shippingCountry]="'CO'"
-    [total]="total">
-  </app-order-summary>
+  <!-- Pantalla de Pedido Completo -->
+  <div *ngIf="activeIndex === 1" class="step-content">
+    
+  </div>
 </div>
-
 <!-- Componentes adicionales -->
 <app-floating-buttons></app-floating-buttons>
 <app-footer></app-footer>

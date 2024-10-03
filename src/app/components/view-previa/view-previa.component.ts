@@ -47,7 +47,7 @@ export class ViewPreviaComponent implements OnInit {
   formGroup!: FormGroup;
   categorias: Categoria[] = [];
   producto: ProductoConImagenes | null = null;
-
+  precioMarco: number = 0;
   product: ProductoConImagenes | undefined;
   productosRelacionados: ProductoConImagenes[] = [];
   productName: string | null = null;
@@ -144,7 +144,6 @@ export class ViewPreviaComponent implements OnInit {
         this.precioSeleccionado -= suma;
       }
     } else {
-      console.log('selectedNodes o precioMarco no está definido');
     }
   }
   
@@ -221,7 +220,6 @@ export class ViewPreviaComponent implements OnInit {
       this.isOptionsSelected = false;
     }
   
-    console.log('El precio total es:', this.precioSeleccionado);
   }
 
   onInput(event: Event) {
@@ -252,24 +250,50 @@ export class ViewPreviaComponent implements OnInit {
   }
 
   addToCart() {
+
+
     if (this.product && this.selectedNodes) {
+      const selectedSize = this.selectedNodes?.TamanhoPoster || 'Tamaño no definido';
+      const precioPoster = this.selectedNodes.PrecioPoster * this.quantity;
+      const precioMarco = this.formGroup.get('checked')?.value ? this.selectedNodes.PrecioMarco * this.quantity : 0;
+  
+      if (!selectedSize || precioPoster <= 0) {
+        console.error('Debe seleccionar un tamaño y el precio correspondiente.');
+        return;
+      }
+  
       const cartItem: CartItem = {
         id: this.generateUniqueId(),
         name: this.product.nombreProducto,
-        price: this.precioSeleccionado,
-        quantity: this.quantity,
-        image: this.product.Imagenes[0],
+        posterPrice: precioPoster,
+        framePrice: precioMarco,
+        size: selectedSize,
+        price: precioPoster + precioMarco,
+        quantity: this.quantity || 1,
+        image: this.product.Imagenes?.[0] || '',
         options: {
-          size: this.selectedNodes.TamanhoPoster,
+          size: selectedSize,
           frame: this.formGroup.get('checked')?.value ? 'Sí' : 'No'
         }
       };
-      
+
+  
+      if (!cartItem.posterPrice || !cartItem.size) {
+        console.error('Producto mal formado antes de agregarlo al carrito:', cartItem);
+        return;
+      }
+  
+      // Agregar el producto al carrito
       this.cartService.addToCart(cartItem);
+  
       this.resetQuantity();
+    } else {
+      console.error('Producto o nodos seleccionados no definidos.');
     }
   }
-
+  
+  
+  
   private generateUniqueId(): number {
     return Date.now() + Math.floor(Math.random() * 1000);
   }
@@ -279,13 +303,11 @@ export class ViewPreviaComponent implements OnInit {
   }
   
   loadProductosRelacionados(producto: ProductoConImagenes) {
-    const productoId = producto.idProducto; // Asegúrate de que este campo tiene un valor válido
-    console.log('ID del producto para cargar relacionados:', productoId);
+    const productoId = producto.idProducto; // Asegúrate de que este campo tiene un valor válid
 
     if (productoId) {
         this.serviceProduct.getRelatedProducts(productoId).subscribe(
             (relacionados) => {
-                console.log('Productos relacionados recibidos:', relacionados);
                 this.productosRelacionados = relacionados;
             },
             (error) => {

@@ -1,66 +1,245 @@
-.order-summary-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+.order-summary-wrapper {
+  font-family: 'Roboto', sans-serif;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.success .status-banner { background-color: #4CAF50; }
+.pending .status-banner { background-color: #FFC107; }
+.failed .status-banner { background-color: #F44336; }
+
+.icon {
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.status-message {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.transaction-info, .products-section {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+h3 {
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.value {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.products-list {
+  list-style: none;
+  padding: 0;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.product-item:last-child {
+  border-bottom: none;
+}
+
+.product-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.product-details h4 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.product-details p {
+  margin: 0.25rem 0;
+  color: #666;
+}
+
+.subtotal {
+  font-weight: 500;
+  color: #2196F3;
+}
+
+.whatsapp-message {
+  background-color: #25D366;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.error-message {
+  background-color: #FFEBEE;
+  color: #D32F2F;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message .icon {
+  margin-right: 0.5rem;
+}
+
+/* Media Queries para Responsividad */
+
+/* Tablets grandes y dispositivos más pequeños */
+@media (max-width: 1024px) {
+  .order-summary-wrapper {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablets y dispositivos más pequeños */
+@media (max-width: 768px) {
+  .order-summary-wrapper {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+
+  .status-banner {
+    flex-direction: column;
     text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-  
-  .status-icon {
-    margin-bottom: 20px;
+
+  .icon {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
   }
-  
-  .status-icon-success {
-    width: 80px;
-    height: 80px;
+
+  .status-message {
+    font-size: 1.2rem;
   }
-  
-  .status-icon-failure {
-    width: 80px;
-    height: 80px;
+
+  .info-grid {
+    grid-template-columns: 1fr;
   }
-  
-  h2 {
-    color: #4CAF50;
+}
+
+/* Celulares y dispositivos más pequeños */
+@media (max-width: 480px) {
+  .order-summary-wrapper {
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0;
   }
-  
-  h2 + h3 {
-    color: #555;
-    margin-top: 30px;
+
+  .product-item {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .summary-details {
-    margin-top: 20px;
-    text-align: left;
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: 1rem;
   }
-  
-  .summary-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f0f0;
+
+  .product-details {
+    width: 100%;
   }
-  
-  .download-invoice {
-    margin-top: 20px;
-    text-align: right;
+
+  h3 {
+    font-size: 1.2rem;
   }
-  
-  .error-message {
-    color: #E53935;
-    font-size: 18px;
+
+  .value {
+    font-size: 1rem;
   }
-  
-  .action-buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+}
+
+/* Celulares muy pequeños */
+@media (max-width: 320px) {
+  .order-summary-wrapper {
+    padding: 0.5rem;
   }
-  
-  button {
-    min-width: 150px;
+
+  .status-message {
+    font-size: 1rem;
   }
-  
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .transaction-info, .products-section {
+    padding: 1rem;
+  }
+}

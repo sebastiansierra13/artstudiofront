@@ -57,31 +57,6 @@
           <span>{{getSubtotal() | currency:'USD'}}</span>
         </div>
         <p-divider />
-        <div class="total-item tem">
-          <span>Envío: </span>
-          <span >Introduzca su dirección para ver las opciones de envío.</span>
-        </div>
-        <p-divider />
-        <div class="total-item">
-          <p-accordion>
-            <p-accordionTab header="Calcular Envío">
-              <div class="field">
-                <label for="Department">Departamento</label>
-                <p-dropdown [options]="departments" [(ngModel)]="selectedDepartment"
-                placeholder="Selecciona un departamento"
-                (onChange)="onDepartmentChange()" ></p-dropdown>
-              </div>
-              <div class="field" *ngIf="selectedDepartment !== null">
-                <label for="municipality">Municipio</label>
-                <p-dropdown [options]="municipalities" [(ngModel)]="selectedMunicipality"></p-dropdown>
-              </div>
-              <div *ngIf="selectedMunicipality !==null">
-                <h4>Costo de Envío: Gratis!!</h4>
-              </div>
-            </p-accordionTab>
-          </p-accordion>
-        </div>
-        <p-divider />
         <div class="total-item total">
           <span class="total-label">Total</span>
           <span class="total-amount">{{ totalCost | currency:'COP':'symbol-narrow':'1.0-0' }}</span>

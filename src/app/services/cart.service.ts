@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../interfaces/interfaces-app';
 
 @Injectable({
@@ -15,8 +15,6 @@ export class CartService {
     this.loadCartFromLocalStorage();
   }
 
-  
-  
   private loadCartFromLocalStorage() {
     if (this.isLocalStorageAvailable) {
       const storedCart = localStorage.getItem(this.STORAGE_KEY);
@@ -24,12 +22,13 @@ export class CartService {
         try {
           this.cartItems.next(JSON.parse(storedCart));
         } catch (e) {
-          console.error('Error parsing stored wishlist', e);
+          console.error('Error parsing stored cart', e);
           this.cartItems.next([]);
         }
       }
     }
   }
+
   private checkLocalStorageAvailability(): boolean {
     const test = 'test';
     try {
@@ -42,15 +41,16 @@ export class CartService {
   }
 
   private saveCartToLocalStorage() {
+    console.log('Guardando el carrito en localStorage:', this.cartItems.value);
     if (this.isLocalStorageAvailable) {
       try {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cartItems.value));
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cartItems.value));
       } catch (e) {
-        console.error('Error saving wishlist to localStorage', e);
-        // Aquí podrías implementar una lógica adicional, como notificar al usuario
+        console.error('Error saving cart to localStorage', e);
       }
     }
   }
+  
 
   getCartItems() {
     return this.cartItems.asObservable();
@@ -58,20 +58,30 @@ export class CartService {
 
   addToCart(item: CartItem) {
     const currentItems = this.cartItems.value;
+    
+    // Validación mejorada del producto antes de agregarlo
+    if (!item.size || item.posterPrice === undefined || item.posterPrice <= 0) {
+        console.error('Producto mal formado antes de agregarlo al carrito:', item);
+        return;
+    }
+    
     const existingItemIndex = currentItems.findIndex(i => 
-      i.id === item.id && 
-      JSON.stringify(i.options) === JSON.stringify(item.options)
+        i.id === item.id && 
+        JSON.stringify(i.options) === JSON.stringify(item.options)
     );
 
     if (existingItemIndex > -1) {
-      currentItems[existingItemIndex].quantity += item.quantity;
+        currentItems[existingItemIndex].quantity += item.quantity;
     } else {
-      currentItems.push(item);
+        currentItems.push(item);
     }
 
     this.cartItems.next(currentItems);
     this.saveCartToLocalStorage();
-  }
+}
+
+  
+  
 
   removeFromCart(id: number) {
     const currentItems = this.cartItems.value;
@@ -90,7 +100,7 @@ export class CartService {
     }
   }
 
-  getSubtotal() {    
+  getSubtotal() {
     return this.cartItems.value.reduce((acc, item) => acc + (item.quantity * (item.price || 0)), 0);  
   }
 

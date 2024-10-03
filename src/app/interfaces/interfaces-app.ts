@@ -56,14 +56,18 @@ export interface Banner {
 }
 
   
-  export interface CartItem {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-    image: string;
-    options?: { [key: string]: string };
-  }
+export interface CartItem {
+  id: number;
+  name: string;
+  posterPrice: number; // Precio del póster
+  framePrice: number;  // Precio del marco
+  size: string;        // Medida seleccionada (TamanhoPoster)
+  price: number;       // Precio total (póster + marco)
+  quantity: number;    // Cantidad seleccionada
+  image: string;       // Imagen del producto
+  options?: { [key: string]: string }; // Opciones adicionales (si es necesario)
+}
+
 
 
   export interface Region {
@@ -99,3 +103,41 @@ export interface Banner {
     Caption: string;
     CreatedAt: string;
   }
+
+
+
+  export interface PayUResponse {
+    referenceCode: string;
+    transactionState: string;
+    TX_VALUE: number;
+    currency: string;
+    processingDate: string;
+    lapPaymentMethod: string;
+    description: string;
+  }
+  
+
+
+  export interface Product {
+    ProductName: string;
+    TamanhoPoster: string;
+    PrecioPoster: number;
+    PrecioMarco: number;
+    Cantidad: number;
+    Subtotal: number;
+    ProductImageUrl: string;
+  }
+  
+  export interface OrderDetails {
+    ReferenceCode: string;
+    TotalAmount: number;
+    Currency: string;
+    OrderStatus: string;
+    CreatedAt: string;
+    UpdatedAt: string;
+    Products: {
+      $values: Product[];
+    };
+  }
+  
+  

@@ -74,22 +74,25 @@ export class DetailedCartComponent implements OnInit, OnDestroy {
         this.updateTotalCost();
       });
 
-    forkJoin({
-      regions: this.locationService.getRegions(),
-      departments: this.locationService.getDepartments(),
-      municipalities: this.locationService.getMunicipalities()
-    }).subscribe(({regions, departments, municipalities}) => {
-      this.regions = regions;
-      this.departamentos = departments;
-      this.municipios = municipalities;
-
-      this.departments = departments.map(department => ({ label: department.Nombre, value: department.Id }));
-    });
   }
 
 
   // detailed-cart.component.ts
   proceedToCheckout() {
+    let hasInvalidProducts = false;
+    this.cartItems.forEach(item => {
+      if (!item.size || !item.posterPrice || !item.framePrice) {
+        console.error('Producto mal formado en DetailedCartComponent, deteniendo el checkout:', item);
+        hasInvalidProducts = true;
+      }
+    });
+  
+    if (hasInvalidProducts) {
+      alert('Hay productos mal formados en el carrito. No puedes proceder al checkout.');
+      return;
+    }
+  
+    // Guardar los datos del carrito en el servicio
     this.orderService.setOrderItems(this.cartItems);
     this.orderService.setTotalCost(this.totalCost);
     this.orderService.setShippingInfo({
@@ -97,51 +100,10 @@ export class DetailedCartComponent implements OnInit, OnDestroy {
       municipalityId: this.selectedMunicipality,
       shippingCost: this.shippingCost
     });
+  
     this.router.navigate(['/checkout']);
   }
-
-  onDepartmentChange() {
-    if (this.selectedDepartment !== null) {
-      this.municipalities = this.municipios
-        .filter(municipality => municipality.DepartamentoId === this.selectedDepartment)
-        .map(municipality => ({ label: municipality.Nombre, value: municipality.Id }));
-      this.selectedMunicipality = null;
-      this.calculateShipping();
-    }
-  }
-
-  calculateShipping() {
-    if (this.selectedDepartment === null) {
-      this.shippingCost = 0;
-      return;
-    }
-
-    const selectedDepartment = this.departamentos.find(dep => dep.Id === this.selectedDepartment);
-    if (!selectedDepartment) {
-      this.shippingCost = 0;
-      return;
-    }
-
-    const region = this.regions.find(r => r.Id === selectedDepartment.RegionId);
-    if (region) {
-      // Aquí deberías tener una lógica para determinar el costo de envío basado en la región
-      // Por ahora, usaremos un valor fijo para cada región
-      const shippingRates: { [key: number]: number } = {
-        1: 8000,   // Bogotá
-        2: 12000,  // Región Eje Cafetero
-        3: 14000,  // Región Centro Oriente
-        4: 18000,  // Región Caribe
-        5: 18000,  // Región Pacífico
-        6: 16000,  // Región Llano
-        7: 14000,  // Región Centro Sur
-      };
-      this.shippingCost = shippingRates[region.Id] || 0;
-    } else {
-      this.shippingCost = 0;
-    }
-
-    this.updateTotalCost();
-  }
+  
 
   updateTotalCost() {
     const subtotal = this.getSubtotal();

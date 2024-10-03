@@ -24,8 +24,20 @@ export class OrderService {
   shippingInfo$ = this.shippingInfoSubject.asObservable();
 
   setOrderItems(items: CartItem[]) {
-    this.orderItemsSubject.next(items);
+    // Verificar si los productos tienen datos mal formados
+    const validItems = items.filter(item => {
+      if (!item.size || item.posterPrice <= 0) {
+        console.error('Producto mal formado en OrderService, no se agregará al pedido:', item);
+        return false;
+      }
+      return true;
+    });
+  
+    // Solo actualizar con productos válidos
+    this.orderItemsSubject.next(validItems);
   }
+  
+  
 
   setTotalCost(total: number) {
     this.totalCostSubject.next(total);

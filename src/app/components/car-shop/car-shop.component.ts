@@ -22,17 +22,29 @@ export class CarShopComponent implements OnInit,  OnDestroy {
   
   constructor(private cartService: CartService, private router: Router, private orderService: OrderService) { }
 
-  ngOnInit(): void {
-    this.cartService.getCartItems()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe({
-        next: (items) => {
-          this.cartItems = items;
-          this.countCart = this.cartService.getItemCount();
-        },
-        error: (err) => console.error('Error fetching cart items:', err)
-      });
-  }
+ // car-shop.component.ts
+ ngOnInit(): void {
+  this.cartService.getCartItems()
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe({
+      next: (items) => {
+        this.cartItems = items;
+
+        // Verificar si los productos están bien formados
+        this.cartItems.forEach(item => {
+          // Asegúrate de que posterPrice y size sean válidos
+          if (item.posterPrice === undefined || item.size === undefined) {
+            console.error('Producto mal formado en CarShopComponent:', item);
+          }
+        });
+
+        this.countCart = this.cartService.getItemCount();
+      },
+      error: (err) => console.error('Error fetching cart items:', err)
+    });
+}
+
+  
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
@@ -50,13 +62,30 @@ export class CarShopComponent implements OnInit,  OnDestroy {
   // Nuevo método checkout para navegar al CheckoutComponent
   checkout() {
     if (this.cartItems.length > 0) {
-      // Guardar los datos del carrito en el servicio
-      this.orderService.setOrderItems(this.cartItems);
-      
-      // Navegar al componente Checkout
-      this.router.navigate(['/checkout']);
+        // Verificar si los productos están bien formados antes de proceder al checkout
+        let hasInvalidProducts = false;
+        this.cartItems.forEach(item => {
+            // Solo verificar si size y posterPrice están definidos
+            if (item.size === undefined || item.posterPrice === undefined) {
+                console.error('Producto mal formado en CarShopComponent, deteniendo el checkout:', item);
+                hasInvalidProducts = true;
+            }
+        });
+
+        if (hasInvalidProducts) {
+            alert('Hay productos mal formados en el carrito. No puedes proceder al checkout.');
+            return;
+        }
+
+        // Guardar los datos del carrito en el servicio
+        this.orderService.setOrderItems(this.cartItems);
+        
+        // Navegar al componente Checkout
+        this.router.navigate(['/checkout']);
     } else {
-      console.log("El carrito está vacío.");
+        console.log("El carrito está vacío.");
     }
-  }
+}
+
+  
 }

@@ -1,42 +1,63 @@
-<div class="order-summary-container">
-    <div class="status-icon">
-      <img *ngIf="paymentSuccess" src="assets/icons/success.svg" alt="Éxito" class="status-icon-success">
-      <img *ngIf="!paymentSuccess" src="assets/icons/failure.svg" alt="Error" class="status-icon-failure">
+<div class="order-summary-wrapper" [ngClass]="statusClass">
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Cargando detalles de la transacción...</p>
+  </div>
+
+  <div *ngIf="!loading && !errorMessage" class="summary-container">
+    <div class="status-banner">
+      <i class="icon" [ngClass]="statusIcon"></i>
+      <h2 class="status-message">{{ statusMessage }}</h2>
     </div>
-    <h2 *ngIf="paymentSuccess">¡Pedido Exitoso!</h2>
-    <h2 *ngIf="!paymentSuccess">Hubo un Problema con tu Pedido</h2>
-  
-    <div *ngIf="paymentSuccess" class="summary-details">
-      <h3>Detalles del Pedido</h3>
-      <div class="summary-row">
-        <div>Nombre:</div>
-        <div>{{ buyerFullName }}</div>
-      </div>
-      <div class="summary-row">
-        <div>Correo Electrónico:</div>
-        <div>{{ buyerEmail }}</div>
-      </div>
-      <div class="summary-row">
-        <div>Dirección de Envío:</div>
-        <div>{{ shippingAddress }}, {{ shippingCity }}, {{ shippingCountry }}</div>
-      </div>
-      <div class="summary-row">
-        <div>Total:</div>
-        <div>{{ total | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
-      </div>
-  
-      <div class="download-invoice">
-        <button pButton label="Descargar Factura" icon="pi pi-file-pdf" (click)="downloadInvoice()"></button>
+
+    <div class="transaction-info">
+      <h3>Detalles de la Transacción</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Referencia:</span>
+          <span class="value">{{ referencia }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Valor:</span>
+          <span class="value">{{ valor | currency:moneda }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Fecha:</span>
+          <span class="value">{{ fecha | date:'medium' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Método de Pago:</span>
+          <span class="value">{{ metodoPago }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Código de Autorización:</span>
+          <span class="value">{{ authorizationCode }}</span>
+        </div>
       </div>
     </div>
-  
-    <div *ngIf="!paymentSuccess" class="error-message">
-      <p>Lo sentimos, pero tu pago no fue procesado correctamente. Por favor, inténtalo de nuevo o contacta con el soporte técnico.</p>
+
+    <div *ngIf="productos && productos.length > 0" class="products-section">
+      <h3>Productos Adquiridos</h3>
+      <ul class="products-list">
+        <li *ngFor="let producto of productos" class="product-item">
+          <img [src]="producto.ProductImageUrl" [alt]="producto.ProductName" class="product-image">
+          <div class="product-details">
+            <h4>{{ producto.ProductName }}</h4>
+            <p>Tamaño: {{ producto.TamanhoPoster }}</p>
+            <p>Cantidad: {{ producto.Cantidad }}</p>
+            <p class="subtotal">Subtotal: {{ producto.Subtotal | currency:moneda }}</p>
+          </div>
+        </li>
+      </ul>
     </div>
-  
-    <div class="action-buttons">
-      <button *ngIf="!paymentSuccess" pButton label="Reintentar Pago" icon="pi pi-refresh" (click)="retryPayment()"></button>
-      <button pButton label="Volver al Inicio" icon="pi pi-home" (click)="goToHome()"></button>
+
+    <div *ngIf="estado.toLowerCase() === 'aprobada'" class="whatsapp-message">
+      <p>Para estar al tanto de su pedido, comuníquese con nosotros vía WhatsApp al <strong>+XX XXX XXX XXXX</strong></p>
     </div>
   </div>
-  
+
+  <div *ngIf="!loading && errorMessage" class="error-message">
+    <i class="icon x-circle"></i>
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

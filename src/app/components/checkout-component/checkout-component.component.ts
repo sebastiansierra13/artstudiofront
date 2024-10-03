@@ -43,7 +43,7 @@ import { Router,RouterModule } from '@angular/router';
 })
 export class CheckoutComponent implements OnInit {
 
-  @ViewChild('payuForm') payuForm!: ElementRef;
+  @ViewChild('payuForm', { static: false }) payuForm!: ElementRef;
   
   activeIndex: number = 0;
   firstName: string = '';
@@ -104,7 +104,6 @@ export class CheckoutComponent implements OnInit {
         // Emitir los productos cargados desde localStorage si el carrito está vacío
         this.orderService.setOrderItems(this.orderItems);
       } else {
-        console.log('Productos recibidos desde el carrito:', items);
         this.updateOrderItems(items);
       }
     });
@@ -133,97 +132,27 @@ export class CheckoutComponent implements OnInit {
   saveOrderItems() {
     if (this.orderItems.length > 0) {
       localStorage.setItem('orderItems', JSON.stringify(this.orderItems));
-      console.log('Productos guardados en localStorage:', this.orderItems);
     } else {
-      console.log('No hay productos para guardar en localStorage.');
     }
   }
 
   // Cargar los productos desde localStorage al iniciar el componente
   loadOrderItems() {
     const storedItems = localStorage.getItem('orderItems');
-    console.log('Cargando productos desde localStorage:', storedItems);
 
     if (storedItems) {
       this.orderItems = JSON.parse(storedItems);
-      console.log('Productos cargados desde localStorage:', this.orderItems);
       this.updateTotalCost(); // Actualizar el costo total al cargar los ítems
     } else {
-      console.log('No se encontraron productos en localStorage.');
     }
   }
 
   // Actualizar los productos y guardar en localStorage
   updateOrderItems(items: CartItem[]) {
     this.orderItems = items;
-    console.log('Actualizando productos del carrito:', this.orderItems);
     this.updateTotalCost(); // Actualizar el costo total
     this.saveOrderItems();  // Guardar los ítems en localStorage
   }
-
-  placeOrder() {
-    // Validar el formulario antes de proceder
-    this.validateForm();
-    
-    // Si el formulario es válido, proceder con el pedido
-    if (this.formValid) {
-      console.log('Pedido realizado exitosamente');
-      console.log('Detalles del pedido:', {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        streetName: this.streetName,
-        apartment: this.apartment,
-        city: this.selectedCity?.Nombre,
-        postcode: this.postcode,
-        phone: this.phone,
-        email: this.email,
-        orderNotes: this.orderNotes,
-        neighborhood: this.neighborhood,
-        selectedDepartment: this.selectedDepartment?.Nombre,
-        selectedCity: this.selectedCity?.Nombre,
-        couponCode: this.couponCode,
-        emailUpdates: this.emailUpdates,
-        shipToDifferentAddress: this.shipToDifferentAddress,
-        shippingCost: this.shippingCost,
-        total: this.total
-      });
-
-      // Avanzar al paso de "Pedido Completo"
-      this.activeIndex = 1;
-
-      // Eliminar los productos del carrito y datos de checkout del localStorage
-      localStorage.removeItem('orderItems');
-      localStorage.removeItem('checkoutData');
-    } else {
-      // Mostrar mensaje de error si el formulario no está completo
-      console.log('Por favor, completa todos los campos requeridos');
-    }
-}
-
-validateForm() {
-  // Asegúrate de que todos los campos estén completos
-  if (!this.firstName || !this.lastName || !this.email || !this.streetName || !this.city) {
-    this.formValid = false;
-    console.error('Algunos campos requeridos están vacíos.');
-    return;
-  }
-
-  // Agregar validación de formato de correo
-  if (!this.isValidEmail(this.email)) {
-    this.formValid = false;
-    console.error('El correo electrónico no es válido.');
-    return;
-  }
-
-  this.formValid = true;
-}
-
-// Validación básica de correo electrónico
-isValidEmail(email: string): boolean {
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  return emailPattern.test(email);
-}
-
 
 // Método para procesar el pedido y crear el formulario de pago
 createPayment() {
@@ -234,88 +163,244 @@ createPayment() {
     return;
   }
 
+  
+  console.log('Departamento seleccionado:', this.selectedDepartmentId);
+  console.log('Municipio seleccionado:', this.selectedMunicipalityId);
+  console.log('Ciudad:', this.city);
   // Datos del pedido que se enviarán al backend
-  const orderData = {
-    firstName: this.firstName,
-    lastName: this.lastName,
-    streetName: this.streetName,
-    neighborhood: this.neighborhood,
-    city: this.city,
-    phone: this.phone,
-    email: this.email,
-    total: this.total
+  const payUFormDTO = {
+    productos: this.orderItems.map(item => ({
+      IdProducto: item.id,  // ID del producto
+      NombreProducto: item.name,
+      TamanhoPoster: item.size, // Tamaño del producto (póster)
+      PrecioPoster: item.posterPrice, // Precio del póster
+      PrecioMarco: item.framePrice, // Precio del marco
+      Cantidad: item.quantity // Cantidad seleccionada del producto
+    })),
+    BuyerEmail: this.email, // Correo del comprador
+    Total: this.total, // Total del pedido
+
+    // Información adicional del comprador desde el formulario del checkout
+    FirstName: this.firstName,
+    LastName: this.lastName,
+    StreetName: this.streetName,
+    Apartment: this.apartment,
+    Neighborhood: this.neighborhood,
+    City: this.onMunicipalityChange()|| 'Ciudad no definida',  // Verifica que `selectedCity` esté definido
+    Department: this.onDepartmentChange()|| 'Departamento no definido',  // Verifica que `selectedDepartment` esté definido
+    Postcode: this.postcode,
+    Phone: this.phone,
+    OrderNotes: this.orderNotes
   };
 
-  // Llamada al backend para generar el formulario PayU
-  this.payUService.createPaymentForm(orderData).subscribe(
-    response => {
-      if (response && response.formHtml) {
-        // Si PayU devuelve el HTML del formulario, insértalo en el DOM
-        this.payuForm.nativeElement.innerHTML = response.formHtml;
-        this.payuForm.nativeElement.submit(); // Enviar el formulario
-      } else if (response && response.paymentSuccess !== undefined) {
-        // Si PayU devuelve el estado del pago
-        this.paymentSuccess = response.paymentSuccess;
-        this.activeIndex = 1; // Cambia a la pantalla de "Pedido Completo"
-      } else {
-        console.error('Error al generar el formulario de PayU:', response);
+  console.log('Datos del pedido que se enviarán al backend:', payUFormDTO);
+
+   // Enviar los datos al backend para crear el formulario de pago
+   this.payUService.createPaymentForm(payUFormDTO).subscribe(
+    (response) => {
+      if (response) {
+        console.log('Formulario de pago creado con éxito:', response);
+        
+        console.log('Datos del pedido que se enviarán al backend:', response);
+        this.payUService.createOrder(response).subscribe(
+          (paymentResponse) => {
+            if (paymentResponse) {
+              console.log("OJITOOOO" + paymentResponse);
+              this.populateAndSubmitForm(response); // Poblamos y enviamos el formulario de pago              
+            }
+          },
+          (error) => {
+            console.error('Error al crear el formulario de pago:', error);
+          }
+        );
       }
     },
-    error => {
-      console.error('Error al crear el formulario de pago:', error);
+    (error) => {
+      console.error('Error al crear la orden:', error);
     }
   );
 }
 
-  private populateAndSubmitForm(formData: any) {
-    const form = this.payuForm.nativeElement;
-    
-    // Limpiar el formulario existente
-    while (form.firstChild) {
-      form.removeChild(form.firstChild);
-    }
-    // Crear y añadir los campos del formulario
-    Object.keys(formData).forEach(key => {
+
+
+// Método para construir el formulario y enviarlo automáticamente
+populateAndSubmitForm(formData: any) {
+  // Crear un formulario HTML dinámico
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/'; // URL de sandbox de PayU
+
+  // Crear campos ocultos con los datos recibidos del backend
+  Object.keys(formData).forEach(key => {
+    if (typeof formData[key] !== 'object') {
       const input = document.createElement('input');
       input.type = 'hidden';
       input.name = key;
       input.value = formData[key];
       form.appendChild(input);
-    });
-
-    // Enviar el formulario
-    form.submit();
-  }
-
-  loadDepartments() {
-    this.locationService.getDepartments().subscribe(
-      departments => {
-        this.departments = departments.map(dep => ({
-          ...dep,
-          label: dep.Nombre,
-          value: dep.Id
-        }));
-      },
-      error => console.error('Error cargando departamentos:', error)
-    );
-  }
-
-  loadMunicipalities() {
-    if (this.selectedDepartmentId) {
-      this.locationService.getMunicipalities().subscribe(
-        municipalities => {
-          this.municipalities = municipalities
-            .filter(m => m.DepartamentoId === this.selectedDepartmentId)
-            .map(m => ({
-              ...m,
-              label: m.Nombre,
-              value: m.Id
-            }));
-        },
-        error => console.error('Error cargando municipios:', error)
-      );
     }
+  });
+
+  // Añadir el campo de monto total (valor)
+  const totalInput = document.createElement('input');
+  totalInput.type = 'hidden';
+  totalInput.name = 'amount';  // O "valor", dependiendo de la API de PayU
+  totalInput.value = formData.Total.toString(); // Asegúrate de que sea un valor numérico correcto
+  form.appendChild(totalInput);
+  console.log(totalInput);
+
+  // Añadir el formulario al DOM y enviarlo automáticamente
+  document.body.appendChild(form);
+  form.submit(); // Enviar el formulario automáticamente
+}
+
+
+
+
+
+validateForm() {
+  // Validar campos vacíos
+  if (!this.firstName || !/^[A-Za-z]+$/.test(this.firstName)) {
+    console.error('Nombre es inválido o está vacío.');
   }
+  if (!this.lastName || !/^[A-Za-z]+$/.test(this.lastName)) {
+    console.error('Apellido es inválido o está vacío.');
+  }
+  if (!this.email) {
+    console.error('Correo electrónico está vacío.');
+  }
+  if (!this.streetName) {
+    console.error('Dirección está vacía.');
+  }
+  if (!this.city) {
+    console.error('Ciudad está vacía.');
+  }
+  if (!this.phone || !/^\d+$/.test(this.phone) || this.phone.length < 10) {
+    console.error('Teléfono es inválido o está vacío.');
+  }
+  if (!this.neighborhood) {
+    console.error('Barrio está vacío.');
+  }
+
+  // Si algo está vacío o inválido, marcar el formulario como no válido
+  if (!this.firstName || !this.lastName || !this.email || !this.streetName || !this.city || !this.phone || !this.neighborhood) {
+    this.formValid = false;
+    console.error('Algunos campos requeridos están vacíos o son inválidos.');
+    return;
+  }
+
+  // Validar formato de correo electrónico
+  if (!this.isValidEmail(this.email)) {
+    this.formValid = false;
+    console.error('El correo electrónico no es válido.');
+    return;
+  }
+
+  this.formValid = true;
+}
+
+// Validar que solo se ingresen letras en nombre y apellido
+validateName(event: KeyboardEvent) {
+  const char = String.fromCharCode(event.which);
+  const pattern = /^[A-Za-z]+$/; // Solo letras
+  if (!pattern.test(char)) {
+    event.preventDefault(); // Previene la entrada de caracteres no válidos
+  }
+}
+
+// Validar que solo se ingresen números en el código postal
+validatePostcode(event: KeyboardEvent) {
+  const char = String.fromCharCode(event.which);
+  const pattern = /^[0-9]$/; // Solo números
+  if (!pattern.test(char)) {
+    event.preventDefault(); // Previene la entrada de caracteres no válidos
+  }
+}
+
+// Validar que solo se ingresen números en el teléfono
+validatePhone(event: KeyboardEvent) {
+  const char = String.fromCharCode(event.which);
+  const pattern = /^[0-9]$/; // Solo números
+  if (!pattern.test(char)) {
+    event.preventDefault(); // Previene la entrada de caracteres no válidos
+  }
+}
+
+
+// Validación básica de formato de correo
+isValidEmail(email: string): boolean {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailPattern.test(email);
+}
+
+
+loadDepartments() {
+  this.locationService.getDepartments().subscribe(
+    departments => {
+      this.departments = departments.map(dep => ({
+        ...dep,
+        label: dep.Nombre,
+        value: dep.Id
+      }));
+    },
+    error => console.error('Error cargando departamentos:', error)
+  );
+}
+
+loadMunicipalities() {
+  if (this.selectedDepartmentId) {
+    this.locationService.getMunicipalities().subscribe(
+      municipalities => {
+        this.municipalities = municipalities
+          .filter(m => m.DepartamentoId === this.selectedDepartmentId)
+          .map(m => ({
+            ...m,
+            label: m.Nombre,
+            value: m.Id
+          }));
+      },
+      error => console.error('Error cargando municipios:', error)
+    );
+  } else {
+    this.municipalities = [];  // Vaciar municipios si no hay departamento seleccionado
+  }
+}
+
+onDepartmentChange() {
+  if (this.selectedDepartmentId) {
+    this.loadMunicipalities();
+    this.selectedMunicipalityId = null;
+  } else {
+    this.municipalities = [];
+  }
+
+  const selectedDepartment = this.departments.find(dep => dep.Id === this.selectedDepartmentId);
+  
+  if (selectedDepartment) {
+    this.selectedDepartment = selectedDepartment;
+    
+  } else {
+    this.selectedDepartment = null;
+    console.log('Ningún departamento seleccionado.');
+  }
+  
+  return this.selectedDepartment?.Nombre;
+}
+
+onMunicipalityChange() {
+  const selectedMunicipality = this.municipalities.find(m => m.Id === this.selectedMunicipalityId);
+  
+  if (selectedMunicipality) {
+    this.city = selectedMunicipality.Nombre;
+    
+  } else {
+    console.log('Ningún municipio seleccionado.');
+    this.city = '';
+  }
+
+  return this.city;
+}
+
   
   updateTotalCost() {
     const subtotal = this.orderItems.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -344,59 +429,7 @@ createPayment() {
     );
   }
 
-  onDepartmentChange() {
-    if (this.selectedDepartmentId) {
-      this.loadMunicipalities();
-      this.selectedMunicipalityId = null;
-    } else {
-      this.municipalities = [];
-    }
-    this.updateTotalCost();
-  }
-
-  onMunicipalityChange() {
-    this.updateTotalCost();
-  }
-
-  
-
-calculateShipping() {
-  if (this.selectedDepartment === null) {
-    this.shippingCost = 0;
-    return;
-  }
-
-  const selectedDepartment = this.departments.find(dep => dep.Id === this.selectedDepartmentId);
-  if (!selectedDepartment) {
-    this.shippingCost = 0;
-    return;
-  }
-
-  const region = this.regions.find(r => r.Id === selectedDepartment.RegionId);
-  if (region) {
-    // Aquí deberías tener una lógica para determinar el costo de envío basado en la región
-    // Por ahora, usaremos un valor fijo para cada región
-    const shippingRates: { [key: number]: number } = {
-      1: 8000,   // Bogotá
-      2: 12000,  // Región Eje Cafetero
-      3: 14000,  // Región Centro Oriente
-      4: 18000,  // Región Caribe
-      5: 18000,  // Región Pacífico
-      6: 16000,  // Región Llano
-      7: 14000,  // Región Centro Sur
-    };
-    this.shippingCost = shippingRates[region.Id] || 0;
-  } else {
-    this.shippingCost = 0;
-  }
-  this.orderService.setShippingInfo({
-    departmentId: this.selectedDepartmentId,
-    municipalityId: this.selectedMunicipalityId,
-    shippingCost: this.shippingCost
-  });
-  this.updateTotalCost();
-  this.saveCheckoutData();
-}
+ 
 
   calculateTotal(): number {
     return this.orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -464,7 +497,6 @@ calculateShipping() {
       if (this.selectedDepartmentId) {
         this.loadMunicipalities();
       }
-      this.calculateShipping(); // Recalcular el envío
       this.updateTotalCost(); // Actualizar el costo total
     }
   }

@@ -23,6 +23,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ListaCategoriasComponent } from './components/lista-categorias/lista-categorias.component';
 import { NgModule } from '@angular/core';
 import { AdminGuard } from './services/admin.guard'; // Importa el AdminGuard
+import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },  // Opción abierta para todos
@@ -43,6 +44,7 @@ export const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent },
   { path: 'lista-categorias', component: ListaCategoriasComponent },
   { path: 'productos', component: ListProductsComponent },
+  { path: 'order-summary', component: OrderSummaryComponent },
   { path: 'list-products/:nombreCategoria/:idCategoria', component: ListProductsComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
