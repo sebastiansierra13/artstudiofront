@@ -230,6 +230,8 @@ populateAndSubmitForm(formData: any) {
   form.method = 'POST';
   form.action = formData.PayUUrl; 
 
+  console.log("ESTA ES LA URL "+ formData.PayUUrl);
+
   // Crear campos ocultos con los datos recibidos del backend
   Object.keys(formData).forEach(key => {
     if (typeof formData[key] !== 'object') {
