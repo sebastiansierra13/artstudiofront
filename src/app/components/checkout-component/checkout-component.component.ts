@@ -205,7 +205,6 @@ createPayment() {
         this.payUService.createOrder(response).subscribe(
           (paymentResponse) => {
             if (paymentResponse) {
-              console.log("OJITOOOO" + paymentResponse);
               this.populateAndSubmitForm(response); // Poblamos y enviamos el formulario de pago              
             }
           },

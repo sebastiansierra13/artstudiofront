@@ -250,12 +250,10 @@ export class ViewPreviaComponent implements OnInit {
   }
 
   addToCart() {
-
-
     if (this.product && this.selectedNodes) {
       const selectedSize = this.selectedNodes?.TamanhoPoster || 'Tamaño no definido';
-      const precioPoster = this.selectedNodes.PrecioPoster * this.quantity;
-      const precioMarco = this.formGroup.get('checked')?.value ? this.selectedNodes.PrecioMarco * this.quantity : 0;
+      const precioPoster = this.selectedNodes.PrecioPoster; // Eliminar la multiplicación por cantidad
+      const precioMarco = this.formGroup.get('checked')?.value ? this.selectedNodes.PrecioMarco : 0; // Eliminar la multiplicación por cantidad
   
       if (!selectedSize || precioPoster <= 0) {
         console.error('Debe seleccionar un tamaño y el precio correspondiente.');
@@ -265,10 +263,10 @@ export class ViewPreviaComponent implements OnInit {
       const cartItem: CartItem = {
         id: this.generateUniqueId(),
         name: this.product.nombreProducto,
-        posterPrice: precioPoster,
-        framePrice: precioMarco,
+        posterPrice: precioPoster, // Aquí solo se envía el precio unitario
+        framePrice: precioMarco,  // Aquí solo se envía el precio unitario
         size: selectedSize,
-        price: precioPoster + precioMarco,
+        price: precioPoster + precioMarco, // Total unitario (posterPrice + framePrice)
         quantity: this.quantity || 1,
         image: this.product.Imagenes?.[0] || '',
         options: {
@@ -276,7 +274,6 @@ export class ViewPreviaComponent implements OnInit {
           frame: this.formGroup.get('checked')?.value ? 'Sí' : 'No'
         }
       };
-
   
       if (!cartItem.posterPrice || !cartItem.size) {
         console.error('Producto mal formado antes de agregarlo al carrito:', cartItem);
@@ -291,6 +288,7 @@ export class ViewPreviaComponent implements OnInit {
       console.error('Producto o nodos seleccionados no definidos.');
     }
   }
+  
   
   
   

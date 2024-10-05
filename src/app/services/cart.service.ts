@@ -58,30 +58,30 @@ export class CartService {
 
   addToCart(item: CartItem) {
     const currentItems = this.cartItems.value;
-    
+
     // Validación mejorada del producto antes de agregarlo
     if (!item.size || item.posterPrice === undefined || item.posterPrice <= 0) {
         console.error('Producto mal formado antes de agregarlo al carrito:', item);
         return;
     }
-    
+
+    // Evitar que los precios se multipliquen por la cantidad en esta parte
     const existingItemIndex = currentItems.findIndex(i => 
         i.id === item.id && 
         JSON.stringify(i.options) === JSON.stringify(item.options)
     );
 
     if (existingItemIndex > -1) {
+        // Solo incrementar la cantidad si el producto ya existe
         currentItems[existingItemIndex].quantity += item.quantity;
     } else {
+        // Agregar el nuevo producto al carrito
         currentItems.push(item);
     }
 
     this.cartItems.next(currentItems);
     this.saveCartToLocalStorage();
-}
-
-  
-  
+  }
 
   removeFromCart(id: number) {
     const currentItems = this.cartItems.value;
@@ -100,8 +100,10 @@ export class CartService {
     }
   }
 
+  // Aquí hacemos el cambio para asegurar el cálculo correcto del subtotal
   getSubtotal() {
-    return this.cartItems.value.reduce((acc, item) => acc + (item.quantity * (item.price || 0)), 0);  
+    // Multiplicar el precio total por la cantidad en este momento
+    return this.cartItems.value.reduce((acc, item) => acc + (item.quantity * (item.posterPrice + item.framePrice)), 0);
   }
 
   getItemCount() {
