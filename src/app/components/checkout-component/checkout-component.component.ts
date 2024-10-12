@@ -227,7 +227,7 @@ populateAndSubmitForm(formData: any) {
   // Crear un formulario HTML dinámico
   const form = document.createElement('form');
   form.method = 'POST';
-  form.action = 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/'; // URL de sandbox de PayU
+  form.action = formData.PayUUrl; // URL de sandbox de PayU
 
   // Crear campos ocultos con los datos recibidos del backend
   Object.keys(formData).forEach(key => {
