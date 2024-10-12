@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <div class="order-summary-wrapper" [ngClass]="statusClass">
   <div *ngIf="loading" class="loading-container">
     <div class="spinner"></div>
@@ -61,3 +62,6 @@
     <p>{{ errorMessage }}</p>
   </div>
 </div>
+
+<app-floating-buttons></app-floating-buttons>
+<app-footer></app-footer>

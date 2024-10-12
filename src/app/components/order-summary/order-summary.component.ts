@@ -3,11 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PayUService } from '../../services/pay-u.service';
 import { OrderDetails, Product } from '../../interfaces/interfaces-app';
+import { CartService } from '../../services/cart.service';
+import { FloatingButtonsComponent } from "../floating-buttons/floating-buttons.component";
+import { FooterComponent } from "../footer/footer.component";
+import { NavBarComponent } from "../nav-bar/nav-bar.component";  // Importar CartService
 
 @Component({
   selector: 'app-order-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FloatingButtonsComponent, FooterComponent, NavBarComponent],
   templateUrl: './order-summary.component.html',
   styleUrls: ['./order-summary.component.css']
 })
@@ -30,12 +34,21 @@ export class OrderSummaryComponent implements OnInit {
   statusIcon: string = '';
   statusMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private payUService: PayUService) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private payUService: PayUService,
+    private cartService: CartService  // Inyectar el servicio del carrito
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.setTransactionDetails(params);
       this.fetchOrderDetails();
+
+      // Vaciar el carrito si la transacción es aprobada
+      if (this.estado.toLowerCase() === 'aprobada') {
+        this.cartService.clearCart();  // Vaciar el carrito
+      }
     });
   }
 
