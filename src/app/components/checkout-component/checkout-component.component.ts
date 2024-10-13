@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
@@ -44,7 +44,8 @@ import { Router,RouterModule } from '@angular/router';
 export class CheckoutComponent implements OnInit {
 
   @ViewChild('payuForm', { static: false }) payuForm!: ElementRef;
-  
+  // Añade esta línea para hacer referencia al campo de teléfono
+  @ViewChild('phoneRef') phoneRef!: NgModel;
   activeIndex: number = 0;
   firstName: string = '';
   lastName: string = '';
@@ -300,12 +301,13 @@ validateForm() {
 
 // Validar que solo se ingresen letras en nombre y apellido
 validateName(event: KeyboardEvent) {
-  const char = String.fromCharCode(event.which);
-  const pattern = /^[A-Za-z]+$/; // Solo letras
-  if (!pattern.test(char)) {
-    event.preventDefault(); // Previene la entrada de caracteres no válidos
+  const pattern = /^[a-zA-Z\s]*$/;
+  const inputChar = String.fromCharCode(event.charCode);
+  if (!pattern.test(inputChar)) {
+    event.preventDefault();
   }
 }
+
 
 // Validar que solo se ingresen números en el código postal
 validatePostcode(event: KeyboardEvent) {
@@ -316,14 +318,21 @@ validatePostcode(event: KeyboardEvent) {
   }
 }
 
-// Validar que solo se ingresen números en el teléfono
 validatePhone(event: KeyboardEvent) {
-  const char = String.fromCharCode(event.which);
-  const pattern = /^[0-9]$/; // Solo números
-  if (!pattern.test(char)) {
-    event.preventDefault(); // Previene la entrada de caracteres no válidos
+  const pattern = /^[0-9]*$/;
+  const inputChar = String.fromCharCode(event.charCode);
+  if (!pattern.test(inputChar) || this.phone.length >= 10) {
+    event.preventDefault();
   }
 }
+
+// Agregar lógica para verificar el formato después de la entrada
+onPhoneInput() {
+  if (this.phone.length === 10 && !this.phone.startsWith('3')) {
+    this.phoneRef.control.setErrors({ invalid: true });
+  }
+}
+
 
 
 // Validación básica de formato de correo

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,15 +26,20 @@ import { CartItem } from '../../interfaces/interfaces-app';
 import { TooltipModule } from 'primeng/tooltip';
 import { HomeDestacadosComponent } from "../home-destacados/home-destacados.component";
 import { OrderService } from '../../services/order.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
     selector: 'app-view-previa',
     standalone: true,
     templateUrl: './view-previa.component.html',
     styleUrls: ['./view-previa.component.css'],
-    imports: [TooltipModule, CommonModule, ScrollPanelModule, MatDividerModule, DropdownModule, InputNumberModule, MatFormFieldModule, FormsModule, NavBarComponent, ButtonModule, ToggleButtonModule, ReactiveFormsModule, CardModule, ButtonModule, CarouselModule, TagModule, FooterComponent, FloatingButtonsComponent, HomeDestacadosComponent]
+    imports: [TooltipModule,ToastModule, CommonModule, ScrollPanelModule, MatDividerModule, DropdownModule, InputNumberModule, MatFormFieldModule, FormsModule, NavBarComponent, ButtonModule, ToggleButtonModule, ReactiveFormsModule, CardModule, ButtonModule, CarouselModule, TagModule, FooterComponent, FloatingButtonsComponent, HomeDestacadosComponent],
+    providers: [MessageService],
 })
-export class ViewPreviaComponent implements OnInit {
+export class ViewPreviaComponent implements OnInit, OnDestroy {
   responsiveOptions: any[] | undefined;
   imgSelect: String = '';
   quantity: number = 1;
@@ -58,10 +63,10 @@ export class ViewPreviaComponent implements OnInit {
   marcoAgregado: boolean = false;
 
   isOptionsSelected: boolean = false;
-
+  private notificationSubscription: Subscription | undefined;
   
 
-  constructor(private cartService: CartService, private fb: FormBuilder , private router: Router,private route: ActivatedRoute,private categoriaService: CategoriaService ,  private serviceProduct:ServiceProductService , private servicePrecio:PrecioService, private orderService:OrderService) {
+  constructor(private notificationService: NotificationService,private messageService: MessageService,private cartService: CartService, private fb: FormBuilder , private router: Router,private route: ActivatedRoute,private categoriaService: CategoriaService ,  private serviceProduct:ServiceProductService , private servicePrecio:PrecioService, private orderService:OrderService) {
     this.imagenSeleccionada = this.imgaServices[0];
     this.formGroup = this.fb.group({
       checked: [false]
@@ -74,6 +79,17 @@ export class ViewPreviaComponent implements OnInit {
     this.loadMedidas();
     this.loadCategorias();
 
+    this.notificationSubscription = this.notificationService.notificationMessage$.subscribe(
+      message => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Notificación',
+          detail: message,
+          life: 3000,
+          
+        });
+      }
+    );
     const id = this.route.snapshot.params['id'];
     this.serviceProduct.getProductByID(id).subscribe((producto) => {
       this.product = producto;
@@ -134,6 +150,14 @@ export class ViewPreviaComponent implements OnInit {
 
     
   }
+
+  ngOnDestroy() {
+    if (this.notificationSubscription) {
+      this.notificationSubscription.unsubscribe();
+    }
+  }
+
+  
   sumarValores(): void {
     if (this.selectedNodes && this.selectedNodes.PrecioMarco !== undefined) {
       let suma = this.selectedNodes.PrecioMarco * this.quantity;
@@ -282,6 +306,9 @@ export class ViewPreviaComponent implements OnInit {
   
       // Agregar el producto al carrito
       this.cartService.addToCart(cartItem);
+      // Mostrar el toast de éxito
+      this.messageService.add({ severity: 'success', summary: 'Producto agregado', detail: 'El producto ha sido agregado al carrito.' });
+
   
       this.resetQuantity();
     } else {

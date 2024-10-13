@@ -79,29 +79,30 @@ export class DetailedCartComponent implements OnInit, OnDestroy {
 
   // detailed-cart.component.ts
   proceedToCheckout() {
-    let hasInvalidProducts = false;
-    this.cartItems.forEach(item => {
-      if (!item.size || !item.posterPrice || !item.framePrice) {
-        console.error('Producto mal formado en DetailedCartComponent, deteniendo el checkout:', item);
-        hasInvalidProducts = true;
+    if (this.cartItems.length > 0) {
+      // Verificar si los productos están bien formados antes de proceder al checkout
+      let hasInvalidProducts = false;
+      this.cartItems.forEach(item => {
+          // Solo verificar si size y posterPrice están definidos
+          if (item.size === undefined || item.posterPrice === undefined) {
+              console.error('Producto mal formado en CarShopComponent, deteniendo el checkout:', item);
+              hasInvalidProducts = true;
+          }
+      });
+
+      if (hasInvalidProducts) {
+          alert('Hay productos mal formados en el carrito. No puedes proceder al checkout.');
+          return;
       }
-    });
-  
-    if (hasInvalidProducts) {
-      alert('Hay productos mal formados en el carrito. No puedes proceder al checkout.');
-      return;
-    }
-  
-    // Guardar los datos del carrito en el servicio
-    this.orderService.setOrderItems(this.cartItems);
-    this.orderService.setTotalCost(this.totalCost);
-    this.orderService.setShippingInfo({
-      departmentId: this.selectedDepartment,
-      municipalityId: this.selectedMunicipality,
-      shippingCost: this.shippingCost
-    });
-  
-    this.router.navigate(['/checkout']);
+
+      // Guardar los datos del carrito en el servicio
+      this.orderService.setOrderItems(this.cartItems);
+      
+      // Navegar al componente Checkout
+      this.router.navigate(['/checkout']);
+  } else {
+      console.log("El carrito está vacío.");
+  }
   }
   
 

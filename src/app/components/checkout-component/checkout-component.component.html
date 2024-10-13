@@ -92,11 +92,12 @@
 <!-- Campo Teléfono -->
 <div class="form-group">
   <label for="phone">Teléfono <span style="color: red;">*</span></label>
-  <input id="phone" type="text" [(ngModel)]="phone" name="phone" required minlength="10" #phoneRef="ngModel" placeholder="Ingresa tu número de teléfono" (keypress)="validatePhone($event)">
+  <input id="phone" type="text" [(ngModel)]="phone" name="phone" required minlength="10" maxlength="10" #phoneRef="ngModel" placeholder="Ingresa tu número de teléfono" (keypress)="validatePhone($event)">
   <small class="error-message" *ngIf="phoneRef.invalid && phoneRef.touched">
-    Teléfono es requerido y debe tener al menos 10 dígitos.
+    El teléfono debe ser un número de 10 dígitos que comience con 3.
   </small>
 </div>
+
 
 <!-- Campo Correo Electrónico -->
 <div class="form-group">
@@ -167,10 +168,16 @@
 
 
     <!-- Botón para proceder con PayU -->
-    <button pButton type="button" label="Pagar con PayU" icon="pi pi-credit-card" 
-      [disabled]="firstNameRef.invalid || lastNameRef.invalid || departmentRef.invalid || municipalityRef.invalid || streetNameRef.invalid || neighborhoodRef.invalid || phoneRef.invalid || emailRef.invalid"
-      (click)="createPayment()">
-    </button>
+    <div class="button-container">
+      <button pButton 
+              type="button" 
+              label="Pagar con PayU" 
+              icon="pi pi-credit-card"
+              class="pay-button"
+              [disabled]="firstNameRef.invalid || lastNameRef.invalid || departmentRef.invalid || municipalityRef.invalid || streetNameRef.invalid || neighborhoodRef.invalid || phoneRef.invalid || emailRef.invalid"
+              (click)="createPayment()">
+      </button>
+    </div>
 
 
   </div>

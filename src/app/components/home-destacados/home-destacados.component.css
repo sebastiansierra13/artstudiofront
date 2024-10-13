@@ -1,5 +1,7 @@
 .carousel-container {
-  overflow-y: auto; /* Permitir el desplazamiento vertical */
+  max-width: 1500px;
+  touch-action: pan-y !important; /* Permitir el desplazamiento vertical */
+  overflow-x: hidden;
 }
 
 

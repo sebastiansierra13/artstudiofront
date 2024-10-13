@@ -1,63 +1,63 @@
-.checkout-container {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #f8f9fa;
-  font-family: 'Poppins', sans-serif;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* Global Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f8fa;
+  color: #333;
+  line-height: 1.6;
 }
 
+.checkout-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Banner Styles */
 .banner {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  background: linear-gradient(135deg, #2c3e50 0%, #bdc3c7 100%);
   color: white;
-  padding: 2rem;
-  border-radius: 10px;
-  margin-bottom: 2rem;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 3rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
-.summary-product {
-  display: flex;
-  align-items: center;
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 40%);
+  transform: rotate(30deg);
+  animation: shimmer 8s linear infinite;
 }
 
-.product-thumbnail {
-  width: 50px;   /* Ajusta el tamaño de la imagen */
-  height: auto;
-  margin-right: 10px;  /* Espacio entre la imagen y el nombre */
-  border-radius: 4px;
+@keyframes shimmer {
+  0% { transform: rotate(30deg) translateY(0); }
+  100% { transform: rotate(30deg) translateY(-50%); }
 }
-
 
 .banner h2 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
   animation: fadeInUp 0.8s ease-out;
 }
 
 .banner p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   opacity: 0.9;
   animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.steps {
-  margin-bottom: 2rem;
-}
-
+/* Layout Styles */
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -65,97 +65,197 @@
 }
 
 .col-md-6 {
-  flex: 1 1 500px;
-  padding: 1rem;
+  flex: 1 1 calc(50% - 2rem);
+  margin: 1rem;
 }
 
+/* Form Styles */
 .form-section, .summary-section {
-  background-color: white;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.form-section:hover, .summary-section:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
+  margin-bottom: 0.7rem;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group .p-dropdown {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
+  padding: 0.9rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group .p-dropdown:focus {
-  border-color: #2575fc;
-  box-shadow: 0 0 0 2px rgba(37, 117, 252, 0.2);
+  border-color: #4a00e0;
+  box-shadow: 0 0 0 3px rgba(74, 0, 224, 0.1);
   outline: none;
 }
 
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
+/* Dropdown specific styles */
+.form-group .p-dropdown {
+  max-width: 100%;
+  overflow: hidden;
 }
 
-.checkbox-group label {
-  margin-left: 0.5rem;
-  font-weight: normal;
+.form-group .p-dropdown .p-dropdown-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Summary Styles */
+.summary-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-content {
+  flex-grow: 1;
 }
 
 .summary-item {
   display: flex;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: 1.2rem 0;
   border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease;
 }
 
-.summary-item:last-child {
-  border-bottom: none;
-  font-weight: 600;
-  font-size: 1.1rem;
+.summary-item:hover {
+  background-color: #f9f9f9;
 }
 
-.button-group {
+
+.summary-product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+/* Estilos del botón de pago mejorado y funcional */
+.button-container {
   margin-top: 2rem;
   text-align: right;
+  perspective: 1000px;
 }
 
-button {
-  background-color: #2575fc;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: #1a5fd0;
-  transform: translateY(-2px);
-}
-
-h3 {
-  color: #333;
-  margin-bottom: 1.5rem;
+:host ::ng-deep .pay-button {
+  position: relative;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(51, 225, 86, 0.9) 0%, rgba(64, 64, 66, 0.9) 100%);
+  box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease, transform 0.1s ease;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+:host ::ng-deep .pay-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  transform: rotate(30deg);
+  transition: all 0.5s ease;
+}
+
+:host ::ng-deep .pay-button:not(:disabled):hover {
+  transform: translateY(-5px) rotateX(10deg);
+  box-shadow: 0 15px 30px rgba(44, 62, 80, 0.3);
+}
+
+:host ::ng-deep .pay-button:not(:disabled):hover::before {
+  transform: rotate(30deg) translate(20%, 20%);
+}
+
+:host ::ng-deep .pay-button:not(:disabled):active {
+  transform: translateY(-2px) rotateX(5deg);
+  box-shadow: 0 5px 15px rgba(44, 62, 80, 0.2);
+}
+
+:host ::ng-deep .pay-button .p-button-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .pay-button:not(:disabled):hover .p-button-label {
+  transform: scale(1.05);
+}
+
+:host ::ng-deep .pay-button .p-button-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .pay-button:not(:disabled):hover .p-button-icon {
+  transform: translateX(-5px) rotate(-15deg);
+}
+
+:host ::ng-deep .pay-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, rgba(50, 173, 46, 0.5) 0%, rgba(189, 195, 199, 0.5) 100%);
+  box-shadow: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .checkout-container {
+    padding: 2rem;
+    margin: 2rem auto;
+  }
+  
+  .banner {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .banner h2 {
+    font-size: 2.4rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -165,11 +265,59 @@ h3 {
   
   .col-md-6 {
     flex: 1 1 100%;
+    margin: 1rem 0;
   }
+  
+  .banner h2 {
+    font-size: 2rem;
+  }
+  
+  .form-section, .summary-section {
+    padding: 2rem;
+  }
+  
+  .button-container {
+    text-align: center;
+  }
+
+  :host ::ng-deep .pay-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
 }
 
-
-.error-message {
-  color: red;
-  font-size: 0.8em;
+@media (max-width: 480px) {
+  .checkout-container {
+    padding: 1.5rem;
+    margin: 1rem auto;
+  }
+  
+  .banner {
+    padding: 2rem 1rem;
+  }
+  
+  .banner h2 {
+    font-size: 1.8rem;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group .p-dropdown {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+  :host ::ng-deep .pay-button {
+    font-size: 1.1rem;
+    padding: 0.9rem 2rem;
+  }
+  .summary-product {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .product-thumbnail {
+    margin-bottom: 0.5rem;
+  }
 }
