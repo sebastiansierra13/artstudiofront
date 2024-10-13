@@ -19,8 +19,7 @@
         [numScroll]="1" 
         [circular]="true" 
         [responsiveOptions]="responsiveOptions" 
-        orientation="horizontal" 
-        [autoplayInterval]="20">
+        [orientation]="isMobileOrTablet ? 'vertical' : 'horizontal'">
         <ng-template let-product pTemplate="item">
           <div class="product-wrapper">
             <div class="product-card" [routerLink]="['/preview', product.nombreProducto, product.idProducto]">
