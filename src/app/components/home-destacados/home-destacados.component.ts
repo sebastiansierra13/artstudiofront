@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, ElementRef, Renderer2 } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
@@ -27,8 +27,12 @@ export class HomeDestacadosComponent implements OnInit {
   isSmallScreen: boolean = false;
   isMobileOrTablet: boolean = false;
 
+  // Variables para el control del touch
   initialTouchX: number = 0;
   initialTouchY: number = 0;
+  lastTouchX: number = 0;
+  lastTouchY: number = 0;
+  isSwiping: boolean = false;
 
   responsiveOptions = [
     {
@@ -52,7 +56,9 @@ export class HomeDestacadosComponent implements OnInit {
     private wishlistService: WishlistService,
     private router: Router,
     private serviceProduct: ServiceProductService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private elRef: ElementRef,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
@@ -72,6 +78,7 @@ export class HomeDestacadosComponent implements OnInit {
     }
 
     this.checkScreenSize();
+    this.setupTouchListeners();  // Activamos la detección de los eventos táctiles
   }
 
   @HostListener('window:resize', ['$event'])
@@ -90,22 +97,52 @@ export class HomeDestacadosComponent implements OnInit {
     event.stopPropagation();
   }
 
-  // Detectar el inicio del touch
-  @HostListener('touchstart', ['$event'])
+  // Agregamos listeners para detectar los gestos táctiles en el carrusel
+  setupTouchListeners() {
+    const carouselElement = this.elRef.nativeElement.querySelector('.carousel-container');
+    
+    if (carouselElement) {
+      this.renderer.listen(carouselElement, 'touchstart', (event: TouchEvent) => this.onTouchStart(event));
+      this.renderer.listen(carouselElement, 'touchmove', (event: TouchEvent) => this.onTouchMove(event));
+      this.renderer.listen(carouselElement, 'touchend', (event: TouchEvent) => this.onTouchEnd(event));
+    }
+  }
+
+  // Detectamos el inicio del toque
   onTouchStart(event: TouchEvent) {
+    this.isSwiping = false;
     this.initialTouchX = event.touches[0].clientX;
     this.initialTouchY = event.touches[0].clientY;
   }
 
-  // Detectar el movimiento del touch
-  @HostListener('touchmove', ['$event'])
+  // Detectamos el movimiento
   onTouchMove(event: TouchEvent) {
-    const deltaX = event.touches[0].clientX - this.initialTouchX;
-    const deltaY = event.touches[0].clientY - this.initialTouchY;
+    this.lastTouchX = event.touches[0].clientX;
+    this.lastTouchY = event.touches[0].clientY;
 
-    // Si el desplazamiento en Y es mayor que en X, permitimos el scroll vertical
+    const deltaX = this.lastTouchX - this.initialTouchX;
+    const deltaY = this.lastTouchY - this.initialTouchY;
+
+    // Si el desplazamiento vertical es mayor que el horizontal, permitimos el desplazamiento vertical
     if (Math.abs(deltaY) > Math.abs(deltaX)) {
-      event.stopPropagation(); // Permitir el desplazamiento vertical
+      // Permitir el desplazamiento vertical
+      this.isSwiping = false;
+    } else {
+      // Detenemos el evento para que el carrusel maneje el desplazamiento horizontal
+      this.isSwiping = true;
+      event.preventDefault();
     }
   }
+
+  // Terminamos el gesto táctil
+  onTouchEnd(event: TouchEvent) {
+    if (this.isSwiping) {
+      // El usuario estaba haciendo un swipe horizontal (cambio de card)
+      console.log('Swipe horizontal detectado');
+    } else {
+      // El usuario estaba haciendo scroll vertical
+      console.log('Scroll vertical detectado');
+    }
+  }
+
 }

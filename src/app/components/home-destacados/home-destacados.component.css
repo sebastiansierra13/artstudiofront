@@ -1,3 +1,9 @@
+.carousel-container {
+  max-width: 1500px;
+  touch-action: pan-y; /* Permitir el desplazamiento vertical */
+}
+
+
 :host ::ng-deep .p-carousel {
   touch-action: pan-y; /* Permitir el desplazamiento vertical */
 }
