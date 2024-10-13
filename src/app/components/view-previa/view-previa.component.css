@@ -264,12 +264,6 @@ input[type="number"] {
 }
 
 
-.carousel-container {
-  width: 100%;
-  align-items: center;
-  padding: 10px; /* Añade espacio alrededor del contenido */
-  box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
-}
 .title-section{
   margin-left: 5%;
 }
