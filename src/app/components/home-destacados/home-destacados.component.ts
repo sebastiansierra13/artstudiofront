@@ -79,32 +79,26 @@ export class HomeDestacadosComponent implements OnInit {
     this.initHammer();
   }
 
-  // Inicia HammerJS para detectar solo gestos horizontales
+  // Integrar HammerJS
   initHammer() {
-    if (this.carouselContainer && this.carouselContainer.nativeElement) {
-      this.hammer = new Hammer.Manager(this.carouselContainer.nativeElement);
-
-      // Detectar swipe solo en el eje horizontal (X)
-      this.hammer.add(new Hammer.Swipe({ direction: Hammer.DIRECTION_HORIZONTAL }));
-
+    if (this.carouselContainer) {
+      this.hammer = new Hammer(this.carouselContainer.nativeElement);
+      this.hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL }); // Detectar solo horizontal
       this.hammer.on('swipeleft', () => {
-        this.nextSlide();
+        this.nextSlide(); // Implementa la lógica de ir al siguiente slide
       });
-
       this.hammer.on('swiperight', () => {
-        this.prevSlide();
+        this.prevSlide(); // Implementa la lógica de ir al slide anterior
       });
     }
   }
 
   nextSlide() {
-    // Aquí puedes agregar la lógica para avanzar en el carrusel de PrimeNG
-    console.log('Siguiente slide');
+    console.log("Siguiente slide");
   }
 
   prevSlide() {
-    // Aquí puedes agregar la lógica para retroceder en el carrusel de PrimeNG
-    console.log('Slide anterior');
+    console.log("Slide anterior");
   }
 
   @HostListener('window:resize', ['$event'])

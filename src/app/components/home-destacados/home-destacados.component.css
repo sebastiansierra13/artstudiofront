@@ -7,11 +7,11 @@
 
 
 :host ::ng-deep .p-carousel {
-  touch-action: pan-y; /* Permitir el desplazamiento vertical */
+  touch-action: pan-y !important;;  /* Permitir el desplazamiento vertical */
 }
 
 :host ::ng-deep .p-carousel .p-carousel-content {
-  touch-action: pan-y; /* Permitir desplazamiento vertical dentro del contenido */
+  touch-action: pan-y !important;; /* Permitir desplazamiento vertical dentro del contenido */
 }
 
 
