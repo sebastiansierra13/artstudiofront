@@ -23,7 +23,8 @@ export class HomeDestacadosComponent implements OnInit {
   imgSelect: String = '';
   @Input() products: ProductoConImagenes[] = [];
   @Input() showOnlyDestacados: boolean = true;
-
+  initialTouchX: number = 0;
+  initialTouchY: number = 0;
   isSmallScreen: boolean = false;
 
   responsiveOptions = [
@@ -87,5 +88,24 @@ export class HomeDestacadosComponent implements OnInit {
     this.wishlistService.addToWishlist(product);
     this.notificationService.showNotification('Producto agregado a la lista de deseos');
     event.stopPropagation();
+  }
+
+  // Detectar el inicio del touch
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    this.initialTouchX = event.touches[0].clientX;
+    this.initialTouchY = event.touches[0].clientY;
+  }
+
+  // Detectar el movimiento del touch
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent) {
+    const deltaX = event.touches[0].clientX - this.initialTouchX;
+    const deltaY = event.touches[0].clientY - this.initialTouchY;
+
+    // Si el desplazamiento en Y es mayor que en X, permitimos el scroll vertical
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+      event.stopPropagation(); // Permitir el desplazamiento vertical
+    }
   }
 }
