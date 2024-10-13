@@ -16,10 +16,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { Categoria, Producto, Tag } from '../../interfaces/interfaces-app'; // Asegúrate de tener esta importación correcta
-import { ServiceProductService  } from '../../services/service-product.service'; 
+import { ServiceProductService } from '../../services/service-product.service'; 
 import { TagService } from '../../services/tag.service';
 import { getStorage, ref, uploadBytes, getDownloadURL, ref as storageRef } from 'firebase/storage';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-product',
@@ -66,8 +65,7 @@ export class AddProductComponent implements OnInit {
     private messageService: MessageService,
     private productoService: ServiceProductService,
     private tagService: TagService,
-    private cdr: ChangeDetectorRef,
-    private authService: AuthService // Inyectar el AuthService aquí
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -139,27 +137,19 @@ export class AddProductComponent implements OnInit {
 
   
 
-  async uploadImagesToFirebase(files: File[]): Promise<string[]> {
-    // Verifica la autenticación antes de proceder
-    const isAuthenticated = await this.authService.isAuthenticated().toPromise();
-    
-    if (!isAuthenticated.authenticated) {
-      throw new Error('El usuario no está autenticado');
-    }
+async uploadImagesToFirebase(files: File[]): Promise<string[]> {
+  const storage = getStorage();
   
-    const storage = getStorage();
-  
-    const uploadPromises = files.map(async file => {
-      const storageRef = ref(storage, `images/Productos/${file.name}`);
-      const snapshot = await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
-      return downloadURL;
-    });
-  
-    const imagesArray = await Promise.all(uploadPromises);
-    return imagesArray;
-  }
-  
+  const uploadPromises = files.map(async file => {
+    const storageRef = ref(storage, `images/Productos/${file.name}`);
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  });
+
+  const imagesArray = await Promise.all(uploadPromises);
+  return imagesArray;
+}
 
 
   
