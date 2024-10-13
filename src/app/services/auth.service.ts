@@ -16,7 +16,7 @@ export class AuthService {
   // Método de login
   login(user: string, password: string): Observable<any> {
     const credentials = { User: user, Password: password };
-    return this.http.post<any>(`${this.apiUrl}/login`, credentials);
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials, { withCredentials: true });
   }
 
   // Método para verificar si el administrador está autenticado
