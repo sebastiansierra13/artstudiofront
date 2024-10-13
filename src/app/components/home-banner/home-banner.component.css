@@ -6,9 +6,12 @@
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  touch-action: pan-y;
+  touch-action: pan-y !important; /* Asegurarse que se permita el scroll vertical */
   overflow-x: hidden; 
 }
+
+/* Resto del CSS sin cambios */
+
 
 .carousel-slides {
   height: 100%;
