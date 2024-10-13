@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { NgIf, NgFor, isPlatformBrowser } from '@angular/common';
 import { BannersService } from '../../services/banners.service';
 import { Banner } from '../../interfaces/interfaces-app';
@@ -16,7 +16,8 @@ import * as Hammer from 'hammerjs';
 })
 export class HomeBannerComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('carouselContainer') carouselContainer!: ElementRef;
-
+  initialTouchX: number = 0;
+  initialTouchY: number = 0;
   banners: Banner[] = [];
   currentSlideIndex = 0;
   private destroy$ = new Subject<void>();
@@ -95,4 +96,23 @@ export class HomeBannerComponent implements OnInit, OnDestroy, AfterViewInit {
   goToSlide(index: number) {
     this.currentSlideIndex = index;
   }
+
+   // Detectar el inicio del touch
+   @HostListener('touchstart', ['$event'])
+   onTouchStart(event: TouchEvent) {
+     this.initialTouchX = event.touches[0].clientX;
+     this.initialTouchY = event.touches[0].clientY;
+   }
+ 
+   // Detectar el movimiento del touch
+   @HostListener('touchmove', ['$event'])
+   onTouchMove(event: TouchEvent) {
+     const deltaX = event.touches[0].clientX - this.initialTouchX;
+     const deltaY = event.touches[0].clientY - this.initialTouchY;
+ 
+     // Si el desplazamiento en Y es mayor que en X, permitimos el scroll vertical
+     if (Math.abs(deltaY) > Math.abs(deltaX)) {
+       event.stopPropagation(); // Permitir el desplazamiento vertical
+     }
+   }
 }

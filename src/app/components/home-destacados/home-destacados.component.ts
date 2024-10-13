@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home-destacados',
   standalone: true,
-  imports: [CardModule, ButtonModule, CarouselModule, TagModule, RouterLink,CommonModule],
+  imports: [CardModule, ButtonModule, CarouselModule, TagModule, RouterLink, CommonModule],
   templateUrl: './home-destacados.component.html',
   providers: [MessageService],
   styleUrls: ['./home-destacados.component.css']
@@ -23,9 +23,12 @@ export class HomeDestacadosComponent implements OnInit {
   imgSelect: String = '';
   @Input() products: ProductoConImagenes[] = [];
   @Input() showOnlyDestacados: boolean = true;
+
+  isSmallScreen: boolean = false;
+  isMobileOrTablet: boolean = false;
+
   initialTouchX: number = 0;
   initialTouchY: number = 0;
-  isSmallScreen: boolean = false;
 
   responsiveOptions = [
     {
@@ -44,7 +47,6 @@ export class HomeDestacadosComponent implements OnInit {
       numScroll: 1
     }
   ];
-  isMobileOrTablet: boolean = false;
 
   constructor(
     private wishlistService: WishlistService,
@@ -54,7 +56,6 @@ export class HomeDestacadosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     if (this.showOnlyDestacados) {
       this.serviceProduct.getProducts().subscribe(
         data => {
@@ -71,7 +72,6 @@ export class HomeDestacadosComponent implements OnInit {
     }
 
     this.checkScreenSize();
-  
   }
 
   @HostListener('window:resize', ['$event'])
