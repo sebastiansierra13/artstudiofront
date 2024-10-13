@@ -119,6 +119,7 @@ export interface CartItem {
 
 
   export interface Product {
+    ProductId: number;
     ProductName: string;
     TamanhoPoster: string;
     PrecioPoster: number;

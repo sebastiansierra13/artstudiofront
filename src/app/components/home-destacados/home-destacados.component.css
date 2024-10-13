@@ -421,16 +421,6 @@
   }
   :host ::ng-deep .p-carousel-prev,
   :host ::ng-deep .p-carousel-next {
-    display: block;
-    position: absolute;
-    top: 305px;
-  }
-
-  :host ::ng-deep .p-carousel-prev {
-    right: 25px;
-  }
-
-  :host ::ng-deep .p-carousel-next {
-    right: 1px;
+    display: none;
   }
 }

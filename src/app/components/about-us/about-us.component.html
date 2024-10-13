@@ -13,7 +13,7 @@
             transformar los espacios y enriquecer nuestras vidas.
         </p>
         <div class="hero__buttons">
-            <button class="btn btn--primary">Ver Productos</button>
+            <button routerLink="/productos" class="btn btn--primary">Ver Productos</button>
         </div>
     </div>
 </section>
@@ -29,7 +29,7 @@
                     <img src="/assets/imgAboutUs/Icon_sobrenosotros.png" alt="icono sobre nosotros" class="section-title__icon">
                     Sobre Nosotros
                 </h2>
-                <div [innerHTML]="aboutUsText" class="about__description"></div>
+                <div [innerHTML]="aboutUsText" class="scrollable-panel"></div>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
     <div class="container">
         <div class="terms__content">
             <div class="terms__image">
-                <img src="/assets/imgAboutUs/image-terms.png" alt="Términos y Condiciones" class="responsive-image">
+                <img src="/assets/imgAboutUs/image-terms.png" alt="Términos y Condiciones" class="responsive-i">
             </div>
             <div class="terms__text">
                 <h2 class="section-title">
@@ -60,7 +60,7 @@
                 <h3 class="terms__subtitle">Términos y Condiciones</h3>
                 <div class="terms__description">
                     <div class="vertical-line"></div>
-                    <div [innerHTML]="termsText"></div>
+                    <div [innerHTML]="termsText" class="scrollable-panel"></div>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
                 </h2>
                 <div class="shipping-content__description">
                     <div class="vertical-line"></div>
-                    <div [innerHTML]="shippingPoliciesText"></div>
+                    <div [innerHTML]="shippingPoliciesText" class="scrollable-panel"></div>
                 </div>
             </div>
             <div class="shipping-content__image">
@@ -120,7 +120,7 @@
                 </h2>
                 <div class="returns-content__description">
                     <div class="vertical-line"></div>
-                    <div [innerHTML]="returnPoliciesText"></div>
+                    <div [innerHTML]="returnPoliciesText" class="scrollable-panel"></div>
                 </div>
             </div>
         </div>

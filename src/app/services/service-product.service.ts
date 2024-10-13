@@ -117,13 +117,23 @@ export class ServiceProductService {
       })
     );
   }
-  
-  
-  
-
+   
+  private generateUniqueId(): number {
+    return Math.floor(100000 + Math.random() * 900000); // Genera un número de 6 dígitos
+}
   agregarProducto(producto: Producto): Observable<Producto> {
-    return this.http.post<Producto>(this.apiUrl, producto);
-  }
+    return this.http.post<Producto>(this.apiUrl, producto).pipe(
+        catchError(error => {
+            if (error.status === 409) {
+                // ID en conflicto, intentar con un nuevo ID
+                producto.idProducto = this.generateUniqueId();
+                return this.agregarProducto(producto); // Reintentar
+            }
+            return throwError(error);
+        })
+    );
+}
+
 
   eliminarProducto(idProducto: number): Observable<void> {
     const url = `${this.apiUrl}/${idProducto}`;

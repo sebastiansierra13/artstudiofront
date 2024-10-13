@@ -261,7 +261,7 @@ export class ViewPreviaComponent implements OnInit {
       }
   
       const cartItem: CartItem = {
-        id: this.generateUniqueId(),
+        id: this.product.idProducto,
         name: this.product.nombreProducto,
         posterPrice: precioPoster, // Aquí solo se envía el precio unitario
         framePrice: precioMarco,  // Aquí solo se envía el precio unitario
@@ -292,9 +292,7 @@ export class ViewPreviaComponent implements OnInit {
   
   
   
-  private generateUniqueId(): number {
-    return Date.now() + Math.floor(Math.random() * 1000);
-  }
+  
  
   private resetQuantity() {
     this.quantity = 1;

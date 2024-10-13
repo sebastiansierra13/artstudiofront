@@ -7,13 +7,13 @@ import { FloatingButtonsComponent } from "../floating-buttons/floating-buttons.c
 import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { FooterComponent } from "../footer/footer.component";
 import { TextService } from '../../services/text.service';
-
+import { Router, RouterModule } from '@angular/router';
 @Component({
     selector: 'app-about-us',
     standalone: true,
     templateUrl: './about-us.component.html',
     styleUrls: ['./about-us.component.css'],
-    imports: [ButtonModule, SplitterModule, DividerModule, MatDividerModule, FloatingButtonsComponent, NavBarComponent, FooterComponent]
+    imports: [ButtonModule, SplitterModule,RouterModule, DividerModule, MatDividerModule, FloatingButtonsComponent, NavBarComponent, FooterComponent]
 })
 
 export class AboutUsComponent implements OnInit {
@@ -22,7 +22,7 @@ export class AboutUsComponent implements OnInit {
   shippingPoliciesText: string = '';
   returnPoliciesText: string = '';
 
-  constructor(private textService: TextService) {}
+  constructor(private router: Router,private textService: TextService) {}
 
   ngOnInit() {
     this.loadTexts();

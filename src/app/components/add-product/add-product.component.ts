@@ -90,7 +90,10 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  
+  private generateUniqueId(): number {
+    return Math.floor(100000 + Math.random() * 900000); // Genera un número de 6 dígitos
+}
+
 
   async confirm1(event: Event) {
     if (this.value && this.selectedCategory && this.selectedTags.length && this.description && this.selectedFiles) {
@@ -98,7 +101,7 @@ export class AddProductComponent implements OnInit {
         const imagenesUrls = await this.uploadImagesToFirebase(this.selectedFiles);
         let imagenesString = JSON.stringify(imagenesUrls);
         const nuevoProducto: Producto = {
-          idProducto: 0,
+          idProducto: this.generateUniqueId(),
           nombreProducto: this.value,
           idCategoria: this.selectedCategory.idCategoria!,
           listTags: this.selectedTags.map(tag => tag.IdTag).join(','),

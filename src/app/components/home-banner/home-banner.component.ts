@@ -1,23 +1,26 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { NgIf, NgFor, isPlatformBrowser } from '@angular/common';
 import { BannersService } from '../../services/banners.service';
 import { Banner } from '../../interfaces/interfaces-app';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router, RouterModule } from '@angular/router';
+import * as Hammer from 'hammerjs';
 
 @Component({
   selector: 'app-home-banner',
   standalone: true,
-  imports: [NgIf, NgFor,RouterModule],
+  imports: [NgIf, NgFor, RouterModule],
   templateUrl: './home-banner.component.html',
   styleUrls: ['./home-banner.component.css']
 })
-export class HomeBannerComponent implements OnInit, OnDestroy {
+export class HomeBannerComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('carouselContainer') carouselContainer!: ElementRef;
+
   banners: Banner[] = [];
   currentSlideIndex = 0;
   private destroy$ = new Subject<void>();
-
+  private hammer: HammerManager | null = null;
 
   constructor(
     private bannersService: BannersService,
@@ -30,6 +33,25 @@ export class HomeBannerComponent implements OnInit, OnDestroy {
       this.loadBanners();
       this.scheduleNextSlide();
     }
+  }
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initHammer();
+    }
+  }
+
+  initHammer() {
+    this.hammer = new Hammer.Manager(this.carouselContainer.nativeElement);
+    this.hammer.add(new Hammer.Swipe());
+
+    this.hammer.on('swipeleft', () => {
+      this.nextSlide();
+    });
+
+    this.hammer.on('swiperight', () => {
+      this.prevSlide();
+    });
   }
 
   scheduleNextSlide() {
@@ -52,10 +74,13 @@ export class HomeBannerComponent implements OnInit, OnDestroy {
       }
     );
   }
-  
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    if (this.hammer) {
+      this.hammer.destroy();
+    }
   }
 
   nextSlide() {
