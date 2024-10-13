@@ -20,16 +20,16 @@ export class AuthService {
     });
   }
 
-  // Verifica si la sesión está activa (check-session)
-  isAuthenticated(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/check-session`, { withCredentials: true })
-      .pipe(
-        catchError((error) => {
-          // Si ocurre un error, devolver un objeto que indica que no está autenticado
-          return of({ authenticated: false });
-        })
-      );
-  }
+      // Verifica si la sesión está activa y devuelve también el rol o permisos
+    isAuthenticated(): Observable<any> {
+      return this.http.get<any>(`${this.apiUrl}/check-session`, { withCredentials: true })
+        .pipe(
+          catchError((error) => {
+            // Si ocurre un error, devolver un objeto que indica que no está autenticado
+            return of({ authenticated: false, role: null });
+          })
+        );
+    }
 
   // Cierra la sesión eliminando la cookie del lado del servidor
   logout(): Observable<any> {
