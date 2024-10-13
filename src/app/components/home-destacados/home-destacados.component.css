@@ -3,6 +3,12 @@
   touch-action: pan-y; /* Permitir desplazamiento vertical */
 }
 
+/* Aseguramos que el carrusel solo reaccione a gestos horizontales */
+:host ::ng-deep .p-carousel .p-carousel-content {
+  touch-action: pan-y; /* Permitir scroll vertical */
+  overflow-x: hidden; /* Ocultar el scroll horizontal nativo */
+}
+
 .featured-section {
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
@@ -357,18 +363,9 @@
     max-width: 250px;
   }
 
-  :host ::ng-deep .p-carousel .p-carousel-content .p-carousel-item {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-
   :host ::ng-deep .p-carousel .p-carousel-content {
     overflow-y: visible;
     touch-action: pan-y;
-  }
-
-  :host ::ng-deep .p-carousel .p-carousel-container {
-    overflow-y: visible;
   }
 }
 
