@@ -354,6 +354,15 @@
     flex: 0 0 100%;
     max-width: 100%;
   }
+
+  :host ::ng-deep .p-carousel .p-carousel-content {
+    overflow-y: visible;
+    touch-action: pan-y;
+  }
+
+  :host ::ng-deep .p-carousel .p-carousel-container {
+    overflow-y: visible;
+  }
 }
 
 /* Ajustes para pantallas pequeñas (max-width: 560px) */
