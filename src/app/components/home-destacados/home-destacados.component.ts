@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, HostListener, Input, ViewChild, ElementRef } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
@@ -23,9 +23,8 @@ export class HomeDestacadosComponent implements OnInit {
   imgSelect: String = '';
   @Input() products: ProductoConImagenes[] = [];
   @Input() showOnlyDestacados: boolean = true;
-  @ViewChild('carouselContainer') carouselContainer!: ElementRef;
-  private hammer: HammerManager | null = null;
   isSmallScreen: boolean = false;
+  isMobileOrTablet: boolean = false;
 
   responsiveOptions = [
     {
@@ -44,18 +43,15 @@ export class HomeDestacadosComponent implements OnInit {
       numScroll: 1
     }
   ];
-  isMobileOrTablet: boolean = false;
 
   constructor(
     private wishlistService: WishlistService,
     private router: Router,
     private serviceProduct: ServiceProductService,
-    private notificationService: NotificationService,
-    private renderer: Renderer2
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
-
     if (this.showOnlyDestacados) {
       this.serviceProduct.getProducts().subscribe(
         data => {
@@ -72,33 +68,6 @@ export class HomeDestacadosComponent implements OnInit {
     }
 
     this.checkScreenSize();
-  
-  }
-
-  ngAfterViewInit() {
-    this.initHammer();
-  }
-
-  // Integrar HammerJS
-  initHammer() {
-    if (this.carouselContainer) {
-      this.hammer = new Hammer(this.carouselContainer.nativeElement);
-      this.hammer.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL }); // Detectar solo horizontal
-      this.hammer.on('swipeleft', () => {
-        this.nextSlide(); // Implementa la lógica de ir al siguiente slide
-      });
-      this.hammer.on('swiperight', () => {
-        this.prevSlide(); // Implementa la lógica de ir al slide anterior
-      });
-    }
-  }
-
-  nextSlide() {
-    console.log("Siguiente slide");
-  }
-
-  prevSlide() {
-    console.log("Slide anterior");
   }
 
   @HostListener('window:resize', ['$event'])
@@ -109,6 +78,11 @@ export class HomeDestacadosComponent implements OnInit {
   private checkScreenSize(): void {
     this.isSmallScreen = window.innerWidth <= 450;
     this.isMobileOrTablet = window.innerWidth <= 1024;
+  }
+
+  // Evento que captura el cambio de página en el carrusel
+  handlePageChange(event: any) {
+    console.log('Página cambiada:', event.page);
   }
 
   addToWishlist(event: Event, product: ProductoConImagenes) {

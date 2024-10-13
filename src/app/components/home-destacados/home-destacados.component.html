@@ -12,8 +12,15 @@
 
   <!-- Carrusel para todas las pantallas -->
   <div class="divcardDestacados">
-    <div class="carousel-container"  #carouselContainer>
-      <p-carousel [value]="products" [numVisible]="5" [numScroll]="1" [circular]="true" [responsiveOptions]="responsiveOptions">
+    <div class="carousel-container" >
+      <p-carousel 
+        [value]="products" 
+        [numVisible]="5" 
+        [numScroll]="1" 
+        [circular]="true" 
+        [responsiveOptions]="responsiveOptions" 
+        orientation="horizontal" 
+        (onPage)="handlePageChange($event)">
         <ng-template let-product pTemplate="item">
           <div class="product-wrapper">
             <div class="product-card" [routerLink]="['/preview', product.nombreProducto, product.idProducto]">
