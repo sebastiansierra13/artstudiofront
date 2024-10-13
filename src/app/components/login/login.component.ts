@@ -23,7 +23,7 @@ export class LoginComponent {
     this.authService.login(this.user, this.password).subscribe(
       response => {
         if (response.success) {
-          // Redirige al admin a la ruta de /admin
+          // Redirige al admin a la ruta de /products
           this.router.navigate(['/products']);
         } else {
           // Manejo de error
@@ -32,8 +32,11 @@ export class LoginComponent {
       },
       error => {
         // Manejo de errores
+        alert('Error en la solicitud: ' + error.message);
         console.error('Error en la solicitud:', error);
       }
     );
   }
+  
+  
 }

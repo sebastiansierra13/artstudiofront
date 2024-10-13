@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api/auth'; // Asegúrate de que esta URL sea la correcta
+  private apiUrl = `${environment.apiUrl}/api/auth`; // URL del backend // Asegúrate de que esta URL sea la correcta
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -5,47 +5,43 @@
   </div>
   <mat-card class="cardFormulario">
     <div class="form">
-      <form class="login-form" (ngSubmit)="login()">
+      <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
         <p class="text-parrafo">
           Introduzca a continuación sus datos de acceso exclusivos de administrador
         </p>
-        <br>
         <div class="form-group">
-          <div>
-            <mat-label class="mat-label-inter">Correo</mat-label>
-          </div>
-          <div>
-            <input
-                type="text"
-                placeholder="correo electrónico"
-                class="form-control"
-                id="email"
-                [(ngModel)]="user"
-                name="user"
-                required
-              />
-          </div>
+          <mat-label>Correo</mat-label>
+          <input
+            type="text"
+            placeholder="correo electrónico"
+            class="form-control"
+            id="email"
+            [(ngModel)]="user"
+            name="user"
+            required
+            #userInput="ngModel"
+          />
+          <div *ngIf="userInput.invalid && userInput.touched">El usuario es requerido</div>
         </div>
-        <br>
+      
         <div class="form-group">
-          <div>
-            <mat-label class="mat-label-inter">Contraseña</mat-label>
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="contraseña"
-              class="form-control"
-              id="password"
-              [(ngModel)]="password" 
-              name="password"
-              required
-            />
-          </div>
+          <mat-label>Contraseña</mat-label>
+          <input
+            type="password"
+            placeholder="contraseña"
+            class="form-control"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+            #passwordInput="ngModel"
+          />
+          <div *ngIf="passwordInput.invalid && passwordInput.touched">La contraseña es requerida</div>
         </div>
-        <br>
-        <button class="buttonAceptar" type="submit">Iniciar sesión</button>
+      
+        <button class="buttonAceptar" type="submit" [disabled]="loginForm.invalid">Iniciar sesión</button>
       </form>
+      
     </div>
   </mat-card>
 </div>
