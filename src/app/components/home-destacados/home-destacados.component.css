@@ -291,15 +291,6 @@
     width: 100%;
     max-width: 300px;
   }
-  .carousel-container {
-    touch-action: pan-y; /* Permitir el desplazamiento vertical */
-    height: 300px; /* Ajusta según tu necesidad */
-  }
-
-  .p-carousel .p-carousel-content {
-    display: flex;
-    flex-direction: column; /* Asegúrate de que se muestre verticalmente */
-  }
 
   .product-card {
     height: auto;
@@ -334,6 +325,11 @@
     .p-carousel-container {
       padding: 0;
     }
+  }
+
+  .carousel-container {
+    max-width: 100%;
+    padding: 0 5px;
   }
 
   .wishlist-button {
