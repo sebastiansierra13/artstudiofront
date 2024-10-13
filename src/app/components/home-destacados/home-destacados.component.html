@@ -20,6 +20,7 @@
         [circular]="true" 
         [responsiveOptions]="responsiveOptions" 
         orientation="horizontal" 
+        [autoplayInterval]="3"
         (onPage)="handlePageChange($event)">
         <ng-template let-product pTemplate="item">
           <div class="product-wrapper">

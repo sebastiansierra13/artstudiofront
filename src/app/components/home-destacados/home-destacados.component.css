@@ -149,10 +149,6 @@
   justify-content: center;
 }
 
-.carousel-container {
-  max-width: 1500px;
-}
-
 :host ::ng-deep .p-carousel {
   .p-carousel-indicators {
     justify-content: center;
