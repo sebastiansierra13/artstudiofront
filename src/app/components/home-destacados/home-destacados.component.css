@@ -1,13 +1,11 @@
-.carousel-container {
-  max-width: 1500px;
-  touch-action: pan-y; /* Permitir desplazamiento vertical */
+:host ::ng-deep .p-carousel {
+  touch-action: pan-y; /* Permitir el desplazamiento vertical */
 }
 
-/* Aseguramos que el carrusel solo reaccione a gestos horizontales */
 :host ::ng-deep .p-carousel .p-carousel-content {
-  touch-action: pan-y; /* Permitir scroll vertical */
-  overflow-x: hidden; /* Ocultar el scroll horizontal nativo */
+  touch-action: pan-y; /* Permitir desplazamiento vertical dentro del contenido */
 }
+
 
 .featured-section {
   font-family: 'Poppins', sans-serif;
@@ -362,11 +360,6 @@
   .product-wrapper {
     max-width: 250px;
   }
-
-  :host ::ng-deep .p-carousel .p-carousel-content {
-    overflow-y: visible;
-    touch-action: pan-y;
-  }
 }
 
 /* Ajustes para pantallas pequeñas (max-width: 560px) */
@@ -395,6 +388,9 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  :host ::ng-deep .p-carousel .p-carousel-content .p-carousel-item {
+    touch-action: pan-y; /* Permitir scroll vertical */
   }
 }
 
