@@ -1,0 +1,32 @@
+{
+    "id": "8",
+    "title": "Arte y naturaleza: Posters inspirados en el mundo natural",
+    "author": "Daniela Pérez",
+    "date": "2023-12-10",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Incorporar la naturaleza en la decoración de tu hogar puede lograrse fácilmente con posters de paisajes, plantas o animales. Estos elementos pueden traer paz y serenidad a cualquier espacio."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/vector-gratis/diseno-poster-w-dibujado-mano_23-2149852702.jpg?t=st=1728868127~exp=1728871727~hmac=7e7417a3fd8af96d9c569ced6af7d83406353683a68f44ad4ef3cdcabd5ccf5c&w=740",
+        "alt": "Poster de paisaje natural"
+      },
+      {
+        "type": "paragraph",
+        "text": "Los posters que representan escenas naturales son ideales para habitaciones en las que se busca crear un ambiente relajante, como dormitorios y salas de estar."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/vector-gratis/plantilla-poster-viaje-ilustrada_23-2148501952.jpg?t=st=1728868150~exp=1728871750~hmac=3e81aac3c262a42557a8390680f70d35c6d37e5603fb37e7423c966e7b909951&w=740g",
+        "alt": "Decoración con posters de plantas"
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: combina estos posters con plantas reales para crear un espacio que respire vida y frescura."
+      }
+    ],
+    "tags": ["naturaleza", "posters", "decoración ecológica"]
+  }
+  

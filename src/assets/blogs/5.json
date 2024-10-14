@@ -1,0 +1,31 @@
+{
+    "id": "5",
+    "title": "Decoración con posters vintage: Un toque retro",
+    "author": "Maria García",
+    "date": "2023-10-05",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "El estilo vintage es cálido y nostálgico, perfecto para quienes quieren dar un toque retro a sus espacios. Los posters vintage evocan épocas pasadas y pueden traer un aire de elegancia y nostalgia."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/embalaje-vhs-vintage-mesa_23-2149854242.jpg?t=st=1728867889~exp=1728871489~hmac=2423c99a2fb4e085c5a2eab4b2cbaae79d2b33ddbd60b25dd35bcb3a6ef351fb&w=996",
+        "alt": "Poster vintage en sala de estar"
+      },
+      {
+        "type": "paragraph",
+        "text": "Desde carteles de películas antiguas hasta anuncios de marcas clásicas, hay una gran variedad de estilos para elegir. Puedes encontrar posters originales o réplicas que se ajusten a tu gusto."
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: los posters vintage lucen mejor en marcos de madera envejecida o metal con acabados rústicos para acentuar su estética."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/bodegon-escritura-antigua-carta-amor_23-2150784430.jpg?t=st=1728867913~exp=1728871513~hmac=8bf5e7e3a53d40f24867c1c1dcc305add2e8ef53b02e8c9a96e6ec8c9bdd0469&w=740",
+        "alt": "Decoración con posters estilo retro"
+      }
+    ],
+    "tags": ["posters vintage", "decoración retro", "arte"]
+  }

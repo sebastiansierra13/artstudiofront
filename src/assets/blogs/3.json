@@ -1,0 +1,40 @@
+{
+    "id": "3",
+    "title": "Cómo elegir posters de arte abstracto para tu hogar",
+    "author": "Alice Brown",
+    "date": "2023-08-02",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "El arte abstracto es ideal para quienes disfrutan de la libertad creativa y la interpretación personal. Estos posters no siguen reglas estrictas de formas o figuras, lo que les permite encajar en cualquier tipo de decoración."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/vector-gratis/coleccion-portadas-formas-abstractas-dibujadas-mano_23-2148907099.jpg?t=st=1728867752~exp=1728871352~hmac=6063aa8a0cda89e8c6644a07dde656f300f211286da88aba4ba402a2f0abdc63&w=996",
+        "alt": "Poster de arte abstracto colorido"
+      },
+      {
+        "type": "paragraph",
+        "text": "Una de las cosas más importantes al elegir arte abstracto es pensar en los colores predominantes en tu espacio. Un poster con tonos que se reflejen en los muebles o accesorios puede unificar toda la habitación."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/vector-gratis/coleccion-cubiertas-formas-abstractas-acuarela_52683-46569.jpg?t=st=1728867779~exp=1728871379~hmac=646d584db2b3b8c47724f187fbaa32c7ba0b0b0def0639fcfe3586fa7ca50cc7&w=996",
+        "alt": "Combinación de arte abstracto en sala"
+      },
+      {
+        "type": "paragraph",
+        "text": "Otro aspecto a considerar es el tamaño. Un poster grande puede ser la pieza central de una pared, mientras que varios posters pequeños pueden formar una interesante galería."
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: mezcla arte abstracto con otras texturas como madera o metal para crear un ambiente contrastante y dinámico."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/vector-gratis/coleccion-portadas-arte-abstracto-pintadas-mano_23-2148981143.jpg?t=st=1728867795~exp=1728871395~hmac=8bcfc9a864eb7619e268719eda8814c010ceedbb76cb3c2d73a2bb6fdf3379ae&w=996",
+        "alt": "Poster abstracto enmarcado en un espacio moderno"
+      }
+    ],
+    "tags": ["arte abstracto", "posters", "decoración"]
+  }

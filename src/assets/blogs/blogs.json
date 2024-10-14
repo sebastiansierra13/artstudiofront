@@ -1,31 +1,65 @@
 [
-    {
-      "id": "1",
-      "title": "Descubre el arte del diseño con posters",
-      "description": "Explora nuestra colección de posters diseñados por artistas de todo el mundo.",
-      "date": "2024-06-18",
-      "image": "/assets/imagesBlogs/blog1.jpg"
-    },
-    {
-      "id": "2",
-      "title": "Cómo decorar tu hogar con arte",
-      "description": "Ideas y consejos para incorporar arte en la decoración de tu hogar.",
-      "date": "2024-05-25",
-      "image": "/assets/imagesBlogs/blog2.jpg"
-    },
-    {
-        "id": "3",
-        "title": "Descubre el arte del diseño con posters",
-        "description": "Explora nuestra colección de posters diseñados por artistas de todo el mundo.",
-        "date": "2024-06-18",
-        "image": "/assets/imagesBlogs/blog1.jpg"
-      },
-      {
-        "id": "4",
-        "title": "Cómo decorar tu hogar con arte",
-        "description": "Ideas y consejos para incorporar arte en la decoración de tu hogar.",
-        "date": "2024-05-25",
-        "image": "/assets/imagesBlogs/blog2.jpg"
-      }
-  ]
-  
+  {
+    "id": "1",
+    "title": "Descubre el arte del diseño con posters",
+    "description": "Explora nuestra colección de posters diseñados por artistas de todo el mundo.",
+    "date": "2024-06-18",
+    "image": "/assets/imagesBlogs/blog1.jpg"
+  },
+  {
+    "id": "2",
+    "title": "El impacto del arte minimalista en la decoración",
+    "description": "Descubre cómo el arte minimalista aporta elegancia y simplicidad.",
+    "date": "2024-04-10",
+    "image": "/assets/imagesBlogs/blog3.jpg"
+  },
+  {
+    "id": "3",
+    "title": "Cómo elegir posters de arte abstracto para tu hogar",
+    "description": "Consejos para seleccionar arte abstracto que armonice con tu espacio.",
+    "date": "2024-03-22",
+    "image": "/assets/imagesBlogs/blog4.jpg"
+  },
+  {
+    "id": "4",
+    "title": "Combina posters y fotografías en tu decoración",
+    "description": "Aprende a mezclar arte y fotos para una decoración personalizada.",
+    "date": "2024-02-18",
+    "image": "/assets/imagesBlogs/blog5.jpg"
+  },
+  {
+    "id": "5",
+    "title": "Decoración con posters vintage: Un toque retro",
+    "description": "Inspírate en el estilo retro con posters de diseño vintage.",
+    "date": "2024-01-25",
+    "image": "/assets/imagesBlogs/blog6.jpg"
+  },
+  {
+    "id": "6",
+    "title": "Cómo iluminar tus posters para maximizar su impacto",
+    "description": "Usa la iluminación para destacar tus posters favoritos.",
+    "date": "2023-12-15",
+    "image": "/assets/imagesBlogs/blog7.jpg"
+  },
+  {
+    "id": "7",
+    "title": "Posters de arte moderno: tendencias actuales",
+    "description": "Conoce las últimas tendencias en posters de arte moderno.",
+    "date": "2023-11-10",
+    "image": "/assets/imagesBlogs/blog8.jpg"
+  },
+  {
+    "id": "8",
+    "title": "Arte y naturaleza: Posters inspirados en el mundo natural",
+    "description": "Decora con posters que traen la belleza de la naturaleza a tu hogar.",
+    "date": "2023-10-20",
+    "image": "/assets/imagesBlogs/blog9.jpg"
+  },
+  {
+    "id": "9",
+    "title": "El arte urbano como inspiración para tus posters",
+    "description": "Explora posters inspirados en el graffiti y el arte callejero.",
+    "date": "2023-09-30",
+    "image": "/assets/imagesBlogs/blog10.jpg"
+  }
+]

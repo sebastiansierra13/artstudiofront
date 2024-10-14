@@ -1,0 +1,31 @@
+{
+    "id": "7",
+    "title": "Posters de arte moderno: tendencias actuales",
+    "author": "Isabel Romero",
+    "date": "2023-11-20",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "El arte moderno sigue siendo una tendencia popular gracias a su capacidad para combinar colores vibrantes y formas abstractas. Los posters de arte moderno son perfectos para dar vida a cualquier habitación."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/vector-gratis/plantilla-brutalismo-diseno-plano_23-2151180538.jpg?t=st=1728868072~exp=1728871672~hmac=a84c99b81663dc2ed50ed0ed3b9276e399c7b7397638c6dafabd371a48d41aa9&w=740",
+        "alt": "Poster de arte moderno enmarcado"
+      },
+      {
+        "type": "paragraph",
+        "text": "Muchas de las tendencias actuales en posters de arte moderno incluyen patrones geométricos, trazos audaces y mezclas de colores vivos. Estas piezas suelen destacar y convertirse en el foco de la decoración."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/collage-bella-mujer_23-2148391276.jpg?t=st=1728868102~exp=1728871702~hmac=ddd26bb3dc2e1407687f630e14b4a1162e07ad85206d07c491fd1454e0a7ece0&w=740",
+        "alt": "Pared decorada con arte moderno"
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: si deseas un estilo más refinado, opta por posters que utilicen una paleta monocromática pero con diseños innovadores."
+      }
+    ],
+    "tags": ["arte moderno", "posters", "tendencias"]
+  }

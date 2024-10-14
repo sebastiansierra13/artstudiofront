@@ -1,0 +1,40 @@
+{
+    "id": "2",
+    "title": "El impacto del arte minimalista en la decoración",
+    "author": "John Smith",
+    "date": "2023-07-10",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "El arte minimalista es conocido por su simplicidad y elegancia. Se caracteriza por el uso de formas geométricas simples, colores neutros y un enfoque en la funcionalidad. Es una opción perfecta para quienes buscan una decoración moderna y sin excesos."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/elegante-jarron-decoracion-plantas_23-2149334646.jpg?t=st=1728867642~exp=1728871242~hmac=aa6049dc87cf033b9400d2a2bcf44be43adb6faa041d79caa89875a506ce75f1&w=740",
+        "alt": "Poster de arte minimalista"
+      },
+      {
+        "type": "paragraph",
+        "text": "En la decoración, los posters minimalistas pueden ser utilizados para añadir un toque sofisticado a un espacio. Usar pocos elementos visuales crea un impacto fuerte, permitiendo que cada pieza destaque por sí misma."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/vista-pinceles-exhibicion-pinceladas-pintura_23-2150351755.jpg?t=st=1728867678~exp=1728871278~hmac=cd2df93bdebab47619c6cc3c75174e44c404abfba6c0ebbe4b7500b4bb4c9c13&w=1060",
+        "alt": "Decoración con arte minimalista"
+      },
+      {
+        "type": "paragraph",
+        "text": "Cuando uses posters minimalistas, considera el espacio disponible y asegúrate de que los colores y las formas se complementen con el resto de la habitación. A veces, menos es más."
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: crea un espacio visual limpio usando marcos finos y colores que se mezclen suavemente con las paredes. Esto ayuda a mantener el enfoque en la obra sin distraer la atención."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/entrada-casa-muebles-diseno-modernos_23-2150791130.jpg?t=st=1728867720~exp=1728871320~hmac=89ee7d9a8d29b029c1032b0d37cecd1eeda7b924bbdd2022a4dd1107252763a1&w=740",
+        "alt": "Pared con poster minimalista y diseño moderno"
+      }
+    ],
+    "tags": ["arte minimalista", "decoración", "diseño moderno"]
+  }

@@ -33,9 +33,12 @@
     <div class="recent-posts">
       <h2>Entradas recientes</h2>
       <ul>
-        <li *ngFor="let post of recentPosts">{{ post.title }}</li>
+        <li *ngFor="let post of recentPosts">
+          <a [routerLink]="['/blog', post.id]" class="recent-post-link">{{ post.title }}</a>
+        </li>
       </ul>
     </div>
+    
   </div>
 </div>
 

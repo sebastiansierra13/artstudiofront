@@ -1,0 +1,32 @@
+{
+    "id": "9",
+    "title": "El arte urbano como inspiración para tus posters",
+    "author": "Sofía Martínez",
+    "date": "2024-01-05",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "El arte urbano ha ganado popularidad por su energía, colorido y expresividad. Usar posters que representen murales, graffiti o arte callejero puede dar un toque vibrante y moderno a tu espacio."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/breakdancer-bailando-sobre-fondo-pared-pintada_23-2147847222.jpg?t=st=1728868181~exp=1728871781~hmac=060894bd414ff9af98bf96fac1c0ba358bfb4625859c11694465c5eada4285a6&w=996",
+        "alt": "Poster de arte urbano vibrante"
+      },
+      {
+        "type": "paragraph",
+        "text": "Estos posters son ideales para espacios juveniles y creativos, como estudios o salas de juegos. Transmiten un sentido de libertad y expresividad."
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: agrupa varios posters de arte urbano en una pared para crear una mini galería que llame la atención."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/colorido-collage-punk-rock_23-2150072269.jpg?t=st=1728868217~exp=1728871817~hmac=5a93f0bafd403e4b5dbb06ea1c6ddbe7efbba455f14c004e732d1a6ee3a50c44&w=740",
+        "alt": "Pared decorada con posters de arte callejero"
+      }
+    ],
+    "tags": ["arte urbano", "posters", "graffiti"]
+  }
+  

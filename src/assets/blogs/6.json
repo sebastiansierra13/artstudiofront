@@ -1,0 +1,36 @@
+{
+    "id": "6",
+    "title": "Cómo iluminar tus posters para maximizar su impacto",
+    "author": "Luis Fernández",
+    "date": "2023-11-01",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "La iluminación adecuada puede hacer que un poster pase de ser una simple pieza decorativa a una verdadera obra de arte. Dirigir la luz correctamente puede resaltar colores, detalles y texturas."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/mujer-joven-posicion-universo-textura-proyeccion_23-2149512116.jpg?t=st=1728868000~exp=1728871600~hmac=071048359f099132fda3b1988869c61e14c967e1779be386187da0b4dc1dabd2&w=740",
+        "alt": "Iluminación de arte en pared"
+      },
+      {
+        "type": "paragraph",
+        "text": "Una de las técnicas más efectivas es usar luces direccionables, como focos LED o luces de riel que apunten directamente al poster. Esto crea un efecto de galería y resalta la obra de forma profesional."
+      },
+      {
+        "type": "paragraph",
+        "text": "También puedes usar luces ambientales suaves para crear una atmósfera cálida que complemente el arte sin opacarlo."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/vista-delantera-mujer-relajandose-casa_23-2150652872.jpg?t=st=1728868026~exp=1728871626~hmac=9262da55a6189d4d1c7b63ac2fdce132d24883a397109bf163169a3907ff57fb&w=996",
+        "alt": "Poster iluminado con luz suave"
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: ajusta la intensidad de la luz según el tamaño y los colores del poster para evitar que se vea sobrecargado o apagado."
+      }
+    ],
+    "tags": ["iluminación", "posters", "diseño de interiores"]
+  }
+  

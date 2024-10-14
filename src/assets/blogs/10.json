@@ -1,0 +1,31 @@
+{
+    "id": "10",
+    "title": "Cómo crear una galería de arte en casa con posters",
+    "author": "Andrés Gómez",
+    "date": "2024-02-18",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Una galería de arte en casa es una excelente forma de mostrar tus posters favoritos. Puedes jugar con diferentes estilos, tamaños y disposiciones para lograr un look único."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/vista-lateral-pintura-femenina_23-2148550790.jpg?t=st=1728868261~exp=1728871861~hmac=0e532520fd62cba0b5341977d0e83e31959f60f2b290ba1c5018f3df43811fb3&w=996",
+        "alt": "Galería de arte en la pared"
+      },
+      {
+        "type": "paragraph",
+        "text": "Para empezar, selecciona una variedad de posters que compartan un tema o color similar para asegurar cohesión visual. Luego, experimenta con la disposición hasta que encuentres la que más te guste."
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: usa marcos de distintos tamaños para crear capas visuales interesantes."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/mujer-cuidando-plantas-caseras_23-2148304909.jpg?t=st=1728868280~exp=1728871880~hmac=5b1ad5fb08ac7423b2b33c5abd7533f938a075ab0e8d67f4bda111334eae3467&w=996",
+        "alt": "Decoración de galería de arte en casa"
+      }
+    ],
+    "tags": ["galería de arte", "decoración", "posters"]
+  }

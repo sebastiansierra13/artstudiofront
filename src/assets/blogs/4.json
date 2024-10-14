@@ -1,0 +1,35 @@
+{
+    "id": "4",
+    "title": "Combina posters y fotografías en tu decoración",
+    "author": "Carlos Díaz",
+    "date": "2023-09-15",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Una excelente manera de añadir un toque personal a tu decoración es combinar posters de arte con fotografías personales. Esto te permite mezclar el diseño artístico con momentos que son significativos para ti."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/mujer-vista-frontal-tablero-vision-inspirador_23-2150104655.jpg?t=st=1728867826~exp=1728871426~hmac=79c478551b9d03202d2b223c2a5f8f9e1c29d6ac9f518a8b655a21abeb4db6cf&w=996",
+        "alt": "Combinación de posters y fotos en la pared"
+      },
+      {
+        "type": "paragraph",
+        "text": "Para lograr una composición equilibrada, considera usar marcos uniformes para todas las piezas, o bien variar intencionalmente los tamaños para crear una disposición dinámica."
+      },
+      {
+        "type": "paragraph",
+        "text": "Puedes organizar tus imágenes y posters en una cuadrícula precisa para un look ordenado, o probar una disposición más libre y asimétrica para un estilo artístico y espontáneo."
+      },
+      {
+        "type": "image",
+        "src": "https://img.freepik.com/foto-gratis/primer-plano-familia-feliz-marco-foto-contra-pared-nuevo-hogar_23-2148059973.jpg?t=st=1728867850~exp=1728871450~hmac=e0d4f705e99c6932069156e1c1d00d8dde1e017477721cb3287ae43cfdcae08f&w=996",
+        "alt": "Galería de pared con arte y fotografía"
+      },
+      {
+        "type": "paragraph",
+        "text": "Consejo: elige una paleta de colores para tus imágenes que combine con los tonos de tu espacio. Esto asegura que la decoración se vea cohesiva y pensada."
+      }
+    ],
+    "tags": ["fotografía", "posters", "decoración personalizada"]
+  }
