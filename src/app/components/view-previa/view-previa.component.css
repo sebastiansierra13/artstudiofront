@@ -120,6 +120,22 @@ p{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+::ng-deep mat-accordion {
+  max-width: 400px;
+}
+
+::ng-deep mat-panel-title {
+  font-family: "Poppins";
+  font-size: 26px;
+  font-weight: bolder;
+  color: #333
+}
+
+::ng-deep mat-expansion-panel{
+  max-width: 285px;
+}
+
+
 .compact-input-number-container {
   display: flex;
   align-items: center;
@@ -196,6 +212,7 @@ input[type="number"] {
   gap: 20px;
   justify-items: center;
 }
+
 
 .grid-item {
   text-align: center;

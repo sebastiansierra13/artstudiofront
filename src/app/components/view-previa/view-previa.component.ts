@@ -30,14 +30,17 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
+import {ChangeDetectionStrategy, signal} from '@angular/core';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
     selector: 'app-view-previa',
     standalone: true,
     templateUrl: './view-previa.component.html',
     styleUrls: ['./view-previa.component.css'],
-    imports: [TooltipModule,ToastModule, CommonModule, ScrollPanelModule, MatDividerModule, DropdownModule, InputNumberModule, MatFormFieldModule, FormsModule, NavBarComponent, ButtonModule, ToggleButtonModule, ReactiveFormsModule, CardModule, ButtonModule, CarouselModule, TagModule, FooterComponent, FloatingButtonsComponent, HomeDestacadosComponent],
+    imports: [TooltipModule,ToastModule,MatExpansionModule, CommonModule, ScrollPanelModule, MatDividerModule, DropdownModule, InputNumberModule, MatFormFieldModule, FormsModule, NavBarComponent, ButtonModule, ToggleButtonModule, ReactiveFormsModule, CardModule, ButtonModule, CarouselModule, TagModule, FooterComponent, FloatingButtonsComponent, HomeDestacadosComponent],
     providers: [MessageService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewPreviaComponent implements OnInit, OnDestroy {
   responsiveOptions: any[] | undefined;
@@ -61,6 +64,8 @@ export class ViewPreviaComponent implements OnInit, OnDestroy {
   precioSeleccionado: number =0;
   subtotal: number = 0;
   marcoAgregado: boolean = false;
+  
+  readonly panelOpenState = signal(false);
 
   isOptionsSelected: boolean = false;
   private notificationSubscription: Subscription | undefined;

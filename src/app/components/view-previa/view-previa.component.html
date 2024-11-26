@@ -13,9 +13,6 @@
     </div>
     <div class="conRight columna">
       <h1 class="ptittle animated-title">{{ product?.nombreProducto }}</h1>
-      <h2 class="pText section-title">Descripción</h2>
-      <br>
-      <p style="width: 285px;">{{ product?.DescripcionProducto }}</p>
       <br>
       <h2 class="pText section-title">Precio</h2>
       <br>
@@ -54,6 +51,17 @@
       <div class="subtotal-label">
         <span>Subtotal: {{ precioSeleccionado | currency: 'COP ':'symbol':'1.0-0' }}</span>
       </div>
+      <br>
+      <br>
+      <mat-accordion [style]="{ width: '100px'}">
+        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="section-title"> Descripción </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p style="width: 125px;">{{ product?.DescripcionProducto }}</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+      
       
     </div>
   </div>
