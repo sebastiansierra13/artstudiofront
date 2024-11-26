@@ -53,12 +53,12 @@
       </div>
       <br>
       <br>
-      <mat-accordion [style]="{ width: '100px'}">
+      <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
           <mat-expansion-panel-header>
             <mat-panel-title class="section-title"> Descripción </mat-panel-title>
           </mat-expansion-panel-header>
-          <p style="width: 125px;">{{ product?.DescripcionProducto }}</p>
+          <p style="width: 250px;">{{ product?.DescripcionProducto }}</p>
         </mat-expansion-panel>
       </mat-accordion>
       
