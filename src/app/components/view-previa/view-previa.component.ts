@@ -32,13 +32,14 @@ import { Subscription } from 'rxjs';
 import { NotificationService } from '../../services/notification.service';
 import {ChangeDetectionStrategy, signal} from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
     selector: 'app-view-previa',
     standalone: true,
     templateUrl: './view-previa.component.html',
     styleUrls: ['./view-previa.component.css'],
-    imports: [TooltipModule,ToastModule,MatExpansionModule, CommonModule, ScrollPanelModule, MatDividerModule, DropdownModule, InputNumberModule, MatFormFieldModule, FormsModule, NavBarComponent, ButtonModule, ToggleButtonModule, ReactiveFormsModule, CardModule, ButtonModule, CarouselModule, TagModule, FooterComponent, FloatingButtonsComponent, HomeDestacadosComponent],
+    imports: [TooltipModule,ToastModule,MatExpansionModule, SelectButtonModule, CommonModule, ScrollPanelModule, MatDividerModule, DropdownModule, InputNumberModule, MatFormFieldModule, FormsModule, NavBarComponent, ButtonModule, ToggleButtonModule, ReactiveFormsModule, CardModule, ButtonModule, CarouselModule, TagModule, FooterComponent, FloatingButtonsComponent, HomeDestacadosComponent],
     providers: [MessageService],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -70,6 +71,11 @@ export class ViewPreviaComponent implements OnInit, OnDestroy {
   isOptionsSelected: boolean = false;
   private notificationSubscription: Subscription | undefined;
   
+  // Opciones para el p-selectButton
+  marcoOptions = [
+    { label: 'No', value: false }, // Sin marco
+    { label: 'Sí', value: true },  // Con marco
+  ];
 
   constructor(private notificationService: NotificationService,private messageService: MessageService,private cartService: CartService, private fb: FormBuilder , private router: Router,private route: ActivatedRoute,private categoriaService: CategoriaService ,  private serviceProduct:ServiceProductService , private servicePrecio:PrecioService, private orderService:OrderService) {
     this.imagenSeleccionada = this.imgaServices[0];

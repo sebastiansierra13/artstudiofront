@@ -30,6 +30,8 @@ export class AuthService {
       );
   }
 
+  
+
   // Método para cerrar sesión
   logout(): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/logout`, {}).pipe(

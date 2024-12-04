@@ -29,9 +29,15 @@
       <br>
       <div class="card flex justify-content-left">
         <form [formGroup]="formGroup">
-          <p-toggleButton formControlName="checked" onLabel="Sí" offLabel="No" />
+            <p-selectButton 
+                [options]="marcoOptions" 
+                formControlName="checked" 
+                optionLabel="label" 
+                optionValue="value">
+            </p-selectButton>
         </form>
-      </div>
+    </div>
+    
       <br>
       <div class="compact-input-number-container">
         <button class="button decrement-button" (click)="decrement()">-</button>
