@@ -17,11 +17,11 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "strictNullChecks": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
