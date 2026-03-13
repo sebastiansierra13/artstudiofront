@@ -4,44 +4,70 @@
   <div class="container-viewService">
     <div class="conLeft columna">
       <div class="columnaRight">
-        <img [src]="imagenSeleccionada" alt="Imagen del botón" class="imgServiceGrande" style="max-width: 100%; height: auto;">
+        <img
+          [src]="imagenSeleccionada"
+          alt="Imagen del botón"
+          class="imgServiceGrande"
+          style="max-width: 100%; height: auto"
+        />
         <div class="columnaLeft">
-          <img *ngFor="let img of product?.Imagenes" [src]="img" alt="Imagen del producto" class="imgService"
-            (click)="seleccionarImagen(img)" />
+          <img
+            *ngFor="let img of product?.Imagenes"
+            [src]="img"
+            alt="Imagen del producto"
+            class="imgService"
+            (click)="seleccionarImagen(img)"
+          />
         </div>
       </div>
     </div>
     <div class="conRight columna">
       <h1 class="ptittle animated-title">{{ product?.nombreProducto }}</h1>
-      <br>
+      <br />
       <h2 class="pText section-title">Precio</h2>
-      <br>
+      <br />
       <p class="pPrice highlight-text">170.000 - 430.000 COP</p>
-      <br>
+      <br />
       <h2 class="pText section-title">Medidas</h2>
-      <br>
-      <p-dropdown [options]="nodes" [(ngModel)]="selectedNodes" optionLabel="TamanhoPoster" [showClear]="true"
-          placeholder="Selecciona una Medida" (onChange)="onNodeSelect()" [style]="{'width': '285px'}">
+      <br />
+      <p-dropdown
+        translate="no"
+        [options]="nodes"
+        [(ngModel)]="selectedNodes"
+        optionLabel="TamanhoPoster"
+        [showClear]="true"
+        placeholder="Selecciona una Medida"
+        (onChange)="onNodeSelect()"
+        [style]="{ width: '285px' }"
+      >
       </p-dropdown>
-      <br>
-      <br>
+      <br />
+      <br />
       <h2 class="pText section-title">Agregar Marco</h2>
-      <br>
+      <br />
       <div class="card flex justify-content-left">
         <form [formGroup]="formGroup">
-            <p-selectButton 
-                [options]="marcoOptions" 
-                formControlName="checked" 
-                optionLabel="label" 
-                optionValue="value">
-            </p-selectButton>
+          <p-selectButton
+            [options]="marcoOptions"
+            formControlName="checked"
+            optionLabel="label"
+            optionValue="value"
+          >
+          </p-selectButton>
         </form>
-    </div>
-    
-      <br>
+      </div>
+
+      <br />
       <div class="compact-input-number-container">
         <button class="button decrement-button" (click)="decrement()">-</button>
-        <input type="number" [(ngModel)]="quantity" class="compact-input" min="1" max="100" (input)="onInput($event)" />
+        <input
+          type="number"
+          [(ngModel)]="quantity"
+          class="compact-input"
+          min="1"
+          max="100"
+          (input)="onInput($event)"
+        />
         <button class="button increment-button" (click)="increment()">+</button>
         <p-button
           label="Agregar al carrito"
@@ -53,49 +79,67 @@
           [tooltipDisabled]="isOptionsSelected"
         ></p-button>
       </div>
-      <br>
+      <br />
       <div class="subtotal-label">
-        <span>Subtotal: {{ precioSeleccionado | currency: 'COP ':'symbol':'1.0-0' }}</span>
+        <span
+          >Subtotal:
+          {{
+            precioSeleccionado | currency : "COP " : "symbol" : "1.0-0"
+          }}</span
+        >
       </div>
-      <br>
-      <br>
+      <br />
+      <br />
       <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+        <mat-expansion-panel
+          (opened)="panelOpenState.set(true)"
+          (closed)="panelOpenState.set(false)"
+        >
           <mat-expansion-panel-header>
-            <mat-panel-title class="section-title"> Descripción </mat-panel-title>
+            <mat-panel-title class="section-title">
+              Descripción
+            </mat-panel-title>
           </mat-expansion-panel-header>
-          <p style="width: 250px;">{{ product?.DescripcionProducto }}</p>
+          <p style="width: 250px">{{ product?.DescripcionProducto }}</p>
         </mat-expansion-panel>
-      </mat-accordion>    
-      
+      </mat-accordion>
     </div>
   </div>
   <div class="contenedorCategorias">
     <div class="textNewDesign">
       <h1 class="category-title">Categorías</h1>
     </div>
-    <p-scrollPanel [style]="{ width: '100%', height: '45rem' }" styleClass="custombar2">
+    <p-scrollPanel
+      [style]="{ width: '100%', height: '45rem' }"
+      styleClass="custombar2"
+    >
       <div class="grid-container">
-        <div *ngFor="let categoria of categorias" class="grid-item" (click)="selectCategory(categoria)"
-          [ngClass]="'imgcat'" [ngStyle]="{'background-image': 'url(' + categoria.imagenCategoria + ')'}">
+        <div
+          *ngFor="let categoria of categorias"
+          class="grid-item"
+          (click)="selectCategory(categoria)"
+          [ngClass]="'imgcat'"
+          [ngStyle]="{
+            'background-image': 'url(' + categoria.imagenCategoria + ')'
+          }"
+        >
           <div class="overlay">{{ categoria.nombreCategoria }}</div>
         </div>
       </div>
     </p-scrollPanel>
   </div>
-
-
-
-
 </div>
 <div class="carousel-container">
   <div class="title-section">
     <mat-divider class="divider"></mat-divider>
-    <h1 class="related-products-title">PRODUCTOS RELACIONADOS</h1>    
+    <h1 class="related-products-title">PRODUCTOS RELACIONADOS</h1>
   </div>
-  <p class="subtitle">Descubre opciones que complementan tu elección</p>    
+  <p class="subtitle">Descubre opciones que complementan tu elección</p>
   <div *ngIf="productosRelacionados.length > 0">
-    <app-home-destacados [products]="productosRelacionados" [showOnlyDestacados]="false"></app-home-destacados>
+    <app-home-destacados
+      [products]="productosRelacionados"
+      [showOnlyDestacados]="false"
+    ></app-home-destacados>
   </div>
 </div>
 <app-floating-buttons></app-floating-buttons>
